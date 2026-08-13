@@ -11,7 +11,7 @@
   <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB - VERSÃO QUE FUNCIONA SEMPRE -->
+<!-- ESTATÍSTICAS DO GITHUB - FUNCIONANDO -->
 <h2 align="center">📊 Estatísticas do GitHub</h2>
 
 <div align="center">
@@ -47,7 +47,7 @@
   </tr>
 </table>
 
-<!-- PAC-MAN CONTRIBUTION GRAPH - SEU CÓDIGO QUE FUNCIONA -->
+<!-- PAC-MAN CONTRIBUTION GRAPH -->
 <h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
 
 <picture align="center">
