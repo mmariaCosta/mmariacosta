@@ -1,121 +1,46 @@
-<!-- CABEÇALHO COM PAC-MAN ANIMADO -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="150" height="150">
+  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="150">
 </p>
 
-<h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Press+Start+2P&size=30&center=true&vCenter=true&width=500&height=70&duration=4000&lines=Olá!+Eu+sou+Maria+Costa;Bem-vinda+ao+meu+GitHub!;Dev+Full+Stack;Apaixonada+por+Código" />
-</h1>
+<h1 align="center">Olá! Eu sou Maria Costa 👋</h1>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
+  <img src="https://komarev.com/ghpvc/?username=mmariacosta&color=FF6B6B" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB -->
-<h2 align="center">📊 Estatísticas do GitHub</h2>
+<h2 align="center">📊 Estatísticas</h2>
 
 <p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=mmariacosta&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&icon_color=FF6B6B&text_color=C9D1D9" />
-  <img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=mmariacosta&theme=radical&hide_border=true&background=0D1117&stroke=FFD700&ring=FF6B6B&fire=FFD700&currStreakLabel=FFD700" />
+  <img src="https://github-readme-stats.vercel.app/api?username=mmariacosta&show_icons=true&theme=radical" />
 </p>
-
-<!-- LINGUAGENS MAIS USADAS -->
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&text_color=C9D1D9" />
-</p>
-
-<!-- GRÁFICO DE CONTRIBUIÇÕES (PAC-MAN) -->
-<h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
 
 <p align="center">
-  <img src="https://github.com/mmariacosta/mmariacosta/blob/output/github-contribution-grid-snake.svg" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&layout=compact&theme=radical" />
 </p>
 
-<!-- SEÇÕES DE ESTATÍSTICAS PESSOAIS -->
-<h2 align="center">🎯 Minhas Estatísticas Pessoais</h2>
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <img src="https://img.shields.io/badge/🚀_Projetos-50+-blue?style=for-the-badge&logo=github&logoColor=white&color=FF6B6B"/>
-    </td>
-    <td align="center">
-      <img src="https://img.shields.io/badge/💻_Commits_Ano-1.5k+-green?style=for-the-badge&logo=git&logoColor=white&color=4ECDC4"/>
-    </td>
-    <td align="center">
-      <img src="https://img.shields.io/badge/⭐_Stars_Recebidas-300+-yellow?style=for-the-badge&logo=github&logoColor=white&color=FFD93D"/>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://img.shields.io/badge/🔄_PRs_Abertos-100+-orange?style=for-the-badge&logo=github&logoColor=white&color=FF9F1C"/>
-    </td>
-    <td align="center">
-      <img src="https://img.shields.io/badge/🏆_Repositórios-80+-purple?style=for-the-badge&logo=github&logoColor=white&color=A66CFF"/>
-    </td>
-    <td align="center">
-      <img src="https://img.shields.io/badge/⌨️_Linhas_Código-500k+-red?style=for-the-badge&logo=code&logoColor=white&color=FF4757"/>
-    </td>
-  </tr>
-</table>
-
-<!-- TECNOLOGIAS -->
-<h2 align="center">🛠️ Stack Tecnológica</h2>
+<h2 align="center">📈 Atividade</h2>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=js,ts,react,nodejs,python,java,php,html,css,docker,aws,git" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&theme=radical" />
 </p>
 
-<!-- GRÁFICO DE ATIVIDADE -->
-<h2 align="center">📈 Atividade Recente</h2>
+<h2 align="center">🛠️ Tecnologias</h2>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" />
+  <img src="https://skillicons.dev/icons?i=js,ts,react,nodejs,python,java,html,css" />
 </p>
 
-<!-- REDES SOCIAIS -->
-<h2 align="center">🌐 Onde me encontrar</h2>
+<h2 align="center">🌐 Redes Sociais</h2>
 
 <p align="center">
   <a href="https://linkedin.com/in/mmariacosta">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
-  </a>
-  <a href="https://twitter.com/mmariacosta">
-    <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
-  </a>
-  <a href="mailto:seu-email@email.com">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
   <a href="https://instagram.com/mmariacosta">
     <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
   </a>
 </p>
 
-<!-- WAKATIME -->
-<h2 align="center">⏱️ Tempo de Código</h2>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=mmariacosta&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&text_color=C9D1D9" />
-</p>
-
-<!-- FRASE MOTIVACIONAL -->
-<p align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" />
-</p>
-
-<!-- FOOTER COM PAC-MAN -->
-<p align="center">
-  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="80" height="80">
-</p>
-
 <p align="center">
   <i>“Comer bugs é o meu passatempo favorito!”</i> 🍒
-</p>
-
-<!-- ÚLTIMAS ATIVIDADES -->
-<h2 align="center">🔄 Últimas Atividades</h2>
-
-<!-- BRASIL -->
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mmariacosta&theme=radical" />
 </p>
