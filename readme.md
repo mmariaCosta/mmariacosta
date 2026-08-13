@@ -11,27 +11,13 @@
   <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB -->
-<h2 align="center">📊 Estatísticas do GitHub</h2>
+<!-- ESTATÍSTICAS DO GITHUB - CÓDIGO QUE FUNCIONA -->
+<div align="center">
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/stats-output/stats.svg?hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dracula&locale=en&hide_border=false" height="180" alt="stats graph" />
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/languages-output/languages.svg?locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dracula&hide_border=false" height="180" alt="languages graph" />
+</div>
 
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=mmariacosta&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&icon_color=FF6B6B&text_color=C9D1D9" />
-  <img width="49%" src="https://github-readme-streak-stats.herokuapp.com/?user=mmariacosta&theme=radical&hide_border=true&background=0D1117&stroke=FFD700&ring=FF6B6B&fire=FFD700&currStreakLabel=FFD700" />
-</p>
-
-<!-- LINGUAGENS MAIS USADAS -->
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&text_color=C9D1D9" />
-</p>
-
-<!-- GRÁFICO DE CONTRIBUIÇÕES (PAC-MAN) -->
-<h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
-
-<p align="center">
-  <img src="https://github.com/mmariacosta/mmariacosta/blob/output/github-contribution-grid-snake.svg" />
-</p>
-
-<!-- SEÇÕES DE ESTATÍSTICAS PESSOAIS -->
+<!-- MINHAS ESTATÍSTICAS PESSOAIS -->
 <h2 align="center">🎯 Minhas Estatísticas Pessoais</h2>
 
 <table align="center">
@@ -58,6 +44,15 @@
     </td>
   </tr>
 </table>
+
+<!-- PAC-MAN CONTRIBUTION GRAPH - CÓDIGO QUE FUNCIONA -->
+<h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
+
+<picture align="center">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph-dark.svg?game=pacman">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+</picture>
 
 <!-- TECNOLOGIAS -->
 <h2 align="center">🛠️ Stack Tecnológica</h2>
