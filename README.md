@@ -1,33 +1,14 @@
-<h2 align="center">Olá 👋! Chamo-me Maria Costa e é um prazer conhecê-la</h2>
+<div data-importer="stats" align="center">
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/stats-output/stats.svg?hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dracula&locale=en&hide_border=false" height="150" alt="stats graph"  />
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/languages-output/languages.svg?locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dracula&hide_border=false" height="150" alt="languages graph"  />
+</div>
 
-### Estatísticas do GitHub
+###
 
-<!-- Usando github-readme-stats com fallback -->
-<p align="center">
-  <a href="https://github.com/mmariacosta">
-    <img src="https://github-readme-stats.vercel.app/api?username=mmariacosta&show_icons=true&theme=dracula" alt="GitHub Stats" />
-  </a>
-  <a href="https://github.com/mmariacosta">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&layout=compact&theme=dracula" alt="Top Langs" />
-  </a>
-</p>
+<picture data-importer="pacman">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph-dark.svg?game=pacman">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+</picture>
 
-### 🎮 Pac-Man
-
-<p align="center">
-  <a href="https://github.com/mmariacosta">
-    <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/output/pacman-contribution-graph.svg" alt="Pac-Man" width="800" />
-  </a>
-</p>
-
-<!-- SE O PAC-MAN NÃO APARECER, USE ESTE COMO FALLBACK -->
-<!-- 
-<p align="center">
-  <img src="https://ghchart.rshah.org/mmariacosta" alt="GitHub Chart" width="800" />
-</p>
--->
-
-<p align="center">
-  <a href="mailto:maria.costa2897@gmail.com"><img src="https://img.shields.io/badge/-Gmail-D14836?style=flat-square&logo=Gmail&logoColor=white" /></a>
-  <a href="https://www.linkedin.com/in/mariacosta28092007"><img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=Linkedin&logoColor=white" /></a>
-</p>
+###
