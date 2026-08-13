@@ -13,13 +13,14 @@
 
 <!-- ESTATÍSTICAS DO GITHUB -->
 <h2 align="center">📊 Estatísticas do GitHub</h2>
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mmariacosta)](https://github.com/mmariacosta/github-readme-stats)
 <div data-importer="stats" align="center">
   <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/stats-output/stats.svg?hide_title=true&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=radical&locale=en&hide_border=false" height="150" alt="stats graph"  />
   <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/languages-output/languages.svg?locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=radical&hide_border=false" height="150" alt="languages graph"  />
 </div>
 
 ###
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mmariacosta)](https://github.com/mmariacosta/github-readme-stats)
 
 <!-- MINHAS ESTATÍSTICAS PESSOAIS -->
 <h2 align="center">🎯 Minhas Estatísticas Pessoais</h2>
