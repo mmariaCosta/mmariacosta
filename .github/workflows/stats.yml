@@ -25,6 +25,6 @@ jobs:
       - name: Generate stats.svg
         uses: jstriebel/stats-action@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           stats_branch: stats-output
           languages_branch: languages-output
