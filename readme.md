@@ -11,10 +11,10 @@
   <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB - USANDO A API DO VERCEL (100% FUNCIONAL) -->
+<!-- ESTATÍSTICAS DO GITHUB - CÓDIGO QUE FUNCIONA -->
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=mmariacosta&show_icons=true&theme=dracula&hide_border=true&count_private=true&include_all_commits=true" height="180" alt="stats graph" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&layout=compact&theme=dracula&hide_border=true&langs_count=6" height="180" alt="languages graph" />
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/stats-output/stats.svg?hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dracula&locale=en&hide_border=false" height="180" alt="stats graph" />
+  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/languages-output/languages.svg?locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dracula&hide_border=false" height="180" alt="languages graph" />
 </div>
 
 <!-- MINHAS ESTATÍSTICAS PESSOAIS -->
@@ -45,7 +45,7 @@
   </tr>
 </table>
 
-<!-- PAC-MAN CONTRIBUTION GRAPH - CÓDIGO QUE VOCÊ JÁ VALIDOU -->
+<!-- PAC-MAN CONTRIBUTION GRAPH - CÓDIGO QUE FUNCIONA -->
 <h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
 
 <picture align="center">
@@ -97,5 +97,5 @@
 </p>
 
 <p align="center">
-  <i>"Comer bugs é o meu passatempo favorito!"</i> 🍒
+  <i>“Comer bugs é o meu passatempo favorito!”</i> 🍒
 </p>
