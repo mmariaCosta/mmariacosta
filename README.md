@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is Maria Costa and it's a pleasure to meet you</h2>
+<h2 align="left">Olá 👋! Chamo-me Maria Costa e é um prazer conhecê-la</h2>
 
 ###
 
@@ -36,30 +36,57 @@
   <a href="https://www.linkedin.com/in/mariacosta28092007" target="_blank">
     <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="linkedin logo" />
   </a>
-  <a href="https://open.spotify.com/user/mmariacosta" target="_blank">
+  <a href="https://open.spotify.com/user/seu-usuario" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Spotify&logo=spotify&label=&color=1DB954&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="spotify logo" />
   </a>
-  <a href="https://wa.me/19993786188" target="_blank">
+  <a href="https://wa.me/seu-numero" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Whatsapp&logo=whatsapp&label=&color=25D366&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="whatsapp logo" />
   </a>
 </div>
 
 ###
 
+<!-- PAC-MAN CONTRIBUTION GRAPH -->
+<h3 align="center">🎮 Pac-Man Contribution Graph</h3>
+
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&theme=dracula&hide_border=true" height="200" alt="activity graph" />
+  <picture>
+    <source 
+      media="(prefers-color-scheme: dark)" 
+      srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/output/pacman-contribution-graph-dark.svg" 
+    />
+    <source 
+      media="(prefers-color-scheme: light)" 
+      srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/output/pacman-contribution-graph.svg" 
+    />
+    <img 
+      alt="Pac-Man Contribution Graph" 
+      src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/output/pacman-contribution-graph.svg" 
+    />
+  </picture>
 </div>
 
 ###
 
-<h3 align="center">📊 GitHub Statistics</h3>
+<!-- ACTIVITY GRAPH -->
+<h3 align="center">📊 Contribution Graph</h3>
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=mmariacosta&theme=dracula&row=2&column=4&margin-w=15&margin-h=15" alt="trophies" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&theme=github-dark&hide_border=true&area=true" height="200" alt="activity graph" />
 </div>
 
 ###
 
+<!-- GITHUB STATISTICS -->
+<h3 align="center">📈 GitHub Statistics</h3>
+
+<div align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=mmariacosta&theme=darkhub&row=2&column=4&margin-w=15&margin-h=15" alt="trophies" />
+</div>
+
+###
+
+<!-- VISITOR BADGE -->
 <div align="center">
   <img src="https://visitor-badge.laobi.icu/badge?page_id=mmariacosta.mmariacosta" alt="visitor badge" />
 </div>
