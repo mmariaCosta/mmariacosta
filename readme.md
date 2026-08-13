@@ -11,7 +11,7 @@
   <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB - VERSÃO QUE FUNCIONA -->
+<!-- ESTATÍSTICAS DO GITHUB -->
 <h2 align="center">📊 Estatísticas do GitHub</h2>
 
 <div align="center">
@@ -86,7 +86,7 @@
   <a href="https://twitter.com/mmariacosta" target="_blank">
     <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
   </a>
-  <a href="mailto:seu-email@email.com">
+  <a href="mailto:maria.costa@email.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
   <a href="https://instagram.com/mmariacosta" target="_blank">
