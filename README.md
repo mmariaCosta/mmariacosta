@@ -91,13 +91,6 @@
   </a>
 </p>
 
-<!-- WAKATIME -->
-<h2 align="center">⏱️ Tempo de Código</h2>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/wakatime?username=mmariacosta&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=FFD700&text_color=C9D1D9" />
-</p>
-
 <!-- FRASE MOTIVACIONAL -->
 <p align="center">
   <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" />
@@ -110,12 +103,4 @@
 
 <p align="center">
   <i>“Comer bugs é o meu passatempo favorito!”</i> 🍒
-</p>
-
-<!-- ÚLTIMAS ATIVIDADES -->
-<h2 align="center">🔄 Últimas Atividades</h2>
-
-<!-- BRASIL -->
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mmariacosta&theme=radical" />
 </p>
