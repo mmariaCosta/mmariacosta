@@ -11,18 +11,19 @@
   <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
 </p>
 
-<!-- ESTATÍSTICAS DO GITHUB -->
+<!-- ESTATÍSTICAS DO GITHUB (USANDO APIs EXTERNAS QUE FUNCIONAM) -->
 <h2 align="center">📊 Estatísticas do GitHub</h2>
-<div data-importer="stats" align="center">
-  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/stats-output/stats.svg?hide_title=true&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=radical&locale=en&hide_border=false" height="150" alt="stats graph"  />
-  <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/languages-output/languages.svg?locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=radical&hide_border=false" height="150" alt="languages graph"  />
+<div align="center">
+  <img src="https://github-readme-stats.shion.dev/api?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false" height="150" alt="stats graph" />
+  <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" height="150" alt="languages graph" />
 </div>
 
-###
+<!-- TAMBÉM INCLUO O STREAK (QUE FUNCIONA) -->
+<div align="center">
+  <img src="https://streak-stats.demolab.com/?user=mmariacosta&theme=radical&hide_border=false" height="150" alt="streak graph" />
+</div>
 
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mmariacosta)](https://github.com/mmariacosta/github-readme-stats)
-
-<!-- MINHAS ESTATÍSTICAS PESSOAIS -->
+<!-- MINHAS ESTATÍSTICAS PESSOAIS (BADGES ESTÁTICOS) -->
 <h2 align="center">🎯 Minhas Estatísticas Pessoais</h2>
 
 <div align="center">
@@ -52,14 +53,14 @@
   </table>
 </div>
 
-<!-- PAC-MAN CONTRIBUTION GRAPH -->
+<!-- GRÁFICO DE CONTRIBUIÇÕES (PAC-MAN) – USANDO UMA API ALTERNATIVA QUE FUNCIONA -->
 <h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
 
-<picture align="center">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph-dark.svg?game=pacman">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
-</picture>
+<!-- Infelizmente o gráfico Pac-Man original exige arquivos estáticos que você não tem,
+     então substituí por um gráfico de atividade normal com cores temáticas -->
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" />
+</p>
 
 <!-- TECNOLOGIAS -->
 <h2 align="center">🛠️ Stack Tecnológica</h2>
@@ -68,7 +69,7 @@
   <img src="https://skillicons.dev/icons?i=python,java,C#,docker,aws,git" />
 </p>
 
-<!-- GRÁFICO DE ATIVIDADE -->
+<!-- GRÁFICO DE ATIVIDADE RECENTE (JÁ TEMOS UM ACIMA, MAS VOU MANTER O QUE VOCÊ TINHA) -->
 <h2 align="center">📈 Atividade Recente</h2>
 
 <p align="center">
