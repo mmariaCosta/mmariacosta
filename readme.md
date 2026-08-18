@@ -1,106 +1,92 @@
-<!-- CABEÇALHO COM PAC-MAN ANIMADO -->
-<p align="center">
-  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="120" height="150">
-</p>
-
 <h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Press+Start+2P&size=20&center=true&vCenter=true&width=500&height=70&duration=4000&lines=HI!!+I+AM+Maria+Costa;;Dev+Cloud+Security;Apaixonada+por+Cloud!!" />
+  <img src="https://readme-typing-svg.herokuapp.com/?font=Press+Start+2P&size=20&center=true&vCenter=true&width=600&height=70&duration=4000&lines=Hi!!+I+AM+Maria+Costa;;Dev+Cloud+Security;From+Brazil+🇧🇷;Apaixonada+por+Cloud!!" />
 </h1>
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=mmariacosta&label=Visitantes&color=FF6B6B&style=flat-square" />
-</p>
+###
 
-<!-- ESTATÍSTICAS DO GITHUB (USANDO APIs EXTERNAS QUE FUNCIONAM) -->
-<h2 align="center">📊 Estatísticas do GitHub</h2>
-<div align="center">
+<div data-importer="stats" align="center">
+  <!-- STATS – agora usando APIs externas que funcionam -->
   <img src="https://github-readme-stats.shion.dev/api?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false" height="150" alt="stats graph" />
+  <img src="https://streak-stats.demolab.com/?user=mmariacosta&theme=radical&hide_border=false" height="150" alt="streak graph" />
   <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" height="150" alt="languages graph" />
 </div>
 
-<!-- TAMBÉM INCLUO O STREAK (QUE FUNCIONA) -->
-<div align="center">
-  <img src="https://streak-stats.demolab.com/?user=mmariacosta&theme=radical&hide_border=false" height="150" alt="streak graph" />
+###
+
+<img data-importer="image" align="right" height="130" src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg"  />
+
+###
+
+<img data-importer="profile-views" align="left" src="https://count.getloli.com/@:mmariacosta?theme=sketch-1&padding=5&offset=1&scale=0.7&align=top&pixelated=1&darkmode=auto"  />
+
+###
+
+<div data-importer="techs" align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="35" alt="python logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg" height="35" alt="csharp logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" height="35" alt="amazonwebservices logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="35" alt="docker logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="35" alt="git logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="35" alt="java logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" height="35" alt="linux logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="35" alt="vscode logo"  />
+  <img width="13" />
+  <img src="https://skillicons.dev/icons?i=gcp" height="35" alt="googlecloud logo"  />
+  <img width="13" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg" height="35" alt="microsoftsqlserver logo"  />
 </div>
 
-<!-- MINHAS ESTATÍSTICAS PESSOAIS (BADGES ESTÁTICOS) -->
-<h2 align="center">🎯 Minhas Estatísticas Pessoais</h2>
+###
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="https://img.shields.io/badge/🚀_Projetos-50+-blue?style=for-the-badge&logo=github&logoColor=white&color=FF6B6B"/>
-      </td>
-      <td align="center">
-        <img src="https://img.shields.io/badge/💻_Commits_Ano-1.5k+-green?style=for-the-badge&logo=git&logoColor=white&color=4ECDC4"/>
-      </td>
-      <td align="center">
-        <img src="https://img.shields.io/badge/⭐_Stars-300+-yellow?style=for-the-badge&logo=github&logoColor=white&color=FFD93D"/>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="https://img.shields.io/badge/🔄_PRs-100+-orange?style=for-the-badge&logo=github&logoColor=white&color=FF9F1C"/>
-      </td>
-      <td align="center">
-        <img src="https://img.shields.io/badge/🏆_Repos-80+-purple?style=for-the-badge&logo=github&logoColor=white&color=A66CFF"/>
-      </td>
-      <td align="center">
-        <img src="https://img.shields.io/badge/⌨️_Linhas-500k+-red?style=for-the-badge&logo=code&logoColor=white&color=FF4757"/>
-      </td>
-    </tr>
-  </table>
+<!-- GRÁFICO DE ATIVIDADE – agora com API funcional -->
+<div data-importer="stats" align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" height="220" alt="activity-graph graph"  />
 </div>
 
-<!-- GRÁFICO DE CONTRIBUIÇÕES (PAC-MAN) – USANDO UMA API ALTERNATIVA QUE FUNCIONA -->
-<h2 align="center">👾 Contribuições ao Estilo Pac-Man</h2>
+###
 
-<!-- Infelizmente o gráfico Pac-Man original exige arquivos estáticos que você não tem,
-     então substituí por um gráfico de atividade normal com cores temáticas -->
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" />
-</p>
+<br clear="both">
 
-<!-- TECNOLOGIAS -->
-<h2 align="center">🛠️ Stack Tecnológica</h2>
+<!-- PAC-MAN CONTRIBUTION GRAPH – mantido, desde que você tenha configurado o GitHub Action -->
+<picture data-importer="pacman">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph-dark.svg?game=pacman">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman">
+</picture>
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=python,java,C#,docker,aws,git" />
-</p>
+###
 
-<!-- GRÁFICO DE ATIVIDADE RECENTE (JÁ TEMOS UM ACIMA, MAS VOU MANTER O QUE VOCÊ TINHA) -->
-<h2 align="center">📈 Atividade Recente</h2>
+<br clear="both">
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" />
-</p>
-
-<!-- REDES SOCIAIS -->
-<h2 align="center">🌐 Onde me encontrar</h2>
-
-<p align="center">
-  <a href="https://linkedin.com/in/mmariacosta" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+<!-- REDES SOCIAIS (mantidas) -->
+<div data-importer="socials" align="center">
+  <img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="instagram logo"  />
+  <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="gmail logo"  />
+  <a href="https://www.linkedin.com/in/mmariacosta" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="linkedin logo"  />
   </a>
-  <a href="mailto:maria.costa2897@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://instagram.com/mar28edua9" target="_blank">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
-  </a>
-</p>
+  <img src="https://img.shields.io/static/v1?message=Whatsapp&logo=whatsapp&label=&color=25D366&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="whatsapp logo"  />
+</div>
 
-<!-- FRASE MOTIVACIONAL -->
+###
+
+<!-- CITAÇÃO MOTIVACIONAL (ADICIONADA) -->
 <p align="center">
   <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" />
 </p>
 
-<!-- FOOTER COM PAC-MAN -->
+<!-- FRASE FINAL EM INGLÊS -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="80" height="80">
+  <img src="https://raw.githubusercontent.com/TavernaDev/Pac-Man-ReadME/main/pac-man.gif" width="60" height="60">
 </p>
 
 <p align="center">
-  <i>"Comer bugs é o meu passatempo favorito!"</i> 🍒
+  <i>"Eating bugs is my favorite pastime!"</i> 🍒
 </p>
