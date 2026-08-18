@@ -2,25 +2,26 @@
   <img src="https://readme-typing-svg.herokuapp.com/?font=Press+Start+2P&size=20&center=true&vCenter=true&width=600&height=70&duration=4000&lines=Hi!!+I+AM+Maria+Costa;;Dev+Cloud+Security;From+Brazil+🇧🇷;Apaixonada+por+Cloud!!" />
 </h1>
 
-<!-- VISUALIZAÇÕES (canto esquerdo) -->
-<img align="left" src="https://count.getloli.com/@:mmariacosta?theme=sketch-1&padding=5&offset=1&scale=0.7&align=top&pixelated=1&darkmode=auto" />
-
 <!-- ESTATÍSTICAS PRINCIPAIS (stats + streak) lado a lado -->
 <div align="center">
   <img src="https://github-readme-stats.shion.dev/api?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false" height="150" alt="stats graph" />
   <img src="https://streak-stats.demolab.com/?user=mmariacosta&theme=radical&hide_border=false" height="150" alt="streak graph" />
 </div>
 
-<!-- IMAGEM DE PERFIL À DIREITA (flutuante) -->
-<img align="right" height="130" src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg" />
-
-<!-- LINGUAGENS – AGORA ABAIXO DA IMAGEM (em nova linha) -->
-<br clear="right" />  <!-- força quebra para a imagem não atrapalhar -->
+<!-- LINGUAGENS – logo abaixo da imagem (centralizada) -->
 <div align="center">
   <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" height="150" alt="languages graph" />
 </div>
 
-<br clear="both" />
+<!-- IMAGEM DE PERFIL (centralizada) -->
+<p align="right">
+  <img height="130" src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg" />
+</p>
+
+<p align="left">
+  <img src="https://count.getloli.com/@:mmariacosta?theme=sketch-1&padding=5&offset=1&scale=0.7&align=top&pixelated=1&darkmode=auto" />
+</p>
+<br />
 
 <!-- TECNOLOGIAS (ícones) -->
 <div align="center">
@@ -59,16 +60,16 @@
   <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/pacman-output/pacman-contribution-graph.svg?game=pacman" width="100%">
 </picture>
 
-<br clear="both" />
+<br />
 
-<!-- REDES SOCIAIS COM TODOS OS LINKS FUNCIONANDO -->
+<!-- REDES SOCIAIS – TODOS OS LINKS FUNCIONANDO -->
 <h2 align="center">🌐 Onde me encontrar</h2>
 <div align="center">
   <!-- Instagram -->
   <a href="https://instagram.com/mar28edua9" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="instagram logo" />
   </a>
-  <!-- Gmail -->
+  <!-- Gmail (mailto) -->
   <a href="mailto:maria.costa2897@gmail.com">
     <img src="https://img.shields.io/static/v1?message=Gmail&logo=gmail&label=&color=D14836&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="gmail logo" />
   </a>
@@ -76,7 +77,7 @@
   <a href="https://linkedin.com/in/mmariacosta" target="_blank">
     <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="linkedin logo" />
   </a>
-  <!-- WhatsApp (número fictício – substitua pelo seu) -->
+  <!-- WhatsApp – substitua o número pelo seu -->
   <a href="https://wa.me/5519993786188" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Whatsapp&logo=whatsapp&label=&color=25D366&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="whatsapp logo" />
   </a>
