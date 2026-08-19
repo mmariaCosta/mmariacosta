@@ -18,11 +18,6 @@
   <img height="130" src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg" />
 </p>
 
-<p align="left">
-  <img src="https://count.getloli.com/@:mmariacosta?theme=sketch-1&padding=5&offset=1&scale=0.7&align=top&pixelated=1&darkmode=auto" />
-</p>
-<br />
-
 <!-- TECNOLOGIAS (ícones) -->
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="35" alt="python logo" />
