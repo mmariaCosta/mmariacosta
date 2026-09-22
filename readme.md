@@ -41,12 +41,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain-wordmark.svg" height="35" alt="sqlserver logo" />
 </div>
 
-<!-- GRÁFICO DE ATIVIDADE – OCUPA A LARGURA INTEIRA -->
-<h2 align="center">📈 Atividade Recente</h2>
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mmariacosta&bg_color=0D1117&color=FFD700&line=FF6B6B&point=4ECDC4&area=true&hide_border=true" width="100%" alt="activity-graph" />
-</div>
-
 <!-- PAC-MAN CONTRIBUTION GRAPH (se tiver o Action configurado) -->
 <h2 align="center">👾 Contribuições Estilo Pac‑Man</h2>
 <picture align="center">
