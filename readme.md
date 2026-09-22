@@ -5,7 +5,6 @@
 <!-- ESTATÍSTICAS PRINCIPAIS (stats + streak) lado a lado -->
 <div align="center">
   <img src="https://github-readme-stats.shion.dev/api?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=false&count_private=false" height="150" alt="stats graph" />
-  <!-- ✅ agora -->
   <img src="https://raw.githubusercontent.com/mmariacosta/mmariacosta/main/generated/streak.svg" height="150" alt="streak graph" />
 </div>
 
