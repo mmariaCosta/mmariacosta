@@ -22,14 +22,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2) Streak graph (novo)
-      - name: Generate Streak Stats
+     - name: Generate Streak Stats
         uses: DenverCoder1/github-readme-streak-stats@main
-        with:
-          options: user=mmariacosta&theme=radical&hide_border=false
-          path: generated/streak.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+        env:
+          INPUT_USER: mmariacosta
+          INPUT_THEME: radical
+          INPUT_HIDE_BORDER: "false"
+          INPUT_PATH: generated/streak.svg
+          INPUT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       # 3) Commit
       - name: Commit and push if changed
         run: |
