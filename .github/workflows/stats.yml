@@ -4,19 +4,33 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: "0 0 * * *" # roda todo dia
+    - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v4
+
+      # 1) Stats + Languages (já existente)
       - name: Generate GitHub Stats
         uses: jstrieb/github-stats@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          
+
+      # 2) Streak graph (novo)
+      - name: Generate Streak Stats
+        uses: DenverCoder1/github-readme-streak-stats@main
+        with:
+          options: user=mmariacosta&theme=radical&hide_border=false
+          path: generated/streak.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3) Commit
       - name: Commit and push if changed
         run: |
           git config user.name "GitHub Action"
