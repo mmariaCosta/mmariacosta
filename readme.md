@@ -1,5 +1,5 @@
 
-# My portfolio tech!!
+My portfolio tech!!
 
 <h1 align="center">
   <img src="https://readme-typing-svg.herokuapp.com/?font=Press+Start+2P&size=20&center=true&vCenter=true&width=600&height=70&duration=4000&lines=Hi!!+I+AM+Maria+Costa;;Dev+Cloud+Security;From+Brazil+🇧🇷;Apaixonada+por+Cloud!!" />
