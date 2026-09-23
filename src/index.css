@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* ===== TEMA (variáveis) ===== */
+:root {
+  --bg: rgb(202, 173, 248);
+  --bg-radial: rgba(250, 245, 255, 0.75);
+  --surface: rgba(100, 36, 196, 0.411);
+  --surface-solid: #ffffff;
+  --surface-2: rgba(234, 222, 250, 0.322);
+  --border: rgba(46, 6, 66, 0.74);
+  --border-strong: rgba(79, 11, 143, 0.5);
+  --text: #3a1170;
+  --text-muted: #05032b;
+  --text-dim: #810505;
+  --accent: #5c2bb1;
+  --accent-strong: #8b51e9;
+  --glow: rgba(48, 15, 105, 0.534);
+  --shadow-color: rgba(124, 58, 237, 0.15);
+  --video-opacity: 0.90;
+  --video-overlay: rgba(172, 146, 233, 0.61);
+  --video-overlay: rgba(202, 186, 243, 0.61);
+}
+
+.dark {
+  --bg: #1c152c;
+  --bg-radial: rgba(10, 6, 19, 0.45);
+  --surface: rgba(15, 10, 26, 0.8);
+  --surface-solid: #0f0a1a;
+  --surface-2: rgba(122, 46, 235, 0.15);
+  --border: rgba(168, 85, 247, 0.25);
+  --border-strong: rgba(168, 85, 247, 0.55);
+  --text: #f2ebf8;
+  --text-muted: #a78bfa;
+  --text-dim: #c084fc;
+  --accent: #a855f7;
+  --accent-strong: #c084fc;
+  --glow: rgba(168, 85, 247, 0.5);
+  --shadow-color: rgba(168, 85, 247, 0.3);
+  --video-opacity: 0.90;
+  --video-overlay: rgba(73, 47, 133, 0.45);
+  --glow: rgba(112, 38, 173, 0.671);
+}
+
+html, body, #root { min-height: 100%; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+code, pre, .mono, h1, h2, h3 {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+@keyframes blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===== UTILITÁRIOS SEMÂNTICOS ===== */
+@utility bg-app          { background-color: var(--bg); }
+@utility bg-surface      { background-color: var(--surface); }
+@utility bg-surface-soft { background-color: var(--surface-2); }
+@utility text-app        { color: var(--text); }
+@utility text-app-muted  { color: var(--text-muted); }
+@utility text-app-dim    { color: var(--text-dim); }
+@utility text-app-accent { color: var(--accent); }
+@utility border-app      { border-color: var(--border); }
+@utility border-app-strong { border-color: var(--border-strong); }
+@utility shadow-app      { box-shadow: 0 0 24px var(--shadow-color); }
+@utility glow-app        { box-shadow: 0 0 16px var(--glow); }
