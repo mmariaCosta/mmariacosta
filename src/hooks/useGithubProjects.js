@@ -2,13 +2,47 @@ import { useEffect, useState } from 'react';
 
 const USER = 'mmariacosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-const CACHE_KEY = 'gh-projects-cache-v3';
+const CACHE_KEY = 'gh-projects-cache-v4';
 const TTL = 1000 * 60 * 60 * 6; // 6 horas
+
+// Só 3 pastas pra não estourar a API na listagem
+const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
+
+const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
+const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields'];
 
 function authHeaders(extra = {}) {
   return TOKEN
     ? { ...extra, Authorization: `Bearer ${TOKEN}` }
     : extra;
+}
+
+async function findFirstImage(repo, branch) {
+  for (const folder of IMAGE_FOLDERS) {
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${USER}/${repo}/contents/${folder}?ref=${branch}`,
+        { headers: authHeaders() }
+      );
+      if (!res.ok) continue;
+
+      const data = await res.json();
+      if (!Array.isArray(data)) continue;
+
+      const images = data
+        .filter((f) => f.type === 'file' && IMAGE_EXT.test(f.name))
+        .filter((f) => {
+          const n = f.name.toLowerCase();
+          return !EXCLUDE_KEYWORDS.some((kw) => n.includes(kw));
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      if (images.length > 0) return images[0].download_url;
+    } catch {
+      /* tenta próxima pasta */
+    }
+  }
+  return null;
 }
 
 function extractFirstParagraph(readme) {
@@ -53,7 +87,6 @@ export function useGithubProjects(limit = 12) {
   useEffect(() => {
     let cancelled = false;
 
-    // tenta cache
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (cached && Date.now() - cached.ts < TTL) {
@@ -73,8 +106,10 @@ export function useGithubProjects(limit = 12) {
 
         const withData = await Promise.all(
           repos.map(async (r) => {
-            let summary = r.description || '';
+            const branch = r.default_branch || 'main';
 
+            // resumo do README
+            let summary = r.description || '';
             try {
               const rr = await fetch(
                 `https://api.github.com/repos/${USER}/${r.name}/readme`,
@@ -87,7 +122,11 @@ export function useGithubProjects(limit = 12) {
               }
             } catch { /* ignora */ }
 
-            const cover = `https://opengraph.githubassets.com/1/${USER}/${r.name}`;
+            // imagem da pasta (ou OpenGraph como fallback)
+            const folderImage = await findFirstImage(r.name, branch);
+            const cover = folderImage
+              ? folderImage
+              : `https://opengraph.githubassets.com/1/${USER}/${r.name}`;
 
             return {
               id: r.id,

@@ -3,18 +3,8 @@ import { useEffect, useState } from 'react';
 const USER = 'mmariacosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-const IMAGE_FOLDERS = [
-  'img',
-  'images',
-  'screenshots',
-  'assets',
-  'docs/img',
-  'docs/images',
-  'public/img',
-  'public/images',
-  'src/assets',
-  'static',
-];
+// APENAS estas pastas — sem fallback pra assets/src/static
+const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
 const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields'];
@@ -54,43 +44,6 @@ async function fetchFolderImages(repo, branch) {
   return [];
 }
 
-async function fetchReadmeImages(repo, branch) {
-  try {
-    const rr = await fetch(
-      `https://api.github.com/repos/${USER}/${repo}/readme`,
-      { headers: authHeaders({ Accept: 'application/vnd.github.html' }) }
-    );
-    if (!rr.ok) return [];
-
-    const html = await rr.text();
-    const baseRaw = `https://raw.githubusercontent.com/${USER}/${repo}/${branch}/`;
-    const regex = /<img[^>]+src="([^"]+)"/g;
-    const found = [];
-    let m;
-
-    while ((m = regex.exec(html)) !== null) {
-      let url = m[1];
-      if (url.startsWith('http://') || url.startsWith('https://')) {
-        /* mantém */
-      } else if (url.startsWith('data:')) continue;
-      else url = baseRaw + url.replace(/^\.?\//, '');
-
-      const lower = url.toLowerCase();
-      if (
-        lower.includes('shields.io') ||
-        lower.includes('badge') ||
-        lower.includes('travis-ci') ||
-        lower.includes('codecov')
-      ) continue;
-
-      found.push(url);
-    }
-    return [...new Set(found)];
-  } catch {
-    return [];
-  }
-}
-
 export function useGithubProject(name) {
   const [data, setData] = useState({
     project: null,
@@ -115,20 +68,15 @@ export function useGithubProject(name) {
 
         const branch = repo.default_branch || 'main';
 
-        // 1) tenta pastas de imagens
+        // Pega APENAS das pastas img/images/screenshots
+        // Não cai no README — se não tiver pasta, usa OpenGraph
         let images = await fetchFolderImages(name, branch);
 
-        // 2) se não achou, tenta README
-        if (images.length === 0) {
-          images = await fetchReadmeImages(name, branch);
-        }
-
-        // 3) OpenGraph só como último recurso
         if (images.length === 0) {
           images = [`https://opengraph.githubassets.com/1/${USER}/${repo.name}`];
         }
 
-        // README HTML pra renderizar
+        // README HTML pra renderizar na página
         let readmeHtml = '';
         try {
           const rr = await fetch(
