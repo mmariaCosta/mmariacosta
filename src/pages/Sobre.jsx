@@ -1,4 +1,6 @@
 import { useLanguage } from '../contexts/useLanguage';
+import { useState } from 'react';
+
 
 function Timeline({ items }) {
   return (
@@ -37,90 +39,213 @@ function Timeline({ items }) {
   );
 }
 
+function CertProgressRing({ color, progress }) {
+  const size = 56;
+  const stroke = 4;
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference * (1 - progress / 100);
+
+  return (
+    <svg width={size} height={size} className="shrink-0">
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke="var(--border)"
+        strokeWidth={stroke}
+      />
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={color}
+        strokeWidth={stroke}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        style={{
+          transform: 'rotate(-90deg)',
+          transformOrigin: 'center',
+          filter: `drop-shadow(0 0 6px ${color})`,
+        }}
+      />
+      <text
+        x="50%" y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fill={color}
+        fontSize="11"
+        fontFamily="monospace"
+        fontWeight="700"
+      >
+        {progress}%
+      </text>
+    </svg>
+  );
+}
+
 function Certifications({ t }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+
   const STATUS = {
-    done:     { color: '#00ff88', icon: '✓', label: t.sobre.certsStatus.done },
-    studying: { color: '#facc15', icon: '◐', label: t.sobre.certsStatus.studying },
-    planned:  { color: '#a78bfa', icon: '○', label: t.sobre.certsStatus.planned },
+    done:     { color: '#00ff88', icon: '✓', label: t.sobre.certsStatus.done,     progress: 100 },
+    studying: { color: '#facc15', icon: '◐', label: t.sobre.certsStatus.studying, progress: 50 },
+    planned:  { color: '#a78bfa', icon: '○', label: t.sobre.certsStatus.planned,  progress: 0 },
   };
-  const PROGRESS = { planned: 0, studying: 50, done: 100 };
+
+  const active = t.sobre.certs[activeIdx];
+  const activeS = STATUS[active.status];
+
+  // Índice dentro do próprio array pra saber a "posição na trilha"
+  const totalSteps = t.sobre.certs.length;
+  const doneSteps = t.sobre.certs.filter((c) => c.status === 'done').length;
+  const overallPct = Math.round((doneSteps / totalSteps) * 100);
 
   return (
     <section className="mt-16 pt-12 border-t border-app">
       <header className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold text-app">{t.sobre.certsTitle}</h2>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-app text-app-dim">
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full
+                           border border-app text-app-dim">
             roadmap
           </span>
         </div>
         <p className="text-app-muted text-sm max-w-2xl">{t.sobre.certsSubtitle}</p>
+
+        {/* Barra de progresso geral */}
+        <div className="mt-5 max-w-2xl">
+          <div className="flex items-center justify-between text-xs font-mono mb-2">
+            <span className="text-app-muted uppercase tracking-widest">
+              Progresso geral
+            </span>
+            <span className="text-app font-bold">{overallPct}%</span>
+          </div>
+          <div className="h-1.5 rounded-full bg-surface-soft overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-700"
+              style={{
+                width: `${overallPct}%`,
+                background: 'linear-gradient(90deg, #00ff88, #facc15, #a78bfa)',
+                boxShadow: '0 0 12px rgba(168,85,247,0.6)',
+              }}
+            />
+          </div>
+        </div>
       </header>
 
-      <div className="flex flex-wrap gap-4 mb-6 text-xs font-mono">
-        {Object.entries(STATUS).map(([key, s]) => (
-          <div key={key} className="flex items-center gap-2">
-            <span
-              className="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
-              style={{ backgroundColor: `${s.color}22`, border: `1px solid ${s.color}`, color: s.color }}
-            >
-              {s.icon}
-            </span>
-            <span className="text-app-muted">{s.label}</span>
-          </div>
-        ))}
-      </div>
-
-      <ul className="space-y-3">
-        {t.sobre.certs.map((c) => {
-          const s = STATUS[c.status];
-          const progress = PROGRESS[c.status];
-          return (
-            <li
-              key={c.name}
-              className="p-5 rounded-xl border border-app bg-surface-soft
-                         hover:border-app-strong hover:shadow-app transition-all"
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="w-14 h-14 rounded-lg shrink-0 flex items-center justify-center border"
-                  style={{ backgroundColor: `${s.color}11`, borderColor: `${s.color}55` }}
+      <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 max-w-4xl">
+        {/* Lista lateral */}
+        <ul className="space-y-1">
+          {t.sobre.certs.map((c, i) => {
+            const s = STATUS[c.status];
+            const isActive = i === activeIdx;
+            return (
+              <li key={c.name}>
+                <button
+                  onClick={() => setActiveIdx(i)}
+                  className={`w-full text-left p-3 rounded-lg border
+                             flex items-center gap-3 transition-all ${
+                               isActive
+                                 ? 'border-app-strong bg-surface-soft shadow-app'
+                                 : 'border-transparent hover:bg-surface-soft/50'
+                             }`}
                 >
-                  <span className="text-xl font-bold font-mono" style={{ color: s.color }}>
-                    {s.icon}
-                  </span>
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <h3 className="text-app font-semibold">{c.name}</h3>
-                    <span
-                      className="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded"
-                      style={{ color: s.color, border: `1px solid ${s.color}55`, backgroundColor: `${s.color}11` }}
-                    >
-                      {s.label}
+                  <span
+                    className="w-1 h-10 rounded-full shrink-0 transition-colors"
+                    style={{ backgroundColor: isActive ? s.color : 'var(--border)' }}
+                  />
+                  <span className="flex-1 min-w-0">
+                    <span className="block text-app text-sm font-medium truncate">
+                      {c.name}
                     </span>
-                    <span className="ml-auto text-app-dim text-xs font-mono">{c.year}</span>
-                  </div>
-                  <p className="text-app-muted text-xs mb-3">{c.issuer}</p>
-                  <div className="h-1.5 rounded-full bg-surface-soft overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-700"
-                      style={{
-                        width: `${progress}%`,
-                        backgroundColor: s.color,
-                        boxShadow: progress > 0 ? `0 0 8px ${s.color}` : 'none',
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+                    <span className="block text-app-dim text-[10px] font-mono mt-0.5">
+                      {c.year} · {s.progress}%
+                    </span>
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
-      <p className="mt-6 text-app-dim text-xs font-mono italic">{t.sobre.certsHint}</p>
+        {/* Preview */}
+        <div className="rounded-xl border border-app bg-surface-soft p-6
+                        relative overflow-hidden">
+          <div
+            className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl opacity-30"
+            style={{ backgroundColor: activeS.color }}
+          />
+
+          <div className="relative">
+            {/* Ícone + Ano em destaque */}
+            <div className="flex items-start justify-between gap-4 mb-5">
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center
+                           text-3xl font-bold border-2 shrink-0"
+                style={{
+                  backgroundColor: `${activeS.color}15`,
+                  borderColor: activeS.color,
+                  color: activeS.color,
+                  boxShadow: `0 0 24px ${activeS.color}44`,
+                }}
+              >
+                {activeS.icon}
+              </div>
+
+              {/* ANO GRANDE */}
+              <div className="text-right">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-app-dim">
+                  Meta
+                </p>
+                <p
+                  className="text-4xl md:text-5xl font-bold font-mono leading-none"
+                  style={{
+                    color: activeS.color,
+                    textShadow: `0 0 20px ${activeS.color}66`,
+                  }}
+                >
+                  {active.year}
+                </p>
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-bold text-app mb-2">{active.name}</h3>
+            <p className="text-app-muted text-sm mb-6">{active.issuer}</p>
+
+            {/* PORCENTAGEM com barra */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="text-[10px] font-mono uppercase tracking-widest"
+                  style={{ color: activeS.color }}
+                >
+                  {activeS.label}
+                </span>
+                <span
+                  className="text-2xl font-bold font-mono leading-none"
+                  style={{ color: activeS.color }}
+                >
+                  {activeS.progress}%
+                </span>
+              </div>
+              <div className="h-2 rounded-full bg-surface overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${activeS.progress}%`,
+                    backgroundColor: activeS.color,
+                    boxShadow: `0 0 12px ${activeS.color}`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
