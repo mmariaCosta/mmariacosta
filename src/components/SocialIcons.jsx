@@ -1,10 +1,10 @@
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 
 const links = [
   { icon: FaGithub,   href: 'https://github.com/mmariacosta',      label: 'GitHub',   user: '@mmariacosta' },
   { icon: FaLinkedin, href: 'https://linkedin.com/in/mmariacosta', label: 'LinkedIn', user: '/in/mmariacosta' },
-  { icon: FaEnvelope, href: 'mailto:maria.costa2897@gmail.com',    label: 'Email',    user: 'maria.costa2897@gmail.com' },
+  { icon: FaEnvelope, href: 'mailto:mmaria.costa@outlook.com',     label: 'Email',    user: 'mmaria.costa@outlook.com' },
   { icon: FaWhatsapp, href: 'https://wa.me/5519993786188',         label: 'WhatsApp', user: '+55 19 99378-6188' },
 ];
 

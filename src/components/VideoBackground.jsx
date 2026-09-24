@@ -1,45 +1,52 @@
 import { useEffect, useRef, useState } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/useTheme';
 
-export default function VideoBackground({
-  sources = [
-    '/videos/hacker.mp4'
-  ],
-}) {
+export default function VideoBackground({ opacity = 0.25 }) {
   const { theme } = useTheme();
-  const [idx, setIdx] = useState(0);
-  const [ready, setReady] = useState(false);
   const videoRef = useRef(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+
     const onCanPlay = () => setReady(true);
+    const onError = () => setReady(false);
+
     v.addEventListener('canplay', onCanPlay);
-    return () => v.removeEventListener('canplay', onCanPlay);
+    v.addEventListener('error', onError);
+
+    // tenta dar play (alguns navegadores bloqueiam autoplay)
+    v.play().catch(() => {});
+
+    return () => {
+      v.removeEventListener('canplay', onCanPlay);
+      v.removeEventListener('error', onError);
+    };
   }, []);
 
-  const handleError = () => {
-    if (idx < sources.length - 1) setIdx(idx + 1);
-  };
-
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div
+      className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
+      aria-hidden="true"
+    >
       <video
         ref={videoRef}
-        className={`w-full h-full object-cover transition-opacity duration-1000 ${
-          ready ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ opacity: 'var(--video-opacity)' }}
-        src={sources[idx]}
-        autoPlay loop muted playsInline
-        onError={handleError}
+        className="w-full h-full object-cover"
+        style={{ opacity: ready ? opacity : 0, transition: 'opacity 0.8s' }}
+        src="/videos/hacker.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
       />
 
+      {/* Overlay pra casar com o tema */}
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(circle at 50% 40%, var(--video-overlay) 0%, var(--bg) 100%)`,
+          background: `radial-gradient(circle at 50% 40%, transparent 0%, var(--bg) 85%)`,
         }}
       />
 

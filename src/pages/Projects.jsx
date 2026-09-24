@@ -1,6 +1,7 @@
-import { FaStar, FaCodeBranch, FaExternalLinkAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaStar, FaCodeBranch, FaArrowRight } from 'react-icons/fa';
 import { useGithubProjects } from '../hooks/useGithubProjects';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 
 export default function Projects() {
   const { t } = useLanguage();
@@ -17,7 +18,9 @@ export default function Projects() {
       </header>
 
       {loading && (
-        <p className="text-app-muted text-sm animate-pulse">{t.projects.loading} ⏳</p>
+        <p className="text-app-muted text-sm animate-pulse">
+          {t.projects.loading} ⏳
+        </p>
       )}
 
       {error && (
@@ -28,39 +31,63 @@ export default function Projects() {
       )}
 
       {!loading && !error && (
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-5">
           {repos.map((r) => (
-            <a
+            <Link
               key={r.id}
-              href={r.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex flex-col p-4 rounded-lg
+              to={`/projetos/${r.name}`}
+              className="group flex flex-col rounded-xl overflow-hidden
                          border border-app bg-surface-soft
                          hover:border-app-strong hover:shadow-app
-                         transition-all"
+                         hover:-translate-y-0.5 transition-all"
             >
-              <h3 className="text-app font-mono font-semibold text-sm mb-2 flex items-center gap-2 truncate">
-                <span className="text-app-dim">&lt;</span>
-                <span className="truncate">{r.name}</span>
-                <span className="text-app-dim">/&gt;</span>
-              </h3>
-
-              <p className="text-app-muted text-xs leading-relaxed mb-3 flex-1">
-                {r.summary || t.projects.empty}
-              </p>
-
-              <div className="flex items-center gap-3 text-[11px] text-app-muted">
+              {/* Capa — aspect-video deixa o card "médio" */}
+              <div className="aspect-video overflow-hidden bg-[#0a0613] relative">
+                <img
+                  src={r.cover}
+                  alt={r.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover
+                             transition-transform duration-500
+                             group-hover:scale-105"
+                />
                 {r.language && (
-                  <span className="px-2 py-0.5 rounded border border-app">{r.language}</span>
+                  <span className="absolute top-2 right-2 text-[10px] font-mono
+                                   px-2 py-0.5 rounded bg-black/60 text-purple-200
+                                   backdrop-blur-sm">
+                    {r.language}
+                  </span>
                 )}
-                <span className="flex items-center gap-1"><FaStar size={10} /> {r.stars}</span>
-                <span className="flex items-center gap-1"><FaCodeBranch size={10} /> {r.forks}</span>
-                <span className="ml-auto text-app-dim group-hover:text-app-accent transition-colors">
-                  <FaExternalLinkAlt size={10} />
-                </span>
               </div>
-            </a>
+
+              {/* Conteúdo */}
+              <div className="p-4 flex flex-col flex-1">
+                <h3 className="text-app font-mono font-semibold text-sm mb-2
+                               flex items-center gap-2 truncate">
+                  <span className="text-app-dim">&lt;</span>
+                  <span className="truncate">{r.name}</span>
+                  <span className="text-app-dim">/&gt;</span>
+                </h3>
+
+                <p className="text-app-muted text-xs leading-relaxed mb-3
+                              flex-1 line-clamp-3">
+                  {r.summary || t.projects.empty}
+                </p>
+
+                <div className="flex items-center gap-3 text-[11px] text-app-muted">
+                  <span className="flex items-center gap-1">
+                    <FaStar size={10} /> {r.stars}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaCodeBranch size={10} /> {r.forks}
+                  </span>
+                  <span className="ml-auto text-app-accent flex items-center gap-1
+                                   opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t.projects.viewDetails} <FaArrowRight size={9} />
+                  </span>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       )}
