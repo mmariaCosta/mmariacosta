@@ -13,9 +13,9 @@ export default function Nav() {
     { to: '/',         label: t.nav.home },
     { to: '/sobre',    label: t.nav.about },
     { to: '/skills',   label: t.nav.skills },
+    { to: '/servicos', label: t.nav.services },
     { to: '/projetos', label: t.nav.projects },
     { to: '/cyber',    label: t.nav.cyber },
-    { to: '/servicos', label: t.nav.services },
   ];
 
   return (

@@ -10,6 +10,7 @@ function useTyping(lines = []) {
   const [text, setText] = useState('');
   const [deleting, setDeleting] = useState(false);
 
+  // Reseta tudo quando o array de linhas muda (troca de idioma)
   useEffect(() => {
     setText('');
     setDeleting(false);
@@ -20,21 +21,33 @@ function useTyping(lines = []) {
     if (!lines || lines.length === 0) return;
 
     const current = lines[idx % lines.length];
-    if (!current) return;
+    if (typeof current !== 'string') return;
 
     const speed = deleting ? 40 : 80;
+
     const timer = setTimeout(() => {
       if (!deleting) {
-        setText(current.slice(0, text.length + 1));
-        if (text.length + 1 === current.length) setTimeout(() => setDeleting(true), 1500);
+        // Adicionando letra por letra
+        const next = current.slice(0, text.length + 1);
+        setText(next);
+
+        // Terminou de digitar → espera e começa a apagar
+        if (next === current) {
+          setTimeout(() => setDeleting(true), 1500);
+        }
       } else {
-        setText(current.slice(0, text.length - 1));
-        if (text.length === 0) {
+        // Apagando
+        const next = current.slice(0, Math.max(0, text.length - 1));
+        setText(next);
+
+        // Terminou de apagar → vai pra próxima
+        if (next === '') {
           setDeleting(false);
           setIdx((i) => (i + 1) % lines.length);
         }
       }
     }, speed);
+
     return () => clearTimeout(timer);
   }, [text, deleting, idx, lines]);
 

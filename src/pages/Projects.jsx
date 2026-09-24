@@ -45,7 +45,7 @@ export default function Projects() {
       )}
 
       {!loading && !error && (
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-3 gap-12">
           {repos.map((r) => (
             <Link
               key={r.id}
@@ -56,7 +56,7 @@ export default function Projects() {
                          hover:-translate-y-0.5 transition-all"
             >
               {/* Imagem ou placeholder */}
-              <div className="aspect-video overflow-hidden bg-[#0a0613] relative">
+              <div className="aspect-[21/9] overflow-hidden bg-[#0a0613] relative">
                 {r.cover ? (
                   <img
                     src={r.cover}

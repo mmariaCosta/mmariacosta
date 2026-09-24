@@ -1,7 +1,10 @@
-import { useLanguage } from '../contexts/useLanguage';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/useLanguage';
+import { useTheme } from '../contexts/useTheme';
 
-
+/* =========================================================
+   TIMELINE
+   ========================================================= */
 function Timeline({ items }) {
   return (
     <ol className="relative border-l border-app pl-6 space-y-8">
@@ -15,7 +18,9 @@ function Timeline({ items }) {
               boxShadow: '0 0 10px var(--glow)',
             }}
           />
-          <p className="text-[10px] font-mono text-app-dim tracking-wider uppercase">{it.period}</p>
+          <p className="text-[10px] font-mono text-app-dim tracking-wider uppercase">
+            {it.period}
+          </p>
           <h3 className="text-app font-semibold mt-1 group-hover:text-app-accent transition-colors">
             {it.title}
           </h3>
@@ -39,70 +44,22 @@ function Timeline({ items }) {
   );
 }
 
-function CertProgressRing({ color, progress }) {
-  const size = 56;
-  const stroke = 4;
-  const radius = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference * (1 - progress / 100);
-
-  return (
-    <svg width={size} height={size} className="shrink-0">
-      <circle
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke="var(--border)"
-        strokeWidth={stroke}
-      />
-      <circle
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke={color}
-        strokeWidth={stroke}
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        strokeDashoffset={offset}
-        style={{
-          transform: 'rotate(-90deg)',
-          transformOrigin: 'center',
-          filter: `drop-shadow(0 0 6px ${color})`,
-        }}
-      />
-      <text
-        x="50%" y="50%"
-        dominantBaseline="middle"
-        textAnchor="middle"
-        fill={color}
-        fontSize="11"
-        fontFamily="monospace"
-        fontWeight="700"
-      >
-        {progress}%
-      </text>
-    </svg>
-  );
-}
-
+/* =========================================================
+   CERTIFICAÇÕES
+   ========================================================= */
 function Certifications({ t }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
   const STATUS = {
-    done:     { color: '#00ff88', icon: '✓', label: t.sobre.certsStatus.done,     progress: 100 },
-    studying: { color: '#facc15', icon: '◐', label: t.sobre.certsStatus.studying, progress: 50 },
-    planned:  { color: '#a78bfa', icon: '○', label: t.sobre.certsStatus.planned,  progress: 0 },
+    done:     { color: 'var(--cert-done)',     icon: '✓', label: t.sobre.certsStatus.done },
+    studying: { color: 'var(--cert-studying)', icon: '◐', label: t.sobre.certsStatus.studying },
+    planned:  { color: 'var(--cert-planned)',  icon: '○', label: t.sobre.certsStatus.planned },
   };
+
+  const PROGRESS = { planned: 0, studying: 50, done: 100 };
 
   const active = t.sobre.certs[activeIdx];
   const activeS = STATUS[active.status];
-
-  // Índice dentro do próprio array pra saber a "posição na trilha"
-  const totalSteps = t.sobre.certs.length;
-  const doneSteps = t.sobre.certs.filter((c) => c.status === 'done').length;
-  const overallPct = Math.round((doneSteps / totalSteps) * 100);
 
   return (
     <section className="mt-16 pt-12 border-t border-app">
@@ -115,26 +72,6 @@ function Certifications({ t }) {
           </span>
         </div>
         <p className="text-app-muted text-sm max-w-2xl">{t.sobre.certsSubtitle}</p>
-
-        {/* Barra de progresso geral */}
-        <div className="mt-5 max-w-2xl">
-          <div className="flex items-center justify-between text-xs font-mono mb-2">
-            <span className="text-app-muted uppercase tracking-widest">
-              Progresso geral
-            </span>
-            <span className="text-app font-bold">{overallPct}%</span>
-          </div>
-          <div className="h-1.5 rounded-full bg-surface-soft overflow-hidden">
-            <div
-              className="h-full rounded-full transition-all duration-700"
-              style={{
-                width: `${overallPct}%`,
-                background: 'linear-gradient(90deg, #00ff88, #facc15, #a78bfa)',
-                boxShadow: '0 0 12px rgba(168,85,247,0.6)',
-              }}
-            />
-          </div>
-        </div>
       </header>
 
       <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 max-w-4xl">
@@ -156,14 +93,16 @@ function Certifications({ t }) {
                 >
                   <span
                     className="w-1 h-10 rounded-full shrink-0 transition-colors"
-                    style={{ backgroundColor: isActive ? s.color : 'var(--border)' }}
+                    style={{
+                      backgroundColor: isActive ? s.color : 'var(--border)',
+                    }}
                   />
                   <span className="flex-1 min-w-0">
                     <span className="block text-app text-sm font-medium truncate">
                       {c.name}
                     </span>
                     <span className="block text-app-dim text-[10px] font-mono mt-0.5">
-                      {c.year} · {s.progress}%
+                      {c.year} · {PROGRESS[c.status]}%
                     </span>
                   </span>
                 </button>
@@ -172,41 +111,40 @@ function Certifications({ t }) {
           })}
         </ul>
 
-        {/* Preview */}
-        <div className="rounded-xl border border-app bg-surface-soft p-6
-                        relative overflow-hidden">
+        {/* Preview do ativo — TRANSLÚCIDO */}
+        <div
+          className="rounded-xl border p-6 relative overflow-hidden
+                     bg-surface-soft backdrop-blur-sm"
+          style={{
+            borderColor: `color-mix(in srgb, ${activeS.color} 30%, var(--border))`,
+          }}
+        >
+          {/* Glow da cor do status */}
           <div
-            className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl opacity-30"
-            style={{ backgroundColor: activeS.color }}
+            className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl opacity-25"
+            style={{ background: activeS.color }}
           />
 
           <div className="relative">
-            {/* Ícone + Ano em destaque */}
             <div className="flex items-start justify-between gap-4 mb-5">
               <div
                 className="w-16 h-16 rounded-2xl flex items-center justify-center
-                           text-3xl font-bold border-2 shrink-0"
+                           text-3xl font-bold border-2 shrink-0 bg-surface-soft"
                 style={{
-                  backgroundColor: `${activeS.color}15`,
                   borderColor: activeS.color,
                   color: activeS.color,
-                  boxShadow: `0 0 24px ${activeS.color}44`,
                 }}
               >
                 {activeS.icon}
               </div>
 
-              {/* ANO GRANDE */}
               <div className="text-right">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-app-dim">
                   Meta
                 </p>
                 <p
                   className="text-4xl md:text-5xl font-bold font-mono leading-none"
-                  style={{
-                    color: activeS.color,
-                    textShadow: `0 0 20px ${activeS.color}66`,
-                  }}
+                  style={{ color: activeS.color }}
                 >
                   {active.year}
                 </p>
@@ -216,7 +154,6 @@ function Certifications({ t }) {
             <h3 className="text-2xl font-bold text-app mb-2">{active.name}</h3>
             <p className="text-app-muted text-sm mb-6">{active.issuer}</p>
 
-            {/* PORCENTAGEM com barra */}
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span
@@ -229,16 +166,15 @@ function Certifications({ t }) {
                   className="text-2xl font-bold font-mono leading-none"
                   style={{ color: activeS.color }}
                 >
-                  {activeS.progress}%
+                  {PROGRESS[active.status]}%
                 </span>
               </div>
-              <div className="h-2 rounded-full bg-surface overflow-hidden">
+              <div className="h-2 rounded-full bg-surface-soft overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-700"
                   style={{
-                    width: `${activeS.progress}%`,
+                    width: `${PROGRESS[active.status]}%`,
                     backgroundColor: activeS.color,
-                    boxShadow: `0 0 12px ${activeS.color}`,
                   }}
                 />
               </div>
@@ -250,12 +186,14 @@ function Certifications({ t }) {
   );
 }
 
+/* =========================================================
+   PÁGINA
+   ========================================================= */
 export default function Sobre() {
   const { t } = useLanguage();
 
   return (
     <div>
-      {/* Header */}
       <header className="mb-12">
         <p className="text-app-accent font-mono text-xs tracking-widest uppercase mb-2">
           {t.sobre.eyebrow}
@@ -283,26 +221,40 @@ export default function Sobre() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-8">
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }} />
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }}
+              />
               <h3 className="text-sm font-mono uppercase tracking-widest text-app-muted">
                 {t.sobre.education.academic}
               </h3>
-              <span className="flex-1 h-px"
-                    style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }} />
+              <span
+                className="flex-1 h-px"
+                style={{
+                  background:
+                    'linear-gradient(to right, var(--border-strong), transparent)',
+                }}
+              />
             </div>
             <Timeline items={t.sobre.education.items.academic} />
           </section>
 
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }} />
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }}
+              />
               <h3 className="text-sm font-mono uppercase tracking-widest text-app-muted">
                 {t.sobre.education.professional}
               </h3>
-              <span className="flex-1 h-px"
-                    style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }} />
+              <span
+                className="flex-1 h-px"
+                style={{
+                  background:
+                    'linear-gradient(to right, var(--border-strong), transparent)',
+                }}
+              />
             </div>
             <Timeline items={t.sobre.education.items.professional} />
           </section>
