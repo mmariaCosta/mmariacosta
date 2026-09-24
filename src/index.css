@@ -65,6 +65,88 @@ code, pre, .mono, h1, h2, h3 {
   51%, 100% { opacity: 0; }
 }
 
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20%      { transform: translate(-2px, 1px); }
+  40%      { transform: translate(-1px, -1px); }
+  60%      { transform: translate(2px, 1px); }
+  80%      { transform: translate(1px, -2px); }
+}
+
+/* README renderizado */
+.prose-readme {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.prose-readme h1,
+.prose-readme h2,
+.prose-readme h3,
+.prose-readme h4 {
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  font-family: 'JetBrains Mono', monospace;
+}
+.prose-readme h1 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+.prose-readme h2 { font-size: 1.25rem; }
+.prose-readme h3 { font-size: 1.05rem; }
+.prose-readme p  { margin: 0.8em 0; }
+.prose-readme a  { color: var(--accent); text-decoration: underline; }
+.prose-readme ul,
+.prose-readme ol { padding-left: 1.5em; margin: 0.8em 0; }
+.prose-readme li { margin: 0.3em 0; }
+.prose-readme code {
+  background: var(--surface-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--accent);
+}
+.prose-readme pre {
+  background: #0a0613;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.prose-readme pre code {
+  background: transparent;
+  color: #e9d5ff;
+  padding: 0;
+}
+.prose-readme img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin: 1em 0;
+}
+.prose-readme blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1em;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 1em 0;
+}
+.prose-readme table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.85em;
+}
+.prose-readme th,
+.prose-readme td {
+  border: 1px solid var(--border);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+.prose-readme th {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
 /* ===== UTILITÁRIOS SEMÂNTICOS ===== */
 @utility bg-app          { background-color: var(--bg); }
 @utility bg-surface      { background-color: var(--surface); }
