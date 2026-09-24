@@ -35,7 +35,6 @@ export default function ProjectDetail() {
 
   return (
     <article className="max-w-3xl mx-auto">
-      {/* Voltar */}
       <Link
         to="/projetos"
         className="inline-flex items-center gap-2 text-app-muted text-xs font-mono
@@ -44,12 +43,13 @@ export default function ProjectDetail() {
         <FaArrowLeft size={10} /> {t.projectDetail.back}
       </Link>
 
-      {/* Carrossel */}
-      <div className="mb-6">
-        <Carousel images={images} alt={project.name} />
-      </div>
+      {/* Carrossel (ou nada se não tiver imagens) */}
+      {images.length > 0 && (
+        <div className="mb-6">
+          <Carousel images={images} alt={project.name} />
+        </div>
+      )}
 
-      {/* Header */}
       <header className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-app font-mono break-all">
           <span className="text-app-dim">&lt;</span>
@@ -63,7 +63,6 @@ export default function ProjectDetail() {
         )}
       </header>
 
-      {/* Meta resumido */}
       <section className="flex flex-wrap items-center gap-3 mb-8
                           text-xs text-app-muted">
         {project.language && (
@@ -79,7 +78,6 @@ export default function ProjectDetail() {
         </span>
       </section>
 
-      {/* Links */}
       <section className="flex flex-wrap gap-3 mb-10">
         <a
           href={project.url}
@@ -106,7 +104,6 @@ export default function ProjectDetail() {
         )}
       </section>
 
-      {/* Topics */}
       {project.topics.length > 0 && (
         <section className="mb-10">
           <div className="flex flex-wrap gap-2">
@@ -123,7 +120,6 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      {/* Introdução (README) */}
       {readmeHtml && (
         <section className="mt-10 pt-8 border-t border-app">
           <h2 className="text-sm font-mono uppercase tracking-widest

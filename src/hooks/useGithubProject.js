@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 const USER = 'mmariacosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-// APENAS estas pastas — sem fallback pra assets/src/static
 const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
@@ -37,9 +36,7 @@ async function fetchFolderImages(repo, branch) {
         .map((f) => f.download_url);
 
       if (images.length > 0) return images;
-    } catch {
-      /* tenta próxima pasta */
-    }
+    } catch { /* tenta próxima */ }
   }
   return [];
 }
@@ -68,15 +65,9 @@ export function useGithubProject(name) {
 
         const branch = repo.default_branch || 'main';
 
-        // Pega APENAS das pastas img/images/screenshots
-        // Não cai no README — se não tiver pasta, usa OpenGraph
-        let images = await fetchFolderImages(name, branch);
+        // Só busca das pastas — sem fallback pra OpenGraph
+        const images = await fetchFolderImages(name, branch);
 
-        if (images.length === 0) {
-          images = [`https://opengraph.githubassets.com/1/${USER}/${repo.name}`];
-        }
-
-        // README HTML pra renderizar na página
         let readmeHtml = '';
         try {
           const rr = await fetch(
@@ -102,10 +93,9 @@ export function useGithubProject(name) {
             created: repo.created_at,
             license: repo.license?.name,
             branch,
-            cover: `https://opengraph.githubassets.com/1/${USER}/${repo.name}`,
           },
           readmeHtml,
-          images,
+          images, // vazio se não tiver pasta
           loading: false,
           error: null,
         });

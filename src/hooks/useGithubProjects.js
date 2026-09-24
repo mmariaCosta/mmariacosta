@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 
 const USER = 'mmariacosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-const CACHE_KEY = 'gh-projects-cache-v4';
+const CACHE_KEY = 'gh-projects-cache-v5';
 const TTL = 1000 * 60 * 60 * 6; // 6 horas
 
-// Só 3 pastas pra não estourar a API na listagem
 const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
@@ -39,7 +38,7 @@ async function findFirstImage(repo, branch) {
 
       if (images.length > 0) return images[0].download_url;
     } catch {
-      /* tenta próxima pasta */
+      /* tenta próxima */
     }
   }
   return null;
@@ -108,7 +107,6 @@ export function useGithubProjects(limit = 12) {
           repos.map(async (r) => {
             const branch = r.default_branch || 'main';
 
-            // resumo do README
             let summary = r.description || '';
             try {
               const rr = await fetch(
@@ -122,11 +120,7 @@ export function useGithubProjects(limit = 12) {
               }
             } catch { /* ignora */ }
 
-            // imagem da pasta (ou OpenGraph como fallback)
-            const folderImage = await findFirstImage(r.name, branch);
-            const cover = folderImage
-              ? folderImage
-              : `https://opengraph.githubassets.com/1/${USER}/${r.name}`;
+            const cover = await findFirstImage(r.name, branch);
 
             return {
               id: r.id,
@@ -141,8 +135,7 @@ export function useGithubProjects(limit = 12) {
               updated: r.updated_at,
               created: r.created_at,
               license: r.license?.name,
-              cover,
-              images: [cover],
+              cover, // null se não tiver imagem na pasta
             };
           })
         );

@@ -3,6 +3,20 @@ import { FaStar, FaCodeBranch, FaArrowRight } from 'react-icons/fa';
 import { useGithubProjects } from '../hooks/useGithubProjects';
 import { useLanguage } from '../contexts/useLanguage';
 
+const LANG_EMOJI = {
+  JavaScript: '🟨',
+  TypeScript: '🔷',
+  Python: '🐍',
+  Ruby: '💎',
+  Java: '☕',
+  'C#': '🎯',
+  HTML: '🌐',
+  CSS: '🎨',
+  Shell: '🐚',
+  Go: '🐹',
+  Rust: '🦀',
+};
+
 export default function Projects() {
   const { t } = useLanguage();
   const { repos, loading, error } = useGithubProjects(12);
@@ -41,17 +55,30 @@ export default function Projects() {
                          hover:border-app-strong hover:shadow-app
                          hover:-translate-y-0.5 transition-all"
             >
-              {/* Capa — aspect-video deixa o card "médio" */}
+              {/* Imagem ou placeholder */}
               <div className="aspect-video overflow-hidden bg-[#0a0613] relative">
-                <img
-                  src={r.cover}
-                  alt={r.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover
-                             transition-transform duration-500
-                             group-hover:scale-105"
-                />
-                {r.language && (
+                {r.cover ? (
+                  <img
+                    src={r.cover}
+                    alt={r.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover
+                               transition-transform duration-500
+                               group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center
+                                  bg-gradient-to-br from-purple-900/50 to-purple-700/20">
+                    <span className="text-5xl mb-2">
+                      {LANG_EMOJI[r.language] || '📦'}
+                    </span>
+                    <span className="text-app-muted font-mono text-xs uppercase tracking-widest">
+                      {r.language || 'project'}
+                    </span>
+                  </div>
+                )}
+
+                {r.language && r.cover && (
                   <span className="absolute top-2 right-2 text-[10px] font-mono
                                    px-2 py-0.5 rounded bg-black/60 text-purple-200
                                    backdrop-blur-sm">
