@@ -1,16 +1,5 @@
 import { useLanguage } from '../contexts/useLanguage';
-
-const SKILLS = [
-  { name: 'Python',      group: 'known',    icon: 'python/python-original' },
-  { name: 'C#',          group: 'known',    icon: 'csharp/csharp-original' },
-  { name: 'SQL Server',  group: 'known',    icon: 'microsoftsqlserver/microsoftsqlserver-plain' },
-  { name: 'Git',         group: 'known',    icon: 'git/git-original' },
-  { name: 'VS Code',     group: 'known',    icon: 'vscode/vscode-original' },
-  { name: 'AWS',         group: 'learning', icon: 'amazonwebservices/amazonwebservices-original-wordmark' },
-  { name: 'GCP',         group: 'learning', icon: 'googlecloud/googlecloud-original' },
-  { name: 'Docker',      group: 'learning', icon: 'docker/docker-original' },
-  { name: 'Linux',       group: 'learning', icon: 'linux/linux-original' },
-];
+import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
 
 function Card({ children, className = '', hover = true }) {
   return (
@@ -26,7 +15,28 @@ function Card({ children, className = '', hover = true }) {
 }
 
 export default function Skills() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const { skills, loading, error } = usePortfolioData();
+
+  if (loading) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-red-400 text-sm">erro: {error}</p>
+      </div>
+    );
+  }
+
+  const known = skills?.arsenal?.known || [];
+  const learning = skills?.arsenal?.learning || [];
+  const soft = skills?.soft || [];
 
   return (
     <div>
@@ -38,7 +48,6 @@ export default function Skills() {
         <p className="text-app-muted text-sm mt-2 max-w-2xl">{t.skills.subtitle}</p>
       </header>
 
-      {/* Duas colunas */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* COLUNA 1 — Arsenal */}
         <section>
@@ -62,12 +71,12 @@ export default function Skills() {
                   {t.skills.groups.known}
                 </p>
                 <span className="text-[10px] font-mono text-app-dim ml-auto">
-                  {SKILLS.filter((s) => s.group === 'known').length}
+                  {known.length}
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2">
-                {SKILLS.filter((s) => s.group === 'known').map((s) => (
+                {known.map((s) => (
                   <div
                     key={s.name}
                     className="flex flex-col items-center gap-2 p-3 rounded-lg
@@ -97,12 +106,12 @@ export default function Skills() {
                   {t.skills.groups.learning}
                 </p>
                 <span className="text-[10px] font-mono text-app-dim ml-auto">
-                  {SKILLS.filter((s) => s.group === 'learning').length}
+                  {learning.length}
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2">
-                {SKILLS.filter((s) => s.group === 'learning').map((s) => (
+                {learning.map((s) => (
                   <div
                     key={s.name}
                     className="flex flex-col items-center gap-2 p-3 rounded-lg
@@ -139,9 +148,9 @@ export default function Skills() {
           </div>
 
           <ul className="space-y-3">
-            {t.skills.softItems.map((s, i) => (
+            {soft.map((s, i) => (
               <li
-                key={s.title}
+                key={i}
                 className="group p-4 rounded-2xl border border-app bg-surface-soft
                            hover:border-app-strong hover:shadow-app
                            hover:-translate-y-0.5 transition-all"
@@ -153,10 +162,10 @@ export default function Skills() {
                   <div className="flex-1 min-w-0">
                     <h3 className="text-app font-semibold text-sm mb-1 leading-tight
                                    group-hover:text-app-accent transition-colors">
-                      {s.title}
+                      {pickText(s.title, lang)}
                     </h3>
                     <p className="text-app-muted text-xs leading-relaxed">
-                      {s.desc}
+                      {pickText(s.desc, lang)}
                     </p>
                   </div>
                 </div>

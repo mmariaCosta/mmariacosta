@@ -1,0 +1,100 @@
+{
+  "items": [
+    {
+      "id": "vuln-assessment",
+      "icon": "shield",
+      "title": {
+        "pt": "Análise de Vulnerabilidades",
+        "en": "Vulnerability Assessment"
+      },
+      "desc": {
+        "pt": "Avaliação de aplicações web e infraestrutura com relatório técnico de achados e recomendações.",
+        "en": "Evaluation of web applications and infrastructure with a technical report of findings and recommendations."
+      },
+      "bullets": {
+        "pt": ["Reconhecimento", "Scan de portas", "Relatório priorizado"],
+        "en": ["Reconnaissance", "Port scanning", "Prioritized report"]
+      }
+    },
+    {
+      "id": "python-automation",
+      "icon": "bug",
+      "title": {
+        "pt": "Automação com Python",
+        "en": "Python Automation"
+      },
+      "desc": {
+        "pt": "Scripts e rotinas automatizadas para tarefas repetitivas — relatórios, coleta de dados, integrações.",
+        "en": "Scripts and automated routines for repetitive tasks — reports, data collection, integrations."
+      },
+      "bullets": {
+        "pt": ["Scripts CLI", "Integração de APIs", "Web scraping"],
+        "en": ["CLI scripts", "API integrations", "Web scraping"]
+      }
+    },
+    {
+      "id": "hardening",
+      "icon": "server",
+      "title": {
+        "pt": "Hardening de Infraestrutura",
+        "en": "Infrastructure Hardening"
+      },
+      "desc": {
+        "pt": "Configuração segura de servidores Linux e boas práticas de rede e permissões.",
+        "en": "Secure configuration of Linux servers and best practices for networking and permissions."
+      },
+      "bullets": {
+        "pt": ["Configuração Linux", "Firewall e SSH", "Backup e logs"],
+        "en": ["Linux setup", "Firewall & SSH", "Backup and logs"]
+      }
+    },
+    {
+      "id": "backend",
+      "icon": "code",
+      "title": {
+        "pt": "Desenvolvimento Backend",
+        "en": "Backend Development"
+      },
+      "desc": {
+        "pt": "APIs e serviços em Python ou C# com foco em segurança desde o design.",
+        "en": "APIs and services in Python or C# with security by design."
+      },
+      "bullets": {
+        "pt": ["APIs REST", "Banco de dados", "Autenticação"],
+        "en": ["REST APIs", "Databases", "Authentication"]
+      }
+    },
+    {
+      "id": "mentoring",
+      "icon": "graduation",
+      "title": {
+        "pt": "Mentoria para Iniciantes",
+        "en": "Mentoring for Beginners"
+      },
+      "desc": {
+        "pt": "Acompanhamento para quem está começando em cibersegurança — trilha, dúvidas e projetos guiados.",
+        "en": "Guidance for those starting in cybersecurity — roadmap, questions and guided projects."
+      },
+      "bullets": {
+        "pt": ["Trilha personalizada", "Sessões 1:1", "Revisão de projetos"],
+        "en": ["Custom roadmap", "1:1 sessions", "Project review"]
+      }
+    },
+    {
+      "id": "cloud",
+      "icon": "cloud",
+      "title": {
+        "pt": "Consultoria em Cloud (básico)",
+        "en": "Cloud Consulting (basic)"
+      },
+      "desc": {
+        "pt": "Apoio na migração inicial pra AWS — IAM, buckets, custos e segurança básica.",
+        "en": "Support for initial AWS migration — IAM, buckets, costs and basic security."
+      },
+      "bullets": {
+        "pt": ["AWS Free Tier", "IAM e políticas", "Otimização de custos"],
+        "en": ["AWS Free Tier", "IAM & policies", "Cost optimization"]
+      }
+    }
+  ]
+}

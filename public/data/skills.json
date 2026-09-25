@@ -1,0 +1,44 @@
+
+{
+  "arsenal": {
+    "known": [
+      { "name": "Python",     "icon": "python/python-original" },
+      { "name": "C#",         "icon": "csharp/csharp-original" },
+      { "name": "SQL Server", "icon": "microsoftsqlserver/microsoftsqlserver-plain" },
+      { "name": "Git",        "icon": "git/git-original" },
+      { "name": "VS Code",    "icon": "vscode/vscode-original" }
+    ],
+    "learning": [
+      { "name": "AWS",    "icon": "amazonwebservices/amazonwebservices-original-wordmark" },
+      { "name": "GCP",    "icon": "googlecloud/googlecloud-original" },
+      { "name": "Docker", "icon": "docker/docker-original" },
+      { "name": "Linux",  "icon": "linux/linux-original" }
+    ]
+  },
+  "soft": [
+    {
+      "title": { "pt": "Pensamento Analítico",       "en": "Analytical Thinking" },
+      "desc":  { "pt": "Quebro o problema em partes, entendo o contexto antes de agir e questiono o porquê.", "en": "I break the problem into parts, understand the context before acting and always question the why." }
+    },
+    {
+      "title": { "pt": "Autonomia e Autogestão",     "en": "Autonomy & Self-Management" },
+      "desc":  { "pt": "Consigo me organizar sozinha, priorizar tarefas e entregar sem precisar de cobrança.", "en": "I can organize myself, prioritize tasks and deliver without needing to be chased." }
+    },
+    {
+      "title": { "pt": "Aprendizado Contínuo",       "en": "Continuous Learning" },
+      "desc":  { "pt": "Estudo todos os dias — seja uma ferramenta nova, um conceito ou um erro que cometi.", "en": "I study every day — whether it's a new tool, a concept or a mistake I made." }
+    },
+    {
+      "title": { "pt": "Planejamento Estratégico",   "en": "Strategic Planning" },
+      "desc":  { "pt": "Penso no impacto a longo prazo antes de decidir. Prefiro construir certo do que refazer depois.", "en": "I think about long-term impact before deciding. I'd rather build it right than redo it later." }
+    },
+    {
+      "title": { "pt": "Comunicação Direta",         "en": "Direct Communication" },
+      "desc":  { "pt": "Falo claro, pergunto quando não sei e não enrolo quando preciso dizer não.", "en": "I speak clearly, ask when I don't know and don't dance around when I need to say no." }
+    },
+    {
+      "title": { "pt": "Adaptabilidade Estruturada", "en": "Structured Adaptability" },
+      "desc":  { "pt": "Lido bem com mudanças sem perder o método — me adapto rápido, mas com processo.", "en": "I handle change well without losing method — I adapt fast, but with process." }
+    }
+  ]
+}

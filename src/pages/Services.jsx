@@ -1,16 +1,31 @@
 import { FaEnvelope } from 'react-icons/fa';
-import {
-  FaShieldHalved, FaBug, FaServer, FaCode,
-  FaUserGraduate, FaCloud,
-} from 'react-icons/fa6';
 import { useLanguage } from '../contexts/useLanguage';
-
-const ICONS = [FaShieldHalved, FaBug, FaServer, FaCode, FaUserGraduate, FaCloud];
+import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
+import ServiceIcon from '../components/ServiceIcon';
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const { profile, services, loading, error } = usePortfolioData();
 
-  // Padrão de tamanhos: primeiro grande, resto médio, último largo
+  if (loading) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-red-400 text-sm">erro: {error}</p>
+      </div>
+    );
+  }
+
+  const items = services?.items || [];
+  const email = profile?.email || 'mmaria.costa@outlook.com';
+
   const SIZES = [
     'md:col-span-2 md:row-span-2',
     '',
@@ -33,18 +48,20 @@ export default function Services() {
       </header>
 
       <ul className="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[180px] gap-3">
-        {t.services.items.map((s, i) => {
-          const Icon = ICONS[i] || FaShieldHalved;
+        {items.map((s, i) => {
           const isBig = i === 0;
+          const title = pickText(s.title, lang);
+          const desc = pickText(s.desc, lang);
+          const bullets = s.bullets?.[lang] || s.bullets?.pt || [];
+
           return (
             <li
-              key={s.title}
+              key={s.id || i}
               className={`group relative p-5 rounded-2xl border border-app
                          bg-surface-soft hover:border-app-strong
                          transition-all overflow-hidden flex flex-col
                          ${SIZES[i] || ''}`}
             >
-              {/* Glow de canto */}
               <div
                 className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl
                            opacity-0 group-hover:opacity-25 transition-opacity"
@@ -53,7 +70,8 @@ export default function Services() {
 
               <div className="relative flex-1 flex flex-col">
                 <div className="flex items-start justify-between mb-3">
-                  <Icon
+                  <ServiceIcon
+                    name={s.icon}
                     size={isBig ? 32 : 20}
                     className="text-app-accent shrink-0"
                   />
@@ -67,18 +85,18 @@ export default function Services() {
                     isBig ? 'text-2xl' : 'text-sm'
                   }`}
                 >
-                  {s.title}
+                  {title}
                 </h3>
                 <p
                   className={`text-app-muted leading-relaxed mb-3 ${
                     isBig ? 'text-sm line-clamp-3' : 'text-[11px] line-clamp-2'
                   }`}
                 >
-                  {s.desc}
+                  {desc}
                 </p>
 
                 <div className="mt-auto flex flex-wrap gap-1.5">
-                  {s.bullets?.slice(0, isBig ? 3 : 2).map((b) => (
+                  {bullets.slice(0, isBig ? 3 : 2).map((b) => (
                     <span
                       key={b}
                       className="text-[9px] font-mono px-1.5 py-0.5 rounded
@@ -96,7 +114,7 @@ export default function Services() {
 
       <div className="mt-12 text-center">
         <a
-          href="mailto:mmaria.costa@outlook.com"
+          href={`mailto:${email}`}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
                      text-white font-medium transition-all hover:-translate-y-0.5"
           style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 20px var(--glow)' }}

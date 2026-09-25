@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../contexts/useLanguage';
-import { useTheme } from '../contexts/useTheme';
+import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
 
 /* =========================================================
    TIMELINE
@@ -26,7 +26,7 @@ function Timeline({ items }) {
           </h3>
           <p className="text-app-muted text-xs mt-0.5">{it.place}</p>
           <p className="text-app/80 text-sm mt-2 leading-relaxed">{it.desc}</p>
-          {it.tags && (
+          {it.tags && it.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-3">
               {it.tags.map((tag) => (
                 <span
@@ -45,9 +45,9 @@ function Timeline({ items }) {
 }
 
 /* =========================================================
-   CERTIFICAÇÕES
+   CERTIFICAÇÕES — consome JSON
    ========================================================= */
-function Certifications({ t }) {
+function Certifications({ t, certifications }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
   const STATUS = {
@@ -56,10 +56,28 @@ function Certifications({ t }) {
     planned:  { color: 'var(--cert-planned)',  icon: '○', label: t.sobre.certsStatus.planned },
   };
 
-  const PROGRESS = { planned: 0, studying: 50, done: 100 };
+  const DEFAULT_PROGRESS = { planned: 0, studying: 50, done: 100 };
 
-  const active = t.sobre.certs[activeIdx];
+  const items = certifications?.items || [];
+  if (items.length === 0) return null;
+
+  const getProgress = (item) => {
+    if (typeof item.progress === 'number') return item.progress;
+    return DEFAULT_PROGRESS[item.status] || 0;
+  };
+
+  const totalProgress = items.reduce((acc, c) => acc + getProgress(c), 0);
+  const maxProgress = items.length * 100;
+  const calculatedPct = Math.round((totalProgress / maxProgress) * 100);
+
+  const overallPct =
+    typeof certifications.overallProgress === 'number'
+      ? certifications.overallProgress
+      : calculatedPct;
+
+  const active = items[activeIdx];
   const activeS = STATUS[active.status];
+  const activeProgress = getProgress(active);
 
   return (
     <section className="mt-16 pt-12 border-t border-app">
@@ -72,16 +90,59 @@ function Certifications({ t }) {
           </span>
         </div>
         <p className="text-app-muted text-sm max-w-2xl">{t.sobre.certsSubtitle}</p>
+
+        {/* ===================== BARRA DE PROGRESSO GERAL ===================== */}
+        <div className="mt-6 max-w-2xl">
+          <div className="flex items-center justify-between text-xs font-mono mb-2">
+            <span className="text-app-muted uppercase tracking-widest">
+              {t.sobre.certsProgressLabel || 'Progresso geral'}
+            </span>
+            <span className="text-app font-bold text-base">{overallPct}%</span>
+          </div>
+
+          <div className="h-3 rounded-full bg-surface-soft overflow-hidden relative">
+            <div
+              className="h-full rounded-full transition-all duration-700 relative"
+              style={{
+                width: `${Math.min(overallPct, 100)}%`,
+                background: `linear-gradient(90deg,
+                        #f3d23e,
+                        #b0be5e,
+                        #1ea356
+                       )`,
+                boxShadow: overallPct > 0
+                  ? `0 0 12px color-mix(in srgb, var(--cert-studying) 50%, transparent)`
+                  : 'none',
+              }}
+            />
+          </div>
+
+          <div className="flex items-center gap-4 mt-2 text-[10px] font-mono text-app-dim">
+            <span>
+              {items.filter((c) => c.status === 'done').length} concluída(s)
+            </span>
+            <span>·</span>
+            <span>
+              {items.filter((c) => c.status === 'studying').length} estudando
+            </span>
+            <span>·</span>
+            <span>
+              {items.filter((c) => c.status === 'planned').length} planejada(s)
+            </span>
+          </div>
+        </div>
+        {/* =================== FIM DA BARRA =================== */}
       </header>
 
       <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 max-w-4xl">
         {/* Lista lateral */}
         <ul className="space-y-1">
-          {t.sobre.certs.map((c, i) => {
+          {items.map((c, i) => {
             const s = STATUS[c.status];
             const isActive = i === activeIdx;
+            const itemProgress = getProgress(c);
             return (
-              <li key={c.name}>
+              <li key={c.id || c.name}>
                 <button
                   onClick={() => setActiveIdx(i)}
                   className={`w-full text-left p-3 rounded-lg border
@@ -102,7 +163,7 @@ function Certifications({ t }) {
                       {c.name}
                     </span>
                     <span className="block text-app-dim text-[10px] font-mono mt-0.5">
-                      {c.year} · {PROGRESS[c.status]}%
+                      {c.year} · {itemProgress}%
                     </span>
                   </span>
                 </button>
@@ -111,7 +172,7 @@ function Certifications({ t }) {
           })}
         </ul>
 
-        {/* Preview do ativo — TRANSLÚCIDO */}
+        {/* Preview */}
         <div
           className="rounded-xl border p-6 relative overflow-hidden
                      bg-surface-soft backdrop-blur-sm"
@@ -119,7 +180,6 @@ function Certifications({ t }) {
             borderColor: `color-mix(in srgb, ${activeS.color} 30%, var(--border))`,
           }}
         >
-          {/* Glow da cor do status */}
           <div
             className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl opacity-25"
             style={{ background: activeS.color }}
@@ -166,14 +226,14 @@ function Certifications({ t }) {
                   className="text-2xl font-bold font-mono leading-none"
                   style={{ color: activeS.color }}
                 >
-                  {PROGRESS[active.status]}%
+                  {activeProgress}%
                 </span>
               </div>
               <div className="h-2 rounded-full bg-surface-soft overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-700"
                   style={{
-                    width: `${PROGRESS[active.status]}%`,
+                    width: `${activeProgress}%`,
                     backgroundColor: activeS.color,
                   }}
                 />
@@ -190,7 +250,44 @@ function Certifications({ t }) {
    PÁGINA
    ========================================================= */
 export default function Sobre() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const { profile, certifications, education, loading, error } = usePortfolioData();
+
+  if (loading) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-red-400 text-sm">erro: {error}</p>
+      </div>
+    );
+  }
+
+  // Bio do JSON — agora vem como objeto {pt: [...], en: [...]}
+  const bio = profile?.bio?.[lang] || profile?.bio?.pt || [];
+
+  // Converte education JSON pro formato do <Timeline>
+  const academicItems = (education?.academic || []).map((it) => ({
+    title: pickText(it.title, lang),
+    place: pickText(it.place, lang),
+    period: pickText(it.period, lang),
+    desc: pickText(it.desc, lang),
+    tags: it.tags || [],
+  }));
+
+  const professionalItems = (education?.professional || []).map((it) => ({
+    title: pickText(it.title, lang),
+    place: pickText(it.place, lang),
+    period: pickText(it.period, lang),
+    desc: pickText(it.desc, lang),
+    tags: it.tags || [],
+  }));
 
   return (
     <div>
@@ -202,16 +299,16 @@ export default function Sobre() {
         <p className="text-app-muted text-sm mt-2 max-w-2xl">{t.sobre.subtitle}</p>
       </header>
 
-      {/* Bio */}
+      {/* Bio — do JSON */}
       <section className="max-w-3xl space-y-4 mb-16">
-        {t.sobre.bio.map((paragraph, i) => (
+        {bio.map((paragraph, i) => (
           <p key={i} className="text-app/85 leading-relaxed">
             {paragraph}
           </p>
         ))}
       </section>
 
-      {/* Formação */}
+      {/* Formação — do JSON */}
       <section className="pt-12 border-t border-app">
         <header className="mb-8">
           <h2 className="text-2xl font-bold text-app">{t.sobre.eduTitle}</h2>
@@ -236,7 +333,7 @@ export default function Sobre() {
                 }}
               />
             </div>
-            <Timeline items={t.sobre.education.items.academic} />
+            <Timeline items={academicItems} />
           </section>
 
           <section>
@@ -256,11 +353,12 @@ export default function Sobre() {
                 }}
               />
             </div>
-            <Timeline items={t.sobre.education.items.professional} />
+            <Timeline items={professionalItems} />
           </section>
         </div>
 
-        <Certifications t={t} />
+        {/* Certificações — do JSON */}
+        <Certifications t={t} certifications={certifications} />
       </section>
     </div>
   );

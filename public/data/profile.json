@@ -1,0 +1,78 @@
+{
+  "name": "Maria Costa",
+  "email": "mmaria.costa@outlook.com",
+  "whatsapp": "+55 19 99378-6188",
+  "whatsappUrl": "https://wa.me/5519993786188",
+
+  "intro": {
+    "pt": "Olá, eu sou",
+    "en": "Hi, I'm"
+  },
+
+  "role": {
+    "pt": "Analista de Segurança em formação",
+    "en": "Security Analyst in training"
+  },
+
+  "location": {
+    "pt": "Campinas · Brasil 🇧🇷",
+    "en": "Campinas · Brazil 🇧🇷"
+  },
+
+  "typing": {
+    "pt": [
+      "Hi!! I AM Maria Costa",
+      "Analista de Segurança em formação",
+      "From Brazil 🇧🇷",
+      "Apaixonada por Cyber!!"
+    ],
+    "en": [
+      "Hi!! I AM Maria Costa",
+      "Security Analyst in training",
+      "From Brazil 🇧🇷",
+      "Passionate about Cyber!!"
+    ]
+  },
+
+  "bioShort": {
+    "pt": "Pensamento estratégico aplicado à segurança de sistemas. Estudante de Cibersegurança em formação, com foco em infraestrutura resiliente, análise de vulnerabilidades e automação. Não me interessa só o \"como\", mas o \"por quê\" por trás de cada falha. Segurança é design, não remendo.",
+    "en": "Strategic thinking applied to system security. Cybersecurity student in training, focused on resilient infrastructure, vulnerability analysis and automation. I care less about the \"how\" and more about the \"why\" behind every failure. Security is design, not a patch."
+  },
+
+  "bio": {
+    "pt": [
+      "Sou Maria Costa, estudante de Cibersegurança com base técnica em programação e infraestrutura. Vim do ensino médio integrado ao técnico em Informática pelo Cotuca (Unicamp), e em 2027 inicio a graduação em Cibersegurança pela FIAP.",
+      "O que me move na segurança não é só o desafio técnico, mas a forma de pensar: entender a origem da falha, questionar o porquê, e projetar sistemas que resistam por design — não por remendo.",
+      "Fora do código, gosto de escrever sobre o que aprendo, resolver desafios em CTFs e estudar arquiteturas de defesa."
+    ],
+    "en": [
+      "I am Maria Costa, a Cybersecurity student with a technical background in programming and infrastructure. I came from the technical high school program at Cotuca (Unicamp), and in 2027 I start my degree in Cybersecurity at FIAP.",
+      "What drives me in security is not only the technical challenge, but the way of thinking: understanding the origin of the failure, questioning the why, and designing systems that are resilient by design — not by patch.",
+      "Outside code, I enjoy writing about what I learn, solving CTF challenges and studying defense architectures."
+    ]
+  },
+
+  "bugQuote": {
+    "pt": "> \"Comer bugs é meu passatempo favorito!\" 🍒",
+    "en": "> \"Eating bugs is my favorite pastime!\" 🍒"
+  },
+
+  "social": {
+    "github": {
+      "handle": "@mmariacosta",
+      "url": "https://github.com/mmariacosta"
+    },
+    "linkedin": {
+      "handle": "/in/mmariacosta",
+      "url": "https://linkedin.com/in/mmariacosta"
+    },
+    "instagram": {
+      "handle": "@mar28edua9",
+      "url": "https://instagram.com/mar28edua9"
+    }
+  },
+
+  "images": {
+    "cat": "https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg"
+  }
+}

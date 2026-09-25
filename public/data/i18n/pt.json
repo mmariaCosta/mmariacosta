@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "skills": "Skills",
+    "projects": "Projetos",
+    "cyber": "Cyber",
+    "services": "Serviços"
+  },
+  "home": {
+    "ctaProjects": "Ver projetos",
+    "ctaContact": "Contato",
+    "contactEyebrow": "Contato",
+    "contactTitle": "Vamos conversar",
+    "contactSubtitle": "Estou aberta a oportunidades, colaborações e trocas sobre segurança."
+  },
+  "sobre": {
+    "eyebrow": "Sobre",
+    "title": "Quem eu sou",
+    "subtitle": "Um pouco da minha trajetória, do que acredito e do que estou construindo.",
+    "eduTitle": "Formação",
+    "eduSubtitle": "Do estudo à prática — o que construí até aqui.",
+    "education": {
+      "academic": "Acadêmica",
+      "professional": "Profissional"
+    },
+    "certsTitle": "Trilha de certificações",
+    "certsSubtitle": "Metas de certificação que estou perseguindo — roadmap de evolução técnica.",
+    "certsProgressLabel": "Progresso geral",
+    "certsHint": "// certificações são metas — atualizo o status conforme avanço",
+    "certsStatus": {
+      "done": "concluída",
+      "studying": "estudando",
+      "planned": "planejada"
+    }
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "title": "Ferramentas e habilidades",
+    "subtitle": "O arsenal técnico e as soft skills que carrego pra qualquer time.",
+    "arsenalTitle": "Arsenal",
+    "arsenalSubtitle": "O que já domino e o que estou colocando na bagagem.",
+    "softTitle": "Soft Skills",
+    "softSubtitle": "Habilidades que não se aprende só em curso técnico.",
+    "groups": {
+      "known": "Domino",
+      "learning": "Em evolução"
+    }
+  },
+  "projects": {
+    "eyebrow": "Projetos",
+    "title": "Coisas que construí",
+    "subtitle": "Sincronizado em tempo real com meu GitHub.",
+    "loading": "carregando projetos...",
+    "error": "⚠️ erro ao buscar do GitHub",
+    "errorHint": "(talvez o limite da API tenha estourado — tente de novo em 1h)",
+    "empty": "— sem descrição —",
+    "viewDetails": "ver detalhes"
+  },
+  "projectDetail": {
+    "eyebrow": "Projeto",
+    "loading": "carregando projeto",
+    "error": "Não foi possível carregar este projeto.",
+    "back": "voltar para projetos",
+    "viewRepo": "Ver no GitHub",
+    "viewLive": "Ver ao vivo",
+    "topics": "Tópicos",
+    "readme": "Sobre o projeto",
+    "locale": "pt-BR"
+  },
+  "cyber": {
+    "eyebrow": "Cyber",
+    "title": "Laboratório e prática",
+    "subtitle": "O que estou construindo, quebrando e documentando.",
+    "intro": "Este é o meu espaço de estudos em cibersegurança, onde registro desafios, experimentos, anotações e exercícios práticos.",
+    "featured": "destaque",
+    "filterLabel": "filtrar",
+    "currentYear": "atual",
+    "emptyFilter": "// sem itens nesse filtro",
+    "timelineEyebrow": "learning path",
+    "timelineTitle": "Linha do tempo",
+    "timelineSubtitle": "Uma visão da evolução dos meus estudos e práticas.",
+    "stats": {
+      "records": "registros",
+      "ctf": "ctf",
+      "notes": "notas",
+      "lab": "lab"
+    },
+    "legend": {
+      "title": "legenda",
+      "easy": "fácil",
+      "medium": "médio",
+      "hard": "difícil",
+      "note": "nota"
+    },
+    "tabs": {
+      "lab": "Lab",
+      "writeups": "Write-ups",
+      "notes": "Notas"
+    },
+    "lab": {
+      "title": "Meu Home Lab",
+      "subtitle": "Ambiente onde pratico ataques, defesas e automação.",
+      "intro": "Meu home lab é o laboratório pessoal onde treino sem medo de quebrar nada.",
+      "emptyTitle": "Home Lab em construção",
+      "emptyDesc": "Estou montando meu ambiente virtualizado para praticar segurança.",
+      "status": {
+        "done": "pronto",
+        "building": "montando",
+        "planned": "planejado"
+      },
+      "sections": {
+        "vms": "Máquinas Virtuais",
+        "tools": "Ferramentas",
+        "exercises": "Exercícios"
+      },
+      "vms": [
+        { "name": "Kali Linux",       "role": "Distro principal para pentest e análise",     "status": "done" },
+        { "name": "Ubuntu Server",    "role": "Alvo de testes — serviços web e SSH",          "status": "done" },
+        { "name": "Metasploitable 2", "role": "VM intencionalmente vulnerável para prática", "status": "building" },
+        { "name": "Windows 10 (VM)",  "role": "Análise de logs e eventos do Windows",        "status": "planned" }
+      ],
+      "tools": [
+        { "name": "Nmap",                 "role": "Mapeamento de rede e scan de portas",       "status": "done" },
+        { "name": "Wireshark",            "role": "Análise de tráfego em tempo real",          "status": "done" },
+        { "name": "Burp Suite Community", "role": "Interceptação e análise de aplicações web", "status": "building" },
+        { "name": "Metasploit Framework", "role": "Exploração e pós-exploração",               "status": "building" },
+        { "name": "Gobuster",             "role": "Enumeração de diretórios e subdomínios",    "status": "planned" },
+        { "name": "John the Ripper",      "role": "Quebra de hashes e auditoria de senhas",    "status": "planned" }
+      ],
+      "exercises": [
+        { "title": "Scan de rede local com Nmap",           "desc": "Mapeamento de hosts ativos e portas abertas.",    "status": "done" },
+        { "title": "Análise de tráfego HTTP com Wireshark", "desc": "Captura de requisições e credenciais em claro.",  "status": "done" },
+        { "title": "Enumeração de diretórios em app web",   "desc": "Uso do Gobuster contra servidor local.",          "status": "building" },
+        { "title": "Explorando Metasploitable",             "desc": "Prática de exploits do Metasploit.",              "status": "planned" }
+      ]
+    },
+    "writeups": {
+      "title": "Desafios resolvidos",
+      "subtitle": "CTFs, laboratórios e desafios práticos que documentei.",
+      "intro": "Cada write-up registra um desafio que resolvi — do TryHackMe, HackTheBox ou PicoCTF.",
+      "emptyTitle": "Nenhum write-up ainda",
+      "emptyDesc": "Estou começando minha jornada em CTFs.",
+      "viewOn": "ver no",
+      "difficulty": {
+        "easy": "fácil",
+        "medium": "médio",
+        "hard": "difícil"
+      },
+      "items": [
+        { "title": "Simple CTF",               "platform": "TryHackMe", "category": "Web",          "difficulty": "easy",   "date": "2026-03", "url": "https://tryhackme.com/room/simplectf",           "summary": "Primeiro contato com exploração web." },
+        { "title": "Pickle Rick",              "platform": "TryHackMe", "category": "Web",          "difficulty": "easy",   "date": "2026-04", "url": "https://tryhackme.com/room/picklerick",          "summary": "Análise de código-fonte e web shell." },
+        { "title": "Nmap Live Host Discovery", "platform": "TryHackMe", "category": "Network",      "difficulty": "easy",   "date": "2026-05", "url": "https://tryhackme.com/module/nmap",              "summary": "Módulo completo sobre descoberta de hosts." },
+        { "title": "OWASP Top 10 — Injection", "platform": "TryHackMe", "category": "Web",          "difficulty": "medium", "date": "2026-06", "url": "https://tryhackme.com/room/owasptop10",          "summary": "Estudo aprofundado de SQL Injection." },
+        { "title": "Blue (EternalBlue)",       "platform": "TryHackMe", "category": "Exploitation", "difficulty": "medium", "date": "2026-07", "url": "https://tryhackme.com/room/blue",                "summary": "Exploração da MS17-010 em Windows 7." },
+        { "title": "Brooklyn Nine-Nine",       "platform": "TryHackMe", "category": "CTF",          "difficulty": "easy",   "date": "2026-08", "url": "https://tryhackme.com/room/brooklynninenine",    "summary": "Brute force e escalação de privilégios Linux." }
+      ]
+    },
+    "notes": {
+      "title": "Anotações de estudo",
+      "subtitle": "O que estou aprendendo, resumido em texto curto.",
+      "intro": "Escrever é a melhor forma de fixar o que se aprende.",
+      "emptyTitle": "Nenhuma nota publicada",
+      "emptyDesc": "Vou publicar aqui resumos de temas que estudo.",
+      "readMore": "ler mais",
+      "items": [
+        { "title": "O que é o OWASP Top 10",            "date": "2026-03-15", "tags": ["OWASP", "Web"],          "excerpt": "As 10 principais categorias de vulnerabilidades em aplicações web.", "url": "#" },
+        { "title": "Diferença entre IDS e IPS",         "date": "2026-04-02", "tags": ["Redes", "Blue Team"],    "excerpt": "IDS monitora e alerta. IPS monitora e bloqueia.",                  "url": "#" },
+        { "title": "Simétrico vs Assimétrico",          "date": "2026-04-20", "tags": ["Criptografia"],          "excerpt": "Simétrico usa a mesma chave. Assimétrico usa par de chaves.",     "url": "#" },
+        { "title": "O que é um SOC",                    "date": "2026-05-08", "tags": ["Blue Team", "Carreira"], "excerpt": "Security Operations Center — monitoramento em tempo real.",        "url": "#" },
+        { "title": "Escalação de privilégios no Linux", "date": "2026-06-12", "tags": ["Linux", "Pentest"],      "excerpt": "SUID, cron jobs, permissões frouxas, sudo sem senha.",             "url": "#" },
+        { "title": "SQL Injection em 5 minutos",        "date": "2026-07-03", "tags": ["Web", "OWASP"],          "excerpt": "Input do usuário direto em query SQL sem sanitização.",           "url": "#" }
+      ]
+    }
+  },
+  "services": {
+    "eyebrow": "Serviços",
+    "title": "O que eu posso fazer por você",
+    "subtitle": "Serviços técnicos que ofereço — desde análises pontuais até consultoria contínua.",
+    "ctaTitle": "Precisa de algo específico?",
+    "ctaSubtitle": "Me conta o que você precisa e eu monto uma proposta sob medida.",
+    "ctaButton": "Solicitar proposta"
+  },
+  "social": {
+    "where": "Onde me encontrar"
+  },
+  "footer": {
+    "tagline": "feito com ☕ e muito bug"
+  }
+}

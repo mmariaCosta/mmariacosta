@@ -4,13 +4,17 @@ import { useEffect, useState } from 'react';
 import { FaArrowRight, FaEnvelope } from 'react-icons/fa';
 import CyberTerminal from '../components/CyberTerminal';
 import { useLanguage } from '../contexts/useLanguage';
+import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
+import { useImage } from '../hooks/useImage';
 
+/* =========================================================
+   HOOK DE TYPING
+   ========================================================= */
 function useTyping(lines = []) {
   const [idx, setIdx] = useState(0);
   const [text, setText] = useState('');
   const [deleting, setDeleting] = useState(false);
 
-  // Reseta tudo quando o array de linhas muda (troca de idioma)
   useEffect(() => {
     setText('');
     setDeleting(false);
@@ -27,20 +31,14 @@ function useTyping(lines = []) {
 
     const timer = setTimeout(() => {
       if (!deleting) {
-        // Adicionando letra por letra
         const next = current.slice(0, text.length + 1);
         setText(next);
-
-        // Terminou de digitar → espera e começa a apagar
         if (next === current) {
           setTimeout(() => setDeleting(true), 1500);
         }
       } else {
-        // Apagando
         const next = current.slice(0, Math.max(0, text.length - 1));
         setText(next);
-
-        // Terminou de apagar → vai pra próxima
         if (next === '') {
           setDeleting(false);
           setIdx((i) => (i + 1) % lines.length);
@@ -54,10 +52,42 @@ function useTyping(lines = []) {
   return text;
 }
 
+/* =========================================================
+   PÁGINA
+   ========================================================= */
 export default function Home() {
-  const { t } = useLanguage();
-  const typed = useTyping(t?.home?.typing);
+  const { t, lang } = useLanguage();
+  const { profile, loading, error } = usePortfolioData();
 
+  // Pega as linhas de typing
+  const typingLines = profile?.typing?.[lang] || profile?.typing?.pt || [];
+  const typed = useTyping(typingLines);
+
+  if (loading) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-16 text-center">
+        <p className="text-red-400 text-sm">erro: {error}</p>
+      </div>
+    );
+  }
+
+  const intro = pickText(profile?.intro, lang);
+  const role = pickText(profile?.role, lang);
+  const bio = pickText(profile?.bioShort, lang);
+  const bugQuote = pickText(profile?.bugQuote, lang);
+  const email = profile?.email || 'mmaria.costa@outlook.com';
+  const whatsapp = profile?.whatsapp || '+55 19 99378-6188';
+  const whatsappUrl = profile?.whatsappUrl || 'https://wa.me/5519993786188';
+  const catImage = useImage('cat', profile?.images?.cat);
+  
   return (
     <div>
       {/* HERO */}
@@ -68,7 +98,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className="text-app-accent font-mono text-sm mb-3"
           >
-            {t.home.intro}
+            {intro}
           </motion.p>
 
           <motion.h1
@@ -77,7 +107,7 @@ export default function Home() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-app leading-tight"
           >
-            {t.home.name}
+            {profile?.name}
           </motion.h1>
 
           <motion.p
@@ -86,7 +116,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="mt-4 text-lg md:text-xl text-app-muted font-mono min-h-[1.75em]"
           >
-            {typed}
+            {typed || role}
             <span
               className="inline-block w-[2px] h-[1.1em] ml-1 align-middle
                          animate-[blink_1s_steps(2)_infinite]"
@@ -100,7 +130,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="mt-6 text-app/85 max-w-xl leading-relaxed"
           >
-            {t.home.bio}
+            {bio}
           </motion.p>
 
           <motion.p
@@ -109,7 +139,7 @@ export default function Home() {
             transition={{ delay: 0.35 }}
             className="mt-4 text-app-dim italic font-mono text-sm"
           >
-            {t.home.bugQuote}
+            {bugQuote}
           </motion.p>
 
           <motion.div
@@ -153,24 +183,25 @@ export default function Home() {
                        group-hover:opacity-100 opacity-70"
             style={{ backgroundColor: 'var(--glow)' }}
           />
-          {/* 🐱 trocar a URL aqui pela foto nova */}
-          <img
-            src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg"
-            alt="Gatinho fofo representando curiosidade"
-            width="256"
-            height="256"
-            fetchPriority="high"
-            decoding="async"
-            className="relative w-48 md:w-64 h-auto rounded-2xl border border-app-strong shadow-app
-                      transition-transform duration-500 group-hover:scale-[1.02]"
-          />
+          {catImage && (
+            <img
+              src={catImage}
+              alt="Gatinho fofo representando curiosidade"
+              width="256"
+              height="256"
+              fetchPriority="high"
+              decoding="async"
+              className="relative w-48 md:w-64 h-auto rounded-2xl border border-app-strong shadow-app
+                         transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+          )}
         </motion.div>
       </section>
 
       {/* TERMINAL INTERATIVO */}
       <CyberTerminal />
 
-      {/* Contato */}
+      {/* CONTATO */}
       <section id="contato" className="mt-20 pt-12 border-t border-app">
         <header className="text-center mb-8">
           <p className="text-app-accent font-mono text-xs tracking-widest uppercase mb-2">
@@ -184,7 +215,7 @@ export default function Home() {
 
         <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           <a
-            href="mailto:mmaria.costa@outlook.com"
+            href={`mailto:${email}`}
             className="group p-5 rounded-xl border border-app bg-surface-soft
                        hover:border-app-strong hover:shadow-app hover:-translate-y-0.5
                        transition-all"
@@ -193,12 +224,12 @@ export default function Home() {
               email
             </p>
             <p className="text-app font-medium group-hover:text-app-accent transition-colors break-all">
-              mmaria.costa@outlook.com
+              {email}
             </p>
           </a>
 
           <a
-            href="https://wa.me/5519993786188"
+            href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
             className="group p-5 rounded-xl border border-app bg-surface-soft
@@ -209,7 +240,7 @@ export default function Home() {
               whatsapp
             </p>
             <p className="text-app font-medium group-hover:text-app-accent transition-colors">
-              +55 19 99378-6188
+              {whatsapp}
             </p>
           </a>
         </div>

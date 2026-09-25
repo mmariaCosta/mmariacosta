@@ -1,0 +1,29 @@
+{
+  "overallProgress": null,
+  "items": [
+    {
+      "id": "aws-cp",
+      "name": "AWS Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "status": "studying",
+      "year": "2026",
+      "progress": 10
+    },
+    {
+      "id": "comptia-sec",
+      "name": "CompTIA Security+",
+      "issuer": "CompTIA",
+      "status": "planned",
+      "year": "2027",
+      "progress": 0
+    },
+    {
+      "id": "aws-security",
+      "name": "AWS Security Specialty",
+      "issuer": "Amazon Web Services",
+      "status": "planned",
+      "year": "2028",
+      "progress": 0
+    }
+  ]
+}

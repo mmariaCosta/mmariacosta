@@ -11,6 +11,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import Cyber from './pages/Cyber';
 import Services from './pages/Services';
 import { useLanguage } from './contexts/useLanguage';
+import Admin from './pages/Admin';
 
 function PageWrapper({ children }) {
   return (
@@ -28,7 +29,26 @@ function PageWrapper({ children }) {
 
 export default function App() {
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, loading, error } = useLanguage();
+
+  // Aguarda as traduções carregarem
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-app flex items-center justify-center">
+        <p className="text-app-muted font-mono text-sm animate-pulse">
+          carregando...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-app flex items-center justify-center">
+        <p className="text-red-400 font-mono text-sm">erro: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen">
@@ -47,6 +67,7 @@ export default function App() {
               <Route path="/projetos/:name" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
               <Route path="/cyber"          element={<PageWrapper><Cyber /></PageWrapper>} />
               <Route path="/servicos"       element={<PageWrapper><Services /></PageWrapper>} />
+              <Route path="/admin" element={<PageWrapper><Admin /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </main>
@@ -54,7 +75,7 @@ export default function App() {
         <footer className="border-t border-app py-10">
           <SocialIcons />
           <p className="text-center text-app-muted text-xs font-mono mt-6">
-            © {new Date().getFullYear()} Maria Costa · {t.footer.tagline}
+            © {new Date().getFullYear()} Maria Costa · {t.footer?.tagline}
           </p>
         </footer>
       </div>

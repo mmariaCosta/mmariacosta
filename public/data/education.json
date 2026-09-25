@@ -1,0 +1,66 @@
+{
+  "academic": [
+    {
+      "id": "fiap",
+      "title": {
+        "pt": "FIAP — Cibersegurança",
+        "en": "FIAP — Cybersecurity"
+      },
+      "place": {
+        "pt": "Tecnólogo · FIAP",
+        "en": "Technologist degree · FIAP"
+      },
+      "period": {
+        "pt": "2027 — 2029 (previsão)",
+        "en": "2027 — 2029 (expected)"
+      },
+      "desc": {
+        "pt": "Formação superior focada em segurança da informação, pentest, criptografia e defesa cibernética.",
+        "en": "Higher education focused on information security, pentesting, cryptography and cyber defense."
+      },
+      "tags": ["Cyber", "Pentest", "Defesa"]
+    },
+    {
+      "id": "cotuca",
+      "title": {
+        "pt": "Técnico em Informática",
+        "en": "IT Technician"
+      },
+      "place": {
+        "pt": "Colégio Técnico de Campinas (Cotuca/Unicamp)",
+        "en": "Colégio Técnico de Campinas (Cotuca/Unicamp)"
+      },
+      "period": {
+        "pt": "2023 — 2026",
+        "en": "2023 — 2026"
+      },
+      "desc": {
+        "pt": "Ensino médio integrado ao técnico em Informática — programação, redes, banco de dados e infraestrutura.",
+        "en": "High school integrated with a technical degree in IT — programming, networking, databases and infrastructure."
+      },
+      "tags": ["Programação", "Redes", "BD"]
+    }
+  ],
+  "professional": [
+    {
+      "id": "alpha",
+      "title": {
+        "pt": "Estagiária em TI",
+        "en": "IT Intern"
+      },
+      "place": {
+        "pt": "Alpha Consultoria de Sistemas",
+        "en": "Alpha Consultoria de Sistemas"
+      },
+      "period": {
+        "pt": "fev 2026 — fev 2027",
+        "en": "Feb 2026 — Feb 2027"
+      },
+      "desc": {
+        "pt": "Atuação em consultoria de sistemas com foco em suporte, automação e infraestrutura.",
+        "en": "Working at a systems consultancy focused on support, automation and infrastructure."
+      },
+      "tags": ["TI", "Automação", "Infra"]
+    }
+  ]
+}
