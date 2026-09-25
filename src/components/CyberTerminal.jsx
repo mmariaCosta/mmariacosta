@@ -14,7 +14,6 @@ const INITIAL_LINES = {
   ],
 };
 
-// Cada comando tem aliases em PT e EN
 const COMMANDS = {
   help: {
     aliases: { pt: ['ajuda', 'help'], en: ['help', 'ajuda'] },
@@ -121,7 +120,6 @@ const COMMANDS = {
   },
 };
 
-// Textos da UI
 const UI = {
   pt: {
     tabLabel: 'Terminal',
@@ -143,6 +141,21 @@ const UI = {
     scanSummary: '4 open · 1 closed · 1 filtered',
     cmdNotFound: (c) => `command not found: ${c}`,
   },
+};
+
+/* Cores por comando */
+const CMD_COLORS = {
+  'ajuda':             { main: '#eeeeee', bg: 'rgba(78, 54, 172, 0.39)',   border: 'rgba(82, 50, 211, 0.4)' },
+  'help':              { main: '#eeeeee', bg: 'rgba(196, 181, 253, 0.15)', border: 'rgba(113, 92, 197, 0.4)' },
+  'quem-sou':          { main: '#eeeeee', bg: 'rgba(43, 158, 173, 0.45)',  border: 'rgba(17, 110, 122, 0.4)' },
+  'whoami':            { main: '#eeeeee', bg: 'rgba(138, 234, 247, 0.15)', border: 'rgba(59, 175, 190, 0.4)' },
+  'skills':            { main: '#eeeeee', bg: 'rgba(86, 199, 127, 0.44)',  border: 'rgba(54, 143, 86, 0.4)' },
+  'scan':              { main: '#eeeeee', bg: 'rgba(219, 84, 84, 0.42)',   border: 'rgba(158, 29, 29, 0.4)' },
+  'contato':           { main: '#eeeeee', bg: 'rgba(77, 160, 199, 0.43)',  border: 'rgba(49, 140, 182, 0.4)' },
+  'contact':           { main: '#eeeeee', bg: 'rgba(125, 211, 252, 0.15)', border: 'rgba(39, 119, 156, 0.4)' },
+  'cat manifesto.txt': { main: '#eeeeee', bg: 'rgba(214, 86, 157, 0.38)',  border: 'rgba(92, 9, 55, 0.4)' },
+  'limpar':            { main: '#eeeeee', bg: 'rgba(216, 174, 37, 0.36)',  border: 'rgba(201, 161, 30, 0.4)' },
+  'clear':             { main: '#eeeeee', bg: 'rgba(252, 211, 77, 0.15)',  border: 'rgba(173, 137, 18, 0.4)' },
 };
 
 function lineColor(type) {
@@ -213,7 +226,6 @@ export default function CyberTerminal() {
     });
   };
 
-  // Descobre qual comando rodar baseado no idioma + alias
   const resolveCommand = (raw) => {
     const lc = raw.trim().toLowerCase();
     if (!lc) return null;
@@ -301,7 +313,8 @@ export default function CyberTerminal() {
       </div>
 
       <div className="rounded-xl border border-app-strong bg-[#0a0613] overflow-hidden shadow-app">
-        <div className="flex items-center gap-2 px-4 py-2 border-b border-app bg-surface-soft">
+        {/* Barra superior */}
+        <div className="flex items-center gap-2 px-4 py-2 border-b border-app bg-[#8b55d1c0]">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
@@ -313,7 +326,7 @@ export default function CyberTerminal() {
             ONLINE
           </span>
         </div>
-
+        {/* Corpo do terminal */}
         <div
           ref={scrollRef}
           onClick={() => inputRef.current?.focus()}
@@ -343,21 +356,37 @@ export default function CyberTerminal() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 px-4 py-2 border-t border-app bg-surface-soft">
-          {ui.quickCmds.map((cmd) => (
-            <button
-              key={cmd}
-              onClick={() => {
-                setInput(cmd);
-                inputRef.current?.focus();
-              }}
-              className="text-[10px] font-mono px-2 py-0.5 rounded
-                         border border-app text-app-muted
-                         hover:text-app hover:border-app-strong transition-colors"
-            >
-              {cmd}
-            </button>
-          ))}
+        {/* Barra inferior com comandos coloridos */}
+        <div className="flex flex-wrap gap-1.5 px-4 py-3 border-t border-app bg-[#8b55d1c0]">
+          {ui.quickCmds.map((cmd) => {
+            const c = CMD_COLORS[cmd] || CMD_COLORS['ajuda'];
+            return (
+              <button
+                key={cmd}
+                onClick={() => {
+                  setInput(cmd);
+                  inputRef.current?.focus();
+                }}
+                className="text-[10px] font-mono px-2.5 py-1 rounded-md
+                           border transition-all hover:scale-105"
+                style={{
+                  color: c.main,
+                  backgroundColor: c.bg,
+                  borderColor: c.border,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = c.main;
+                  e.currentTarget.style.color = '#0a0613';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = c.bg;
+                  e.currentTarget.style.color = c.main;
+                }}
+              >
+                {cmd}
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

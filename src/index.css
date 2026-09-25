@@ -2,22 +2,22 @@
 
 /* ===== TEMA (variáveis) ===== */
 :root {
-  --bg: rgb(198, 166, 249);
+  --bg: rgba(203, 176, 247, 0.911);
   --bg-radial: rgba(250, 245, 255, 0.75);
   --surface: rgba(100, 36, 196, 0.411);
   --surface-solid: #ffffff;
   --surface-2: rgba(234, 222, 250, 0.322);
   --border: rgba(46, 6, 66, 0.74);
-  --border-strong: rgba(79, 11, 143, 0.5);
-  --text: #3a1170;
-  --text-muted: #2d1b5e;
+  --border-strong: rgba(79, 11, 143, 0.5);  
+  --text: #270d49;
+  --text-muted: #11023d;
   --text-dim: #810505;
   --accent: #5c2bb1;
   --accent-strong: #8b51e9;
   --glow: rgba(48, 15, 105, 0.534);
   --shadow-color: rgba(124, 58, 237, 0.15);
   --video-opacity: 1.50;
-  --video-overlay: rgba(202, 186, 243, 0.61);
+  --video-overlay: rgba(213, 199, 247, 0.61);
 
   /* Bem escuras pra dar contraste no fundo lilás */
   --pastel-green:  #14532d;   /* green-900 */
