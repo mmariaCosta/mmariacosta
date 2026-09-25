@@ -6,14 +6,16 @@ const REPO = 'cyber';
 const BRANCH = 'main';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-const CACHE_KEY = 'cyber-content-v1';
+const CACHE_KEY = 'cyber-content-v2';
 const CACHE_TTL = 1000 * 60 * 30; // 30 min
 
 function authHeaders(extra = {}) {
-  return TOKEN ? { ...extra, Authorization: `Bearer ${TOKEN}` } : extra;
+  return TOKEN
+    ? { ...extra, Authorization: `Bearer ${TOKEN}` }
+    : extra;
 }
 
-/* Lista arquivos .md de uma pasta do repo */
+/* Lista arquivos .md de uma pasta */
 async function listFolder(folder) {
   const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${folder}?ref=${BRANCH}`;
   const res = await fetch(url, { headers: authHeaders() });
@@ -23,14 +25,17 @@ async function listFolder(folder) {
   return data.filter((f) => f.type === 'file' && f.name.endsWith('.md'));
 }
 
-/* Baixa o conteúdo cru de um arquivo */
+/* Baixa conteúdo cru — usando a API (que aceita CORS) */
 async function fetchRaw(file) {
-  const res = await fetch(file.download_url, { headers: authHeaders() });
+  const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${file.path}?ref=${BRANCH}`;
+  const res = await fetch(url, {
+    headers: authHeaders({ Accept: 'application/vnd.github.raw' }),
+  });
   if (!res.ok) return '';
   return res.text();
 }
 
-/* Carrega 1 pasta inteira (lista + conteúdo de cada arquivo) */
+/* Carrega uma pasta inteira */
 async function loadFolder(folder, type) {
   const files = await listFolder(folder);
   const items = await Promise.all(
@@ -44,9 +49,8 @@ async function loadFolder(folder, type) {
         filename: file.name,
         path: file.path,
         githubUrl: file.html_url,
-        downloadUrl: file.download_url,
-        data,         // frontmatter
-        content,      // corpo markdown
+        data,
+        content,
       };
     })
   );
@@ -100,7 +104,6 @@ export function useCyberContent() {
   return state;
 }
 
-/* Busca 1 item pelo slug (independente do tipo) */
 export function useCyberItem(slug) {
   const { writeups, notes, vms, tools, loading, error } = useCyberContent();
 

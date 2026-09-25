@@ -34,6 +34,16 @@
   --cert-done:     #16a34a;
   --cert-studying: #ca8a04;
   --cert-planned:  #42158f;
+
+  --diff-easy:     #235836;   /* verde escuro */
+  --diff-medium:   #b45309;   /* laranja escuro */
+  --diff-hard:     #b91c1c;   /* vermelho escuro */
+
+  --status-ready:    #15803d;
+  --status-building: #b45309;
+  --status-planned:  #6d28d9;
+
+  --item-note:  #6d28d9;      /* roxo escuro pra notas */
 }
 
 .dark {
@@ -68,6 +78,17 @@
   --cert-done:     #21cf61;
   --cert-studying: #fada59;
   --cert-planned:  #613df2;
+
+    /* Cores dos status — TEMA ESCURO (claras, brilham) */
+  --diff-easy:     #86efac;
+  --diff-medium:   #fde68a;
+  --diff-hard:     #fca5a5;
+
+  --status-ready:    #86efac;
+  --status-building: #fde68a;
+  --status-planned:  #c4b5fd;
+
+  --item-note:  #8e72fc;
 }
 
 html, body, #root { min-height: 100%; }
