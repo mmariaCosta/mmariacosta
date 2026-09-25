@@ -9,9 +9,10 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Cyber from './pages/Cyber';
+import CyberDetail from './pages/CyberDetail';
 import Services from './pages/Services';
-import { useLanguage } from './contexts/useLanguage';
 import Admin from './pages/Admin';
+import { useLanguage } from './contexts/useLanguage';
 
 function PageWrapper({ children }) {
   return (
@@ -31,13 +32,10 @@ export default function App() {
   const location = useLocation();
   const { t, loading, error } = useLanguage();
 
-  // Aguarda as traduções carregarem
   if (loading) {
     return (
       <div className="min-h-screen bg-app flex items-center justify-center">
-        <p className="text-app-muted font-mono text-sm animate-pulse">
-          carregando...
-        </p>
+        <p className="text-app-muted font-mono text-sm animate-pulse">carregando...</p>
       </div>
     );
   }
@@ -66,8 +64,9 @@ export default function App() {
               <Route path="/projetos"       element={<PageWrapper><Projects /></PageWrapper>} />
               <Route path="/projetos/:name" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
               <Route path="/cyber"          element={<PageWrapper><Cyber /></PageWrapper>} />
+              <Route path="/cyber/:slug"    element={<PageWrapper><CyberDetail /></PageWrapper>} />
               <Route path="/servicos"       element={<PageWrapper><Services /></PageWrapper>} />
-              <Route path="/admin" element={<PageWrapper><Admin /></PageWrapper>} />
+              <Route path="/admin"          element={<PageWrapper><Admin /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </main>

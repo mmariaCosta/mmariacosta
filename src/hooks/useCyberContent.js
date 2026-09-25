@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { parseFrontmatter, slugFromFilename, langFromFilename } from '../lib/parseFrontmatter';
 
-const USER = 'mmariacosta';
+const USER = 'mmariaCosta';
 const REPO = 'cyber';
 const BRANCH = 'main';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
