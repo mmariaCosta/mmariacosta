@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 const USER = 'mmariacosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
-
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
-const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields'];
+const PREFERRED_FOLDERS = ['img', 'images', 'screenshots'];
+const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields', 'avatar', 'profile'];
 
 function authHeaders(extra = {}) {
   return TOKEN
@@ -14,31 +13,42 @@ function authHeaders(extra = {}) {
     : extra;
 }
 
-async function fetchFolderImages(repo, branch) {
-  for (const folder of IMAGE_FOLDERS) {
-    try {
-      const res = await fetch(
-        `https://api.github.com/repos/${USER}/${repo}/contents/${folder}?ref=${branch}`,
-        { headers: authHeaders() }
-      );
-      if (!res.ok) continue;
+async function fetchAllImages(repo, branch) {
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${USER}/${repo}/git/trees/${branch}?recursive=1`,
+      { headers: authHeaders() }
+    );
+    if (!res.ok) return [];
 
-      const data = await res.json();
-      if (!Array.isArray(data)) continue;
+    const data = await res.json();
+    if (!data.tree) return [];
 
-      const images = data
-        .filter((f) => f.type === 'file' && IMAGE_EXT.test(f.name))
-        .filter((f) => {
-          const n = f.name.toLowerCase();
-          return !EXCLUDE_KEYWORDS.some((kw) => n.includes(kw));
-        })
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((f) => f.download_url);
-
-      if (images.length > 0) return images;
-    } catch { /* tenta próxima */ }
+    return data.tree
+      .filter((item) => item.type === 'blob' && IMAGE_EXT.test(item.path))
+      .filter((item) => {
+        const name = item.path.toLowerCase();
+        return !EXCLUDE_KEYWORDS.some((kw) => name.includes(kw));
+      })
+      .map((item) => {
+        const path = item.path.toLowerCase();
+        const priority = PREFERRED_FOLDERS.findIndex((f) =>
+          path.startsWith(`${f}/`)
+        );
+        return {
+          path: item.path,
+          url: `https://raw.githubusercontent.com/${USER}/${repo}/${branch}/${item.path}`,
+          priority: priority === -1 ? 999 : priority,
+        };
+      })
+      .sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority - b.priority;
+        return a.path.localeCompare(b.path);
+      })
+      .map((img) => img.url);
+  } catch {
+    return [];
   }
-  return [];
 }
 
 export function useGithubProject(name) {
@@ -64,9 +74,7 @@ export function useGithubProject(name) {
         const repo = await repoRes.json();
 
         const branch = repo.default_branch || 'main';
-
-        // Só busca das pastas — sem fallback pra OpenGraph
-        const images = await fetchFolderImages(name, branch);
+        const images = await fetchAllImages(name, branch);
 
         let readmeHtml = '';
         try {
@@ -95,7 +103,7 @@ export function useGithubProject(name) {
             branch,
           },
           readmeHtml,
-          images, // vazio se não tiver pasta
+          images,     // ⬅️ volta a retornar as imagens (pro carrossel)
           loading: false,
           error: null,
         });
