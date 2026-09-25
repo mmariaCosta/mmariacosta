@@ -15,6 +15,7 @@ export default function SegmentedToggle({ options, value, onChange, ariaLabel })
             key={opt.value}
             role="tab"
             aria-selected={isActive}
+            aria-label={opt.ariaLabel || opt.label}       // ⬅️ NOVO
             onClick={() => onChange(opt.value)}
             className={`relative px-2.5 py-1 text-xs font-medium rounded-md
                         transition-colors flex items-center gap-1 ${

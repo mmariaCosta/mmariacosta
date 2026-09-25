@@ -156,10 +156,14 @@ export default function Home() {
           {/* 🐱 trocar a URL aqui pela foto nova */}
           <img
             src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg"
-            alt="cat"
-            className="relative w-48 md:w-64 rounded-2xl border border-app-strong shadow-app
-                       transition-transform duration-500 group-hover:scale-[1.02]"
-          />
+            alt="Gatinho fofo representando curiosidade"
+            width="256"                    // ⬅️ NOVO
+            height="256"                   // ⬅️ NOVO
+            fetchPriority="high"           // ⬅️ NOVO (LCP)
+            decoding="async"               // ⬅️ NOVO
+            className="relative w-48 md:w-64 h-auto rounded-2xl border border-app-strong shadow-app
+                      transition-transform duration-500 group-hover:scale-[1.02]"
+            />
         </motion.div>
       </section>
 

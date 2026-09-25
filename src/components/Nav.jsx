@@ -70,21 +70,21 @@ export default function Nav() {
         {/* Toggles */}
         <div className="flex items-center gap-2 shrink-0">
           <SegmentedToggle
-            ariaLabel="language"
+            ariaLabel="Idioma"           // ⬅️ era "language"
             value={lang}
             onChange={setLang}
             options={[
-              { value: 'pt', label: 'PT' },
-              { value: 'en', label: 'EN' },
+              { value: 'pt', label: 'PT', ariaLabel: 'Português' },
+              { value: 'en', label: 'EN', ariaLabel: 'English' },
             ]}
           />
           <SegmentedToggle
-            ariaLabel="theme"
+            ariaLabel="Tema"             // ⬅️ era "theme"
             value={theme}
             onChange={setTheme}
             options={[
-              { value: 'light', icon: <FaSun size={11} /> },
-              { value: 'dark',  icon: <FaMoon size={11} /> },
+              { value: 'light', icon: <FaSun size={11} />, ariaLabel: 'Modo claro' },
+              { value: 'dark',  icon: <FaMoon size={11} />, ariaLabel: 'Modo escuro' },
             ]}
           />
         </div>

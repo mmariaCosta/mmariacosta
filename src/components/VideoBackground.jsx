@@ -5,44 +5,57 @@ export default function VideoBackground({ opacity = 0.25 }) {
   const { theme } = useTheme();
   const videoRef = useRef(null);
   const [ready, setReady] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  // Adia o carregamento do vídeo pra depois do primeiro paint
+  useEffect(() => {
+    const load = () => setShouldLoad(true);
+
+    // carrega 1s depois OU quando o usuário interage
+    const timer = setTimeout(load, 1500);
+
+    window.addEventListener('scroll', load, { once: true, passive: true });
+    window.addEventListener('click', load, { once: true, passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', load);
+      window.removeEventListener('click', load);
+    };
+  }, []);
 
   useEffect(() => {
+    if (!shouldLoad) return;
     const v = videoRef.current;
     if (!v) return;
 
     const onCanPlay = () => setReady(true);
-    const onError = () => setReady(false);
-
     v.addEventListener('canplay', onCanPlay);
-    v.addEventListener('error', onError);
-
-    // tenta dar play (alguns navegadores bloqueiam autoplay)
     v.play().catch(() => {});
 
-    return () => {
-      v.removeEventListener('canplay', onCanPlay);
-      v.removeEventListener('error', onError);
-    };
-  }, []);
+    return () => v.removeEventListener('canplay', onCanPlay);
+  }, [shouldLoad]);
 
   return (
     <div
       className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
       aria-hidden="true"
     >
-      <video
-        ref={videoRef}
-        className="w-full h-full object-cover"
-        style={{ opacity: ready ? opacity : 0, transition: 'opacity 0.8s' }}
-        src="/videos/hacker.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      />
+      {shouldLoad && (
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          style={{ opacity: ready ? opacity : 0, transition: 'opacity 0.8s' }}
+          src="/videos/hacker.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+        />
+      )}
 
-      {/* Overlay pra casar com o tema */}
+      {/* Fallback: gradiente sempre visível */}
       <div
         className="absolute inset-0"
         style={{

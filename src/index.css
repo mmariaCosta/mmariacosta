@@ -10,7 +10,8 @@
   --border: rgba(46, 6, 66, 0.74);
   --border-strong: rgba(79, 11, 143, 0.5);
   --text: #3a1170;
-  --text-muted: #05032b;
+  /*--text-muted: #05032b;*/
+  --text-muted: #2d1b5e;
   --text-dim: #810505;
   --accent: #5c2bb1;
   --accent-strong: #8b51e9;
@@ -174,6 +175,31 @@ code, pre, .mono, h1, h2, h3 {
 .prose-readme th {
   background: var(--surface-2);
   color: var(--text);
+}
+
+/* Foco visível (acessibilidade) */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Otimizar animações — só transform e opacity (composited) */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    will-change: auto;
+  }
+}
+
+/* Fazer animações existentes usarem GPU */
+@keyframes blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1s steps(2) infinite;
+  will-change: opacity;
 }
 
 /* ===== UTILITÁRIOS SEMÂNTICOS ===== */
