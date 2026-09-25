@@ -9,15 +9,25 @@ export default defineConfig({
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'motion': ['framer-motion'],
-          'icons': ['react-icons'],
+        // Rolldown exige FUNÇÃO, não objeto
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion';
+            }
+            if (id.includes('react-icons')) {
+              return 'icons';
+            }
+            return 'vendor';
+          }
         },
       },
     },
-    chunkSizeWarningLimit: 800,
   },
 });
