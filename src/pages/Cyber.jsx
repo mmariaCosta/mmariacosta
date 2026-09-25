@@ -57,26 +57,37 @@ export default function Cyber() {
   const { writeups, notes, vms, tools, loading, error } = useCyberContent();
   const [filter, setFilter] = useState('all');
 
-  const all = [
+    // Junta tudo
+  const rawAll = [
     ...(writeups || []),
     ...(notes || []),
     ...(vms || []),
     ...(tools || []),
-  ]
-    .filter((item) => item.lang === lang || !item.lang)
-    .sort((a, b) => {
-      const da = a.data?.date || '';
-      const db = b.data?.date || '';
-      if (!da) return 1;
-      if (!db) return -1;
-      return da < db ? 1 : -1;
-    });
+  ];
+
+  // Filtra pelo idioma atual
+  let all = rawAll.filter((item) => item.lang === lang || !item.lang);
+
+  // FALLBACK: se não tem nada no idioma atual, mostra os em PT
+  const showingFallback = all.length === 0 && rawAll.length > 0;
+  if (showingFallback) {
+    all = rawAll.filter((item) => item.lang === 'pt' || !item.lang);
+  }
+
+  // Ordena por data
+  all = all.sort((a, b) => {
+    const da = a.data?.date || '';
+    const db = b.data?.date || '';
+    if (!da) return 1;
+    if (!db) return -1;
+    return da < db ? 1 : -1;
+  });
 
   const FILTERS = [
     { id: 'all',      label: 'Tudo',  count: all.length },
-    { id: 'writeup',  label: 'CTF',   count: (writeups || []).filter((i) => i.lang === lang).length },
-    { id: 'note',     label: 'Notas', count: (notes || []).filter((i) => i.lang === lang).length },
-    { id: 'lab',      label: 'Lab',   count: [...(vms||[]), ...(tools||[])].filter((i) => i.lang === lang).length },
+    { id: 'writeup',  label: 'CTF',   count: all.filter((i) => i.type === 'writeup').length },
+    { id: 'note',     label: 'Notas', count: all.filter((i) => i.type === 'note').length },
+    { id: 'lab',      label: 'Lab',   count: all.filter((i) => i.type === 'vm' || i.type === 'tool').length },
   ];
 
   const filtered = filter === 'all'
@@ -112,6 +123,17 @@ export default function Cyber() {
           </p>
         </div>
       </section>
+
+      {showingFallback && (
+      <div className="rounded-xl border border-dashed border-app-strong
+                      bg-surface-soft px-4 py-3 text-center">
+        <p className="text-app-muted text-xs font-mono">
+          ⚠️ {lang === 'en'
+            ? 'No content in English yet — showing Portuguese version.'
+            : 'Sem conteúdo em inglês ainda — mostrando versão em português.'}
+        </p>
+      </div>
+    )}
 
       {/* FILTROS */}
       <div className="flex flex-wrap gap-1.5">

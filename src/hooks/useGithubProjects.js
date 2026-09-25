@@ -5,10 +5,14 @@ const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 const CACHE_KEY = 'gh-projects-cache-v5';
 const TTL = 1000 * 60 * 60 * 6; // 6 horas
 
-const IMAGE_FOLDERS = ['img', 'images', 'screenshots'];
+// Só 2 pastas pra não estourar a API
+const IMAGE_FOLDERS = ['img', 'images'];
+
+// Repos que NÃO devem aparecer nos projetos
+const EXCLUDED_REPOS = ['cyber'];
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
-const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields'];
+const EXCLUDE_KEYWORDS = ['badge', 'logo', 'icon', 'shields', 'avatar', 'profile'];
 
 function authHeaders(extra = {}) {
   return TOKEN
@@ -97,11 +101,16 @@ export function useGithubProjects(limit = 12) {
     async function load() {
       try {
         const res = await fetch(
-          `https://api.github.com/users/${USER}/repos?sort=updated&per_page=${limit}`,
+          `https://api.github.com/users/${USER}/repos?sort=updated&per_page=${limit + 5}`,
           { headers: authHeaders() }
         );
         if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-        const repos = await res.json();
+        const reposRaw = await res.json();
+
+        // Filtra repos excluídos
+        const repos = reposRaw.filter(
+          (r) => !EXCLUDED_REPOS.includes(r.name.toLowerCase())
+        );
 
         const withData = await Promise.all(
           repos.map(async (r) => {
@@ -135,7 +144,7 @@ export function useGithubProjects(limit = 12) {
               updated: r.updated_at,
               created: r.created_at,
               license: r.license?.name,
-              cover, // null se não tiver imagem na pasta
+              cover,
             };
           })
         );

@@ -34,16 +34,32 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-app flex items-center justify-center">
-        <p className="text-app-muted font-mono text-sm animate-pulse">carregando...</p>
+      <div className="min-h-screen bg-app flex flex-col items-center justify-center gap-4">
+        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin"
+            style={{
+              borderColor: 'var(--accent)',
+              borderTopColor: 'transparent',
+            }} />
+        <p className="text-app-muted font-mono text-xs tracking-widest uppercase animate-pulse">
+          carregando...
+        </p>
       </div>
     );
   }
 
-  if (error) {
+  if (error && !t?.nav) {
     return (
-      <div className="min-h-screen bg-app flex items-center justify-center">
-        <p className="text-red-400 font-mono text-sm">erro: {error}</p>
+      <div className="min-h-screen bg-app flex flex-col items-center justify-center gap-4 p-6">
+        <p className="text-red-400 font-mono text-sm text-center">
+          erro: {error}
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 rounded-lg border border-app-strong text-app text-xs
+                    hover:bg-surface-soft transition-colors"
+        >
+          recarregar
+        </button>
       </div>
     );
   }

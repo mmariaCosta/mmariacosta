@@ -15,7 +15,7 @@ function authHeaders(extra = {}) {
     : extra;
 }
 
-/* Lista arquivos .md de uma pasta */
+/* Lista arquivos .md de uma pasta do repo */
 async function listFolder(folder) {
   const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${folder}?ref=${BRANCH}`;
   const res = await fetch(url, { headers: authHeaders() });
@@ -25,7 +25,7 @@ async function listFolder(folder) {
   return data.filter((f) => f.type === 'file' && f.name.endsWith('.md'));
 }
 
-/* Baixa conteúdo cru — usando a API (que aceita CORS) */
+/* Baixa o conteúdo cru — usando a API (que aceita CORS) */
 async function fetchRaw(file) {
   const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${file.path}?ref=${BRANCH}`;
   const res = await fetch(url, {
@@ -79,6 +79,7 @@ export function useCyberContent() {
           loadFolder('notes', 'note'),
           loadFolder('lab/vms', 'vm'),
           loadFolder('lab/tools', 'tool'),
+          loadFolder('ctfs', 'ctf'),
         ]);
 
         if (cancelled) return;
@@ -104,6 +105,7 @@ export function useCyberContent() {
   return state;
 }
 
+/* Busca 1 item pelo slug */
 export function useCyberItem(slug) {
   const { writeups, notes, vms, tools, loading, error } = useCyberContent();
 
