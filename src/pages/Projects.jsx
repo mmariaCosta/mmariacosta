@@ -10,11 +10,15 @@ const LANG_EMOJI = {
   Ruby: '💎',
   Java: '☕',
   'C#': '🎯',
+  'C++': '🔵',
   HTML: '🌐',
   CSS: '🎨',
   Shell: '🐚',
   Go: '🐹',
   Rust: '🦀',
+  PHP: '🐘',
+  Swift: '🦅',
+  Kotlin: '🟪',
 };
 
 export default function Projects() {
@@ -45,34 +49,35 @@ export default function Projects() {
       )}
 
       {!loading && !error && (
-        <div className="grid sm:grid-cols-3 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {repos.map((r) => (
             <Link
               key={r.id}
               to={`/projetos/${r.name}`}
-              className="group flex flex-col rounded-xl overflow-hidden
-                         border border-app bg-surface-soft
-                         hover:border-app-strong hover:shadow-app
-                         hover:-translate-y-0.5 transition-all"
+              className="group rounded-2xl border border-app bg-surface-soft
+                         overflow-hidden hover:border-app-strong hover:shadow-app
+                         hover:-translate-y-0.5 transition-all flex flex-col"
             >
-              {/* Imagem ou placeholder */}
-              <div className="aspect-[21/9] overflow-hidden bg-[#0a0613] relative">
+              {/* Área da imagem */}
+              <div className="aspect-video overflow-hidden bg-[#0a0613] relative">
                 {r.cover ? (
                   <img
                     src={r.cover}
                     alt={r.name}
+                    width="600"
+                    height="400"
                     loading="lazy"
-                    className="w-full h-full object-cover
-                               transition-transform duration-500
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500
                                group-hover:scale-105"
                   />
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center
                                   bg-gradient-to-br from-purple-900/50 to-purple-700/20">
-                    <span className="text-5xl mb-2">
+                    <span className="text-4xl mb-2">
                       {LANG_EMOJI[r.language] || '📦'}
                     </span>
-                    <span className="text-app-muted font-mono text-xs uppercase tracking-widest">
+                    <span className="text-app-muted font-mono text-[10px] uppercase tracking-widest">
                       {r.language || 'project'}
                     </span>
                   </div>

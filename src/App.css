@@ -182,3 +182,27 @@
     border-right-color: var(--border);
   }
 }
+/* Acelerar animações com will-change */
+.animate-blink,
+[class*="animate-pulse"] {
+  will-change: opacity;
+}
+
+/* Reduzir transições no mobile */
+@media (max-width: 768px) {
+  * {
+    transition-duration: 150ms !important;
+    animation-duration: 0.5s !important;
+  }
+}
+
+/* Respeita quem tem preferência por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

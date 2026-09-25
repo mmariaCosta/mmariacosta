@@ -1,29 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../contexts/useTheme';
 
-export default function VideoBackground({ opacity = 0.25 }) {
+export default function VideoBackground() {
   const { theme } = useTheme();
   const videoRef = useRef(null);
   const [ready, setReady] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(false);
 
-  // Adia o carregamento do vídeo pra depois do primeiro paint
+  // Decide se carrega o vídeo (não carrega em mobile lento)
   useEffect(() => {
-    const load = () => setShouldLoad(true);
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSlowConnection =
+      connection?.effectiveType === '2g' ||
+      connection?.effectiveType === 'slow-2g' ||
+      connection?.saveData === true;
 
-    // carrega 1s depois OU quando o usuário interage
-    const timer = setTimeout(load, 1500);
-
-    window.addEventListener('scroll', load, { once: true, passive: true });
-    window.addEventListener('click', load, { once: true, passive: true });
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', load);
-      window.removeEventListener('click', load);
-    };
+    // Carrega o vídeo se NÃO for mobile lento
+    if (!isMobile || !isSlowConnection) {
+      setShouldLoad(true);
+    }
   }, []);
 
+  // Inicia o vídeo quando o elemento existir
   useEffect(() => {
     if (!shouldLoad) return;
     const v = videoRef.current;
@@ -41,11 +40,23 @@ export default function VideoBackground({ opacity = 0.25 }) {
       className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
       aria-hidden="true"
     >
+      {/* Fallback gradiente (aparece SEMPRE, mesmo com vídeo) */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 25%, transparent) 0%, var(--bg) 75%)`,
+        }}
+      />
+
+      {/* Vídeo (só carrega se shouldLoad for true) */}
       {shouldLoad && (
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
-          style={{ opacity: ready ? opacity : 0, transition: 'opacity 0.8s' }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            opacity: ready ? 0.25 : 0,
+            transition: 'opacity 1s',
+          }}
           src="/videos/hacker.mp4"
           autoPlay
           loop
@@ -55,14 +66,7 @@ export default function VideoBackground({ opacity = 0.25 }) {
         />
       )}
 
-      {/* Fallback: gradiente sempre visível */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at 50% 40%, transparent 0%, var(--bg) 85%)`,
-        }}
-      />
-
+      {/* Overlay do tema */}
       {theme === 'dark' && (
         <div
           className="absolute inset-0 mix-blend-overlay"

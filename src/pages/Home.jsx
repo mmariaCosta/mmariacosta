@@ -157,13 +157,13 @@ export default function Home() {
           <img
             src="https://i.pinimg.com/736x/db/ae/13/dbae1315863572eac42a6ee6284479c3.jpg"
             alt="Gatinho fofo representando curiosidade"
-            width="256"                    // ⬅️ NOVO
-            height="256"                   // ⬅️ NOVO
-            fetchPriority="high"           // ⬅️ NOVO (LCP)
-            decoding="async"               // ⬅️ NOVO
+            width="256"
+            height="256"
+            fetchPriority="high"
+            decoding="async"
             className="relative w-48 md:w-64 h-auto rounded-2xl border border-app-strong shadow-app
                       transition-transform duration-500 group-hover:scale-[1.02]"
-            />
+          />
         </motion.div>
       </section>
 

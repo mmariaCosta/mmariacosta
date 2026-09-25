@@ -1,12 +1,3 @@
-import { Link, useParams } from 'react-router-dom';
-import {
-  FaArrowLeft, FaGithub, FaStar, FaCodeBranch,
-  FaExternalLinkAlt,
-} from 'react-icons/fa';
-import { useGithubProject } from '../hooks/useGithubProject';
-import { useLanguage } from '../contexts/useLanguage';
-import Carousel from '../components/Carousel';
-
 export default function ProjectDetail() {
   const { name } = useParams();
   const { t } = useLanguage();
@@ -34,104 +25,73 @@ export default function ProjectDetail() {
   }
 
   return (
-    <article className="max-w-3xl mx-auto">
+    <div className="space-y-6">
       <Link
         to="/projetos"
         className="inline-flex items-center gap-2 text-app-muted text-xs font-mono
-                   hover:text-app-accent transition-colors mb-6"
+                   hover:text-app-accent transition-colors"
       >
         <FaArrowLeft size={10} /> {t.projectDetail.back}
       </Link>
 
-      {/* Carrossel (ou nada se não tiver imagens) */}
+      {/* Header + meta */}
+      <section className="grid md:grid-cols-4 gap-3">
+        <div className="md:col-span-3 p-6 md:p-8 min-h-[160px] flex flex-col justify-between
+                        rounded-2xl border border-app bg-surface-soft">
+          <div>
+            <p className="text-app-dim font-mono text-[10px] uppercase tracking-widest mb-2">
+              Projeto
+            </p>
+            <h1 className="text-2xl md:text-3xl font-bold text-app font-mono break-all">
+              <span className="text-app-dim">&lt;</span>
+              {project.name}
+              <span className="text-app-dim">/&gt;</span>
+            </h1>
+            {project.description && (
+              <p className="text-app-muted mt-3 text-sm leading-relaxed">
+                {project.description}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Meta cards... */}
+      </section>
+
+      {/* ⬇️⬇️⬇️ AQUI VAI A IMAGEM DE CAPA (antes do carrossel) ⬇️⬇️⬇️ */}
+      <div className="rounded-xl overflow-hidden border border-app
+                      bg-[#0a0613] shadow-app">
+        <img
+          src={project.cover}
+          alt={project.name}
+          width="800"
+          height="450"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-auto"
+        />
+      </div>
+      {/* ⬆️⬆️⬆️ FIM DA IMAGEM DE CAPA ⬆️⬆️⬆️ */}
+
+      {/* Carrossel */}
       {images.length > 0 && (
-        <div className="mb-6">
+        <div className="rounded-xl overflow-hidden border border-app bg-surface-soft">
           <Carousel images={images} alt={project.name} />
         </div>
       )}
 
-      <header className="mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-app font-mono break-all">
-          <span className="text-app-dim">&lt;</span>
-          {project.name}
-          <span className="text-app-dim">/&gt;</span>
-        </h1>
-        {project.description && (
-          <p className="text-app-muted mt-3 text-sm leading-relaxed">
-            {project.description}
-          </p>
-        )}
-      </header>
-
-      <section className="flex flex-wrap items-center gap-3 mb-8
-                          text-xs text-app-muted">
-        {project.language && (
-          <span className="px-2 py-1 rounded border border-app font-mono">
-            {project.language}
-          </span>
-        )}
-        <span className="flex items-center gap-1">
-          <FaStar size={10} /> {project.stars}
-        </span>
-        <span className="flex items-center gap-1">
-          <FaCodeBranch size={10} /> {project.forks}
-        </span>
-      </section>
-
-      <section className="flex flex-wrap gap-3 mb-10">
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
-                     text-white text-sm font-medium transition-all hover:-translate-y-0.5"
-          style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 16px var(--glow)' }}
-        >
-          <FaGithub size={14} /> {t.projectDetail.viewRepo}
-        </a>
-
-        {project.homepage && (
-          <a
-            href={project.homepage}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
-                       border border-app-strong text-app text-sm
-                       hover:bg-surface-soft hover:-translate-y-0.5 transition-all"
-          >
-            <FaExternalLinkAlt size={12} /> {t.projectDetail.viewLive}
-          </a>
-        )}
-      </section>
-
-      {project.topics.length > 0 && (
-        <section className="mb-10">
-          <div className="flex flex-wrap gap-2">
-            {project.topics.map((topic) => (
-              <span
-                key={topic}
-                className="text-xs px-2.5 py-1 rounded-md border border-app
-                           bg-surface-soft text-app-muted font-mono"
-              >
-                #{topic}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
-
+      {/* README */}
       {readmeHtml && (
-        <section className="mt-10 pt-8 border-t border-app">
-          <h2 className="text-sm font-mono uppercase tracking-widest
-                         text-app-muted mb-5">
+        <div className="rounded-2xl border border-app bg-surface-soft p-6 md:p-8">
+          <p className="text-app-dim font-mono text-[10px] uppercase tracking-widest mb-5">
             {t.projectDetail.readme}
-          </h2>
+          </p>
           <div
             className="prose-readme"
             dangerouslySetInnerHTML={{ __html: readmeHtml }}
           />
-        </section>
+        </div>
       )}
-    </article>
+    </div>
   );
 }

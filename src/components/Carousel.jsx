@@ -38,10 +38,10 @@ export default function Carousel({ images = [], alt = 'project image' }) {
         <img
           src={images[idx]}
           alt={`${alt} ${idx + 1}`}
-          width="800"                    // ⬅️ NOVO
-          height="450"                   // ⬅️ NOVO
-          loading="lazy"                 // ⬅️ NOVO
-          decoding="async"               // ⬅️ NOVO
+          width="800"
+          height="450"
+          loading="lazy"
+          decoding="async"
           className="max-w-full max-h-full object-contain rounded-lg"
           onError={(e) => { e.target.style.opacity = 0.2; }}
         />
