@@ -1,15 +1,22 @@
-/**
- * Extrai frontmatter (YAML) + corpo do markdown.
- */
 export function parseFrontmatter(raw) {
-  if (!raw || !raw.startsWith('---')) {
-    return { data: {}, content: raw || '' };
+  if (!raw) return { data: {}, content: '' };
+
+  // Normaliza quebras de linha Windows → Unix
+  const text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  if (!text.startsWith('---')) {
+    return { data: {}, content: text };
   }
 
-  const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
-  if (!match) return { data: {}, content: raw };
+  // Encontra o fechamento do frontmatter
+  const endIdx = text.indexOf('\n---', 3);
+  if (endIdx === -1) {
+    return { data: {}, content: text };
+  }
 
-  const [, yamlBlock, content] = match;
+  const yamlBlock = text.slice(3, endIdx).trim();
+  const content = text.slice(endIdx + 4).replace(/^\n+/, '');
+
   const data = {};
 
   for (const line of yamlBlock.split('\n')) {
@@ -52,20 +59,13 @@ export function parseFrontmatter(raw) {
     data[key] = value;
   }
 
-  return { data, content: content.trim() };
+  return { data, content };
 }
 
-/**
- * "simple-ctf.pt.md" → "simple-ctf"
- */
 export function slugFromFilename(filename) {
   return filename.replace(/\.(pt|en)\.md$/i, '').replace(/\.md$/i, '');
 }
 
-/**
- * "simple-ctf.pt.md" → "pt"
- * "simple-ctf.md"    → "pt"
- */
 export function langFromFilename(filename) {
   const m = filename.match(/\.(pt|en)\.md$/i);
   return m ? m[1].toLowerCase() : 'pt';

@@ -72,7 +72,7 @@ export default function CyberDetail() {
   const title = item.data.title || item.slug;
   const folder = getTypeFolder(item);
 
-  const repoUrl = `https://github.com/mmariacosta/cyber/blob/main/${folder}/${item.filename}`;
+  const repoUrl = `https://github.com/mmariaCosta/cyber/blob/main/${folder}/${item.filename}`;
 
   return (
     <article className="max-w-3xl mx-auto space-y-6">

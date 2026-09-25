@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const USER = 'mmariacosta';
+const USER = 'mmariaCosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 const CACHE_KEY = 'gh-projects-cache-v5';
 const TTL = 1000 * 60 * 60 * 6; // 6 horas

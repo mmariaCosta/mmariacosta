@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const USER = 'mmariacosta';
+const USER = 'mmariaCosta';
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i;
