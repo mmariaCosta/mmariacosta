@@ -7,9 +7,6 @@ import { useLanguage } from '../contexts/useLanguage';
 import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
 import { useImage } from '../hooks/useImage';
 
-/* =========================================================
-   HOOK DE TYPING
-   ========================================================= */
 function useTyping(lines = []) {
   const [idx, setIdx] = useState(0);
   const [text, setText] = useState('');
@@ -52,17 +49,20 @@ function useTyping(lines = []) {
   return text;
 }
 
-/* =========================================================
-   PÁGINA
-   ========================================================= */
 export default function Home() {
+  // =========================================================
+  // TODOS OS HOOKS AQUI EM CIMA (antes de qualquer return)
+  // =========================================================
   const { t, lang } = useLanguage();
   const { profile, loading, error } = usePortfolioData();
 
-  // Pega as linhas de typing
   const typingLines = profile?.typing?.[lang] || profile?.typing?.pt || [];
   const typed = useTyping(typingLines);
+  const catImage = useImage('cat', profile?.images?.cat);
 
+  // =========================================================
+  // DEPOIS DOS HOOKS, OS RETURNS CONDICIONAIS
+  // =========================================================
   if (loading) {
     return (
       <div className="py-16 text-center">
@@ -79,6 +79,9 @@ export default function Home() {
     );
   }
 
+  // =========================================================
+  // VALORES DERIVADOS (não são hooks, podem vir depois)
+  // =========================================================
   const intro = pickText(profile?.intro, lang);
   const role = pickText(profile?.role, lang);
   const bio = pickText(profile?.bioShort, lang);
@@ -86,8 +89,7 @@ export default function Home() {
   const email = profile?.email || 'mmaria.costa@outlook.com';
   const whatsapp = profile?.whatsapp || '+55 19 99378-6188';
   const whatsappUrl = profile?.whatsappUrl || 'https://wa.me/5519993786188';
-  const catImage = useImage('cat', profile?.images?.cat);
-  
+
   return (
     <div>
       {/* HERO */}
@@ -157,7 +159,7 @@ export default function Home() {
                 boxShadow: '0 0 20px var(--glow)',
               }}
             >
-              {t.home.ctaProjects} <FaArrowRight size={12} />
+              {t.home?.ctaProjects || 'Ver projetos'} <FaArrowRight size={12} />
             </Link>
 
             <a
@@ -166,7 +168,7 @@ export default function Home() {
                          border border-app-strong text-app
                          hover:bg-surface-soft hover:-translate-y-0.5 transition-all"
             >
-              <FaEnvelope size={14} /> {t.home.ctaContact}
+              <FaEnvelope size={14} /> {t.home?.ctaContact || 'Contato'}
             </a>
           </motion.div>
         </div>
@@ -186,7 +188,7 @@ export default function Home() {
           {catImage && (
             <img
               src={catImage}
-              alt="Gatinho fofo representando curiosidade"
+              alt="Gatinho fofo"
               width="256"
               height="256"
               fetchPriority="high"
@@ -198,18 +200,18 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* TERMINAL INTERATIVO */}
+      {/* TERMINAL */}
       <CyberTerminal />
 
       {/* CONTATO */}
       <section id="contato" className="mt-20 pt-12 border-t border-app">
         <header className="text-center mb-8">
           <p className="text-app-accent font-mono text-xs tracking-widest uppercase mb-2">
-            {t.home.contactEyebrow}
+            {t.home?.contactEyebrow || 'Contato'}
           </p>
-          <h2 className="text-3xl font-bold text-app">{t.home.contactTitle}</h2>
+          <h2 className="text-3xl font-bold text-app">{t.home?.contactTitle || 'Vamos conversar'}</h2>
           <p className="text-app-muted mt-2 text-sm max-w-xl mx-auto">
-            {t.home.contactSubtitle}
+            {t.home?.contactSubtitle}
           </p>
         </header>
 

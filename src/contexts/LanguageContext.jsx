@@ -30,7 +30,7 @@ export function LanguageProvider({ children }) {
     return localStorage.getItem('lang') || 'pt';
   });
 
-  // Começa com cache (se tiver) — instantâneo
+  // Começa com o cache se existir — carrega na hora
   const [t, setT] = useState(() => getCached('pt') || null);
   const [loading, setLoading] = useState(() => !getCached('pt'));
   const [error, setError] = useState(null);
@@ -70,34 +70,13 @@ export function LanguageProvider({ children }) {
         if (cancelled) return;
         setError(e.message);
         setLoading(false);
-
-        // Fallback: se falhou e não tem nada carregado, tenta PT
-        if (!t) {
-          fetch('/data/i18n/pt.json')
-            .then((r) => r.json())
-            .then((data) => {
-              if (!cancelled) {
-                setT(data);
-                setCache('pt', data);
-              }
-            })
-            .catch(() => {});
-        }
       });
 
     return () => { cancelled = true; };
-  }, [lang]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const value = {
-    lang,
-    setLang,
-    t: t || {},
-    loading,
-    error,
-  };
+  }, [lang]);
 
   return (
-    <LanguageContext.Provider value={value}>
+    <LanguageContext.Provider value={{ lang, setLang, t: t || {}, loading, error }}>
       {children}
     </LanguageContext.Provider>
   );
