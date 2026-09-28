@@ -50,12 +50,18 @@
   "projects": {
     "eyebrow": "Projetos",
     "title": "Coisas que construí",
-    "subtitle": "Sincronizado em tempo real com meu GitHub.",
+    "subtitle": "Repositórios, write-ups, notas e meu home lab — tudo num lugar.",
     "loading": "carregando projetos...",
     "error": "⚠️ erro ao buscar do GitHub",
     "errorHint": "(talvez o limite da API tenha estourado — tente de novo em 1h)",
     "empty": "— sem descrição —",
-    "viewDetails": "ver detalhes"
+    "viewDetails": "ver detalhes",
+    "tabs": {
+      "repos":    "Repos",
+      "writeups": "Write-ups",
+      "notes":    "Notas",
+      "lab":      "Lab"
+    }
   },
   "projectDetail": {
     "eyebrow": "Projeto",

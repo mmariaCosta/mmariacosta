@@ -10,12 +10,10 @@ export default function Nav() {
   const { theme, setTheme } = useTheme();
 
   const LINKS = [
-    { to: '/',         label: t.nav.home },
-    { to: '/sobre',    label: t.nav.about },
-    { to: '/skills',   label: t.nav.skills },
-    { to: '/servicos', label: t.nav.services },
-    { to: '/projetos', label: t.nav.projects },
-    { to: '/cyber',    label: t.nav.cyber },
+    { to: '/',         label: t.nav?.home     || 'Início' },
+    { to: '/sobre',    label: t.nav?.about    || 'Sobre' },
+    { to: '/skills',   label: t.nav?.skills   || 'Skills' },
+    { to: '/projetos', label: t.nav?.projects || 'Projetos' },
   ];
 
   return (
@@ -70,21 +68,21 @@ export default function Nav() {
         {/* Toggles */}
         <div className="flex items-center gap-2 shrink-0">
           <SegmentedToggle
-            ariaLabel="Idioma"           // ⬅️ era "language"
+            ariaLabel="Idioma"
             value={lang}
             onChange={setLang}
             options={[
-              { value: 'pt', label: 'PT', ariaLabel: 'Português' },
-              { value: 'en', label: 'EN', ariaLabel: 'English' },
+              { value: 'pt', label: 'PT' },
+              { value: 'en', label: 'EN' },
             ]}
           />
           <SegmentedToggle
-            ariaLabel="Tema"             // ⬅️ era "theme"
+            ariaLabel="Tema"
             value={theme}
             onChange={setTheme}
             options={[
-              { value: 'light', icon: <FaSun size={11} />, ariaLabel: 'Modo claro' },
-              { value: 'dark',  icon: <FaMoon size={11} />, ariaLabel: 'Modo escuro' },
+              { value: 'light', icon: <FaSun size={11} /> },
+              { value: 'dark',  icon: <FaMoon size={11} /> },
             ]}
           />
         </div>

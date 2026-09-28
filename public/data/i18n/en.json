@@ -51,17 +51,22 @@
     }
   },
 
-  "projects": {
+    "projects": {
     "eyebrow": "Projects",
     "title": "Things I built",
-    "subtitle": "Synced in real time with my GitHub.",
+    "subtitle": "Repositories, write-ups, notes and my home lab — all in one place.",
     "loading": "loading projects...",
     "error": "⚠️ error fetching from GitHub",
     "errorHint": "(the API rate limit may be hit — try again in 1h)",
     "empty": "— no description —",
-    "viewDetails": "view details"
+    "viewDetails": "view details",
+    "tabs": {
+      "repos":    "Repos",
+      "writeups": "Write-ups",
+      "notes":    "Notes",
+      "lab":      "Lab"
+    }
   },
-
   "projectDetail": {
     "eyebrow": "Project",
     "loading": "loading project",

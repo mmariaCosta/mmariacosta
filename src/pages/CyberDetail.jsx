@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import {
   FaArrowLeft, FaGithub, FaCalendar, FaExternalLinkAlt,
 } from 'react-icons/fa';
+import { useLanguage } from '../contexts/useLanguage';
 import { useCyberItem } from '../hooks/useCyberContent';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 
@@ -31,12 +32,12 @@ function getColor(item) {
   return STATUS_COLORS[item.data.status] || 'var(--status-planned)';
 }
 
-function getLabel(item) {
+function getLabel(item, lang) {
   if (!item) return '';
   if (item.type === 'writeup') return 'CTF';
-  if (item.type === 'note') return 'Nota';
+  if (item.type === 'note') return lang === 'pt' ? 'Nota' : 'Note';
   if (item.type === 'vm') return 'VM';
-  return 'Ferramenta';
+  return lang === 'pt' ? 'Ferramenta' : 'Tool';
 }
 
 function getTypeFolder(item) {
@@ -47,7 +48,6 @@ function getTypeFolder(item) {
   return 'lab/tools';
 }
 
-/* Extrai headings do markdown pra montar TOC */
 function extractHeadings(content) {
   const lines = (content || '').split('\n');
   const headings = [];
@@ -68,7 +68,8 @@ function extractHeadings(content) {
 
 export default function CyberDetail() {
   const { slug } = useParams();
-  const { item, loading, error } = useCyberItem(slug);
+  const { t, lang } = useLanguage();
+  const { item, loading, error } = useCyberItem(slug, lang);
 
   if (loading) {
     return (
@@ -82,7 +83,7 @@ export default function CyberDetail() {
     return (
       <div className="py-16 text-center">
         <p className="text-red-400 text-sm">erro: {error}</p>
-        <Link to="/cyber" className="text-app-accent text-sm hover:underline mt-4 inline-block">
+        <Link to="/projetos" className="text-app-accent text-sm hover:underline mt-4 inline-block">
           ← voltar
         </Link>
       </div>
@@ -93,15 +94,15 @@ export default function CyberDetail() {
     return (
       <div className="py-16 text-center">
         <p className="text-app-muted mb-4">Conteúdo não encontrado.</p>
-        <Link to="/cyber" className="text-app-accent text-sm hover:underline">
-          ← voltar para Cyber
+        <Link to="/projetos" className="text-app-accent text-sm hover:underline">
+          ← voltar para projetos
         </Link>
       </div>
     );
   }
 
   // =========================================================
-  // CONFIGURAÇÕES DO LAYOUT (vêm do frontmatter do .md)
+  // CONFIGURAÇÕES DO LAYOUT
   // =========================================================
   const layout      = item.data.layout || 'article';
   const cover       = item.data.cover;
@@ -114,18 +115,26 @@ export default function CyberDetail() {
   const widthClass = LAYOUT_WIDTH[layout] || LAYOUT_WIDTH.article;
 
   const color = getColor(item);
-  const label = getLabel(item);
+  const label = getLabel(item, lang);
   const title = item.data.title || item.slug;
   const folder = getTypeFolder(item);
   const repoUrl = `https://github.com/mmariaCosta/cyber/blob/main/${folder}/${item.filename}`;
 
   const headings = showToc ? extractHeadings(item.content) : [];
 
+  const backLabel = lang === 'pt' ? 'voltar para projetos' : 'back to projects';
+  const breadcrumbRoot = lang === 'pt' ? 'Projetos' : 'Projects';
+  const viewGithub = lang === 'pt' ? 'Ver no GitHub' : 'View on GitHub';
+  const originalLink = lang === 'pt' ? 'Link original' : 'Original link';
+  const tocLabel = lang === 'pt' ? 'Nesta página' : 'On this page';
+
   return (
     <article className={`${widthClass} mx-auto space-y-6`}>
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-2 text-xs font-mono text-app-dim">
-        <Link to="/cyber" className="hover:text-app-accent transition-colors">Cyber</Link>
+        <Link to="/projetos" className="hover:text-app-accent transition-colors">
+          {breadcrumbRoot}
+        </Link>
         <span>›</span>
         <span className="text-app-muted">{label}</span>
         <span>›</span>
@@ -134,14 +143,14 @@ export default function CyberDetail() {
 
       {/* Voltar */}
       <Link
-        to="/cyber"
+        to="/projetos"
         className="inline-flex items-center gap-2 text-app-muted text-xs font-mono
                    hover:text-app-accent transition-colors"
       >
-        <FaArrowLeft size={10} /> voltar
+        <FaArrowLeft size={10} /> {backLabel}
       </Link>
 
-      {/* Capa (se o .md definir) */}
+      {/* Capa */}
       {cover && (
         <div
           className="rounded-2xl overflow-hidden border"
@@ -158,7 +167,6 @@ export default function CyberDetail() {
       {/* Header */}
       {!hideHeader && (
         <header className="space-y-3">
-          {/* Meta (badges) */}
           {!hideMeta && (
             <div className="flex flex-wrap items-center gap-3 text-xs font-mono uppercase tracking-widest">
               <span className="font-bold" style={{ color }}>{label}</span>
@@ -212,7 +220,6 @@ export default function CyberDetail() {
             </p>
           )}
 
-          {/* Tags */}
           {!hideTags && item.data.tags && item.data.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {item.data.tags.map((tag) => (
@@ -227,7 +234,6 @@ export default function CyberDetail() {
             </div>
           )}
 
-          {/* Botões */}
           {!hideButtons && (
             <div className="flex flex-wrap gap-2 pt-2">
               <a
@@ -238,7 +244,7 @@ export default function CyberDetail() {
                            border border-app-strong text-app text-xs
                            hover:bg-surface-soft transition-all"
               >
-                <FaGithub size={11} /> Ver no GitHub
+                <FaGithub size={11} /> {viewGithub}
               </a>
 
               {item.data.url && (
@@ -250,7 +256,7 @@ export default function CyberDetail() {
                              text-white text-xs font-medium transition-all"
                   style={{ background: color }}
                 >
-                  <FaExternalLinkAlt size={10} /> Link original
+                  <FaExternalLinkAlt size={10} /> {originalLink}
                 </a>
               )}
             </div>
@@ -258,14 +264,13 @@ export default function CyberDetail() {
         </header>
       )}
 
-      {/* TOC (se ativado) + Conteúdo */}
+      {/* TOC + Conteúdo */}
       <section className="pt-8 border-t border-app">
         {showToc && headings.length > 0 ? (
           <div className="grid md:grid-cols-[220px_1fr] gap-8">
-            {/* Sumário */}
             <aside className="md:sticky md:top-24 md:self-start">
               <p className="text-[10px] font-mono uppercase tracking-widest text-app-dim mb-3">
-                Nesta página
+                {tocLabel}
               </p>
               <ul className="space-y-2 text-xs border-l border-app pl-3">
                 {headings.map((h, i) => (
@@ -282,7 +287,6 @@ export default function CyberDetail() {
               </ul>
             </aside>
 
-            {/* Conteúdo */}
             <div>
               <MarkdownRenderer content={item.content} />
             </div>

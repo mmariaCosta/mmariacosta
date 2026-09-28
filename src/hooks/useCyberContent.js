@@ -15,7 +15,6 @@ function authHeaders(extra = {}) {
     : extra;
 }
 
-/* Lista arquivos .md de uma pasta do repo */
 async function listFolder(folder) {
   const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${folder}?ref=${BRANCH}`;
   const res = await fetch(url, { headers: authHeaders() });
@@ -25,7 +24,6 @@ async function listFolder(folder) {
   return data.filter((f) => f.type === 'file' && f.name.endsWith('.md'));
 }
 
-/* Baixa o conteúdo cru — usando a API (que aceita CORS) */
 async function fetchRaw(file) {
   const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${file.path}?ref=${BRANCH}`;
   const res = await fetch(url, {
@@ -35,7 +33,6 @@ async function fetchRaw(file) {
   return res.text();
 }
 
-/* Carrega uma pasta inteira */
 async function loadFolder(folder, type) {
   const files = await listFolder(folder);
   const items = await Promise.all(
@@ -79,7 +76,6 @@ export function useCyberContent() {
           loadFolder('notes', 'note'),
           loadFolder('lab/vms', 'vm'),
           loadFolder('lab/tools', 'tool'),
-          loadFolder('ctfs', 'ctf'),
         ]);
 
         if (cancelled) return;
@@ -105,8 +101,10 @@ export function useCyberContent() {
   return state;
 }
 
-/* Busca 1 item pelo slug */
-export function useCyberItem(slug) {
+/* =========================================================
+   Busca 1 item pelo slug — respeitando o idioma atual
+   ========================================================= */
+export function useCyberItem(slug, lang = 'pt') {
   const { writeups, notes, vms, tools, loading, error } = useCyberContent();
 
   if (loading || error) return { loading, error, item: null };
@@ -118,7 +116,16 @@ export function useCyberItem(slug) {
     ...(tools || []),
   ];
 
-  const item = all.find((i) => i.slug === slug) || null;
+  // Filtra pelo slug primeiro
+  const candidates = all.filter((i) => i.slug === slug);
+
+  if (candidates.length === 0) return { loading: false, error: null, item: null };
+
+  // Prioriza o item no idioma atual; senão, cai pro PT; senão, qualquer um
+  const item =
+    candidates.find((i) => i.lang === lang) ||
+    candidates.find((i) => i.lang === 'pt') ||
+    candidates[0];
 
   return { loading: false, error: null, item };
 }
