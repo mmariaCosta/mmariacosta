@@ -44,6 +44,7 @@
   --status-planned:  #6d28d9;
 
   --item-note:  #6d28d9;      /* roxo escuro pra notas */
+  --bold-accent: #5420a8;
 }
 
 .dark {
@@ -89,6 +90,7 @@
   --status-planned:  #c4b5fd;
 
   --item-note:  #8e72fc;
+  --bold-accent: #d5b1fc;
 }
 
 html, body, #root { min-height: 100%; }

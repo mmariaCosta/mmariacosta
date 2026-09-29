@@ -21,29 +21,33 @@
 
   "typing": {
     "pt": [
-      "Hi!! I AM Maria Costa",
-      "Analista de Segurança em formação",
-      "From Brazil 🇧🇷",
+      "Oii!! Sou a Maria Costa",
+      "Estudante de Cybersecurity",
+      "Do Brasil 🇧🇷",
       "Apaixonada por Cyber!!"
     ],
     "en": [
-      "Hi!! I AM Maria Costa",
-      "Security Analyst in training",
+      "Hey!! I Am Maria Costa",
+      "Student Cybersecurity",
       "From Brazil 🇧🇷",
       "Passionate about Cyber!!"
     ]
   },
 
   "bioShort": {
-    "pt": "Pensamento estratégico aplicado à segurança de sistemas. Estudante de Cibersegurança em formação, com foco em infraestrutura resiliente, análise de vulnerabilidades e automação. Não me interessa só o \"como\", mas o \"por quê\" por trás de cada falha. Segurança é design, não remendo.",
-    "en": "Strategic thinking applied to system security. Cybersecurity student in training, focused on resilient infrastructure, vulnerability analysis and automation. I care less about the \"how\" and more about the \"why\" behind every failure. Security is design, not a patch."
+    "pt": "Pensamento <b style=\"color: var(--bold-accent);\">estratégico</b> aplicado à segurança de sistemas. Estudante de Cybersecurity em formação, com foco em infraestrutura resiliente, <b style=\"color: var(--bold-accent);\">análise de vulnerabilidades</b> e automação. Não me interessa só o \"como\", mas o \"por quê\" por trás de cada falha. Segurança é <b style=\"color: var(--bold-accent);\">design</b>, não remendo.",
+    "en": "Strategic thinking applied to system security. Cybersecurity student in training, focused on resilient infrastructure, <b style=\"color: var(--bold-accent);\">vulnerability analysis</b> and automation. I care less about the \"how\" and more about the \"why\" behind every failure. Security is <b style=\"color: var(--bold-accent);\">design</b>, not a patch."
+  },
+  "bugQuote": {
+    "pt": "> \"Comer <b style=\"color: var(--bold-accent);\">bugs</b> é meu passatempo favorito!\" 🍒",
+    "en": "> \"Eating <b style=\"color: var(--bold-accent);\">bugs</b> is my favorite pastime!\" 🍒"
   },
 
   "bio": {
     "pt": [
       "Sou Maria Costa, estudante de Cibersegurança com base técnica em programação e infraestrutura. Vim do ensino médio integrado ao técnico em Informática pelo Cotuca (Unicamp), e em 2027 inicio a graduação em Cibersegurança pela FIAP.",
-      "O que me move na segurança não é só o desafio técnico, mas a forma de pensar: entender a origem da falha, questionar o porquê, e projetar sistemas que resistam por design — não por remendo.",
-      "Fora do código, gosto de escrever sobre o que aprendo, resolver desafios em CTFs e estudar arquiteturas de defesa."
+      "Segurança não é sobre ferramentas, é sobre pensamento sistêmico. Entender a raiz da falha, questionar o óbvio e construir defesas que resistam por arquitetura — não por sorte.",
+      "Maria Costa. Estudante de Cibersegurança com base técnica em programação e infraestrutura. Formada pelo ensino médio integrado ao técnico em Informática pelo Cotuca (Unicamp). Em 2027, inicio a graduação em Cibersegurança pela FIAP."
     ],
     "en": [
       "I am Maria Costa, a Cybersecurity student with a technical background in programming and infrastructure. I came from the technical high school program at Cotuca (Unicamp), and in 2027 I start my degree in Cybersecurity at FIAP.",
@@ -52,10 +56,6 @@
     ]
   },
 
-  "bugQuote": {
-    "pt": "> \"Comer bugs é meu passatempo favorito!\" 🍒",
-    "en": "> \"Eating bugs is my favorite pastime!\" 🍒"
-  },
 
   "social": {
     "github": {

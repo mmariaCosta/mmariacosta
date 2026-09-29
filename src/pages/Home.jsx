@@ -126,23 +126,23 @@ export default function Home() {
             />
           </motion.p>
 
+          {/* BIO COM NEGRITO */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
             className="mt-6 text-app/85 max-w-xl leading-relaxed"
-          >
-            {bio}
-          </motion.p>
+            dangerouslySetInnerHTML={{ __html: bio }}
+          />
 
+          {/* BUG QUOTE COM NEGRITO */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
             className="mt-4 text-app-dim italic font-mono text-sm"
-          >
-            {bugQuote}
-          </motion.p>
+            dangerouslySetInnerHTML={{ __html: bugQuote }}
+          />
 
           <motion.div
             initial={{ opacity: 0 }}
