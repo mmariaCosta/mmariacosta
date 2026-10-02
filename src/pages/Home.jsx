@@ -188,13 +188,14 @@ export default function Home() {
           {catImage && (
             <img
               src={catImage}
-              alt="Gatinho fofo"
+              alt="Foto de Perfil"
               width="256"
               height="256"
               fetchPriority="high"
               decoding="async"
-              className="relative w-48 md:w-64 h-auto rounded-2xl border border-app-strong shadow-app
-                         transition-transform duration-500 group-hover:scale-[1.02]"
+              className="relative w-48 md:w-64 aspect-square object-cover rounded-2xl
+                        border border-app-strong shadow-app
+                        transition-transform duration-500 group-hover:scale-[1.02]"
             />
           )}
         </motion.div>
