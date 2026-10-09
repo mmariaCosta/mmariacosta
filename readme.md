@@ -6,6 +6,30 @@ Portfólio pessoal construído em React + Vite. Bilíngue (PT/EN), com tema clar
 
 ---
 
+<!-- ESTATÍSTICAS GITHUB -->
+<div align="center">
+  <img
+    src="https://github-readme-stats.vercel.app/api?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=true&count_private=true&show_icons=true"
+    height="165"
+    alt="stats"
+  />
+  <img
+    src="https://github-readme-streak-stats.herokuapp.com/?user=mmariacosta&theme=radical&hide_border=false"
+    height="165"
+    alt="streak"
+  />
+</div>
+
+<div align="center">
+  <img
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=mmariacosta&theme=radical&hide_border=false&include_all_commits=true&count_private=true&layout=compact&langs_count=8"
+    height="165"
+    alt="linguagens"
+  />
+</div>
+
+---
+
 ## Sobre o projeto
 
 Sou desenvolvedora ADVPL em transição para cibersegurança. Este portfólio reúne os projetos, labs e estudos que mostram essa transição de forma prática — não só como currículo, mas como vitrine técnica.
