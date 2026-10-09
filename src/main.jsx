@@ -5,6 +5,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import App from './App.jsx';
 import './index.css';
+import './styles/markdown.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

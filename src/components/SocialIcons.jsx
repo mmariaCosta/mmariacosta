@@ -1,39 +1,35 @@
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../contexts/useLanguage';
-import { usePortfolioData } from '../hooks/usePortfolioData';
+
+const LINKS = [
+  {
+    icon: FaGithub,
+    href: 'https://github.com/mmariacosta',
+    label: 'GitHub',
+    user: 'mmariacosta',
+  },
+  {
+    icon: FaLinkedin,
+    href: 'https://linkedin.com/in/mmariacosta',
+    label: 'LinkedIn',
+    user: 'mmariacosta',
+  },
+  {
+    icon: FaEnvelope,
+    href: 'mailto:mmaria.costa@outlook.com',
+    label: 'Email',
+    user: 'mmaria.costa@outlook.com',
+  },
+  {
+    icon: FaWhatsapp,
+    href: 'https://wa.me/5519993786188',
+    label: 'WhatsApp',
+    user: '+55 19 99378-6188',
+  },
+];
 
 export default function SocialIcons() {
   const { t } = useLanguage();
-  const { profile } = usePortfolioData();
-
-  if (!profile) return null;
-
-  const links = [
-    profile.social?.github && {
-      icon: FaGithub,
-      href: profile.social.github.url,
-      label: 'GitHub',
-      user: profile.social.github.handle,
-    },
-    profile.social?.linkedin && {
-      icon: FaLinkedin,
-      href: profile.social.linkedin.url,
-      label: 'LinkedIn',
-      user: profile.social.linkedin.handle,
-    },
-    profile.email && {
-      icon: FaEnvelope,
-      href: `mailto:${profile.email}`,
-      label: 'Email',
-      user: profile.email,
-    },
-    profile.whatsappUrl && {
-      icon: FaWhatsapp,
-      href: profile.whatsappUrl,
-      label: 'WhatsApp',
-      user: profile.whatsapp,
-    },
-  ].filter(Boolean);
 
   return (
     <div className="max-w-4xl mx-auto px-6">
@@ -42,7 +38,7 @@ export default function SocialIcons() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-        {links.map(({ icon: Icon, href, label, user }) => (
+        {LINKS.map(({ icon: Icon, href, label, user }) => (
           <a
             key={label}
             href={href}

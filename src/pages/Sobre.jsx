@@ -1,15 +1,105 @@
 import { useState } from 'react';
 import { useLanguage } from '../contexts/useLanguage';
-import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
+import { pickText } from '../utils/pickText';
 
 /* =========================================================
-   TIMELINE
+   DADOS HARD-CODED
    ========================================================= */
-function Timeline({ items }) {
+const BIO = {
+  pt: [
+    'Sou estudante de TI no COTUCA (Unicamp), formada no técnico e atualmente estagiando como desenvolvedora ADVPL no ecossistema TOTVS Protheus. Fui aprovada em Cibersegurança na FIAP e vou começar em 2027.',
+    'Meu foco é segurança defensiva. Gosto de entender como sistemas funcionam por dentro — de infraestrutura a código — porque acredito que não dá pra proteger o que não se entende.',
+    'Estou construindo projetos que mostram isso na prática: simuladores de SOC, laboratórios, análise de logs. Tudo no GitHub, tudo documentado.',
+  ],
+  en: [
+    'I study IT at COTUCA (Unicamp), graduated from the technical program and currently interning as an ADVPL developer in the TOTVS Protheus ecosystem. I was accepted into FIAP for Cybersecurity starting in 2027.',
+    'My focus is defensive security. I like understanding how systems work from the inside — from infrastructure to code — because I believe you cannot protect what you do not understand.',
+    'I am building projects that show this in practice: SOC simulators, labs, log analysis. All on GitHub, all documented.',
+  ],
+};
+
+const ACADEMIC = [
+  {
+    title: { pt: 'Cibersegurança', en: 'Cybersecurity' },
+    place: { pt: 'FIAP', en: 'FIAP' },
+    period: { pt: '2027 — 2029', en: '2027 — 2029' },
+    desc: {
+      pt: 'Graduação em Cibersegurança. Foco em segurança defensiva, análise de ameaças, resposta a incidentes e infraestrutura.',
+      en: 'Cybersecurity degree. Focus on defensive security, threat analysis, incident response, and infrastructure.',
+    },
+    tags: ['Blue Team', 'SOC', 'Threat Intel'],
+  },
+  {
+    title: { pt: 'Técnico em Informática', en: 'Technical Degree in IT' },
+    place: { pt: 'COTUCA — Unicamp', en: 'COTUCA — Unicamp' },
+    period: { pt: '2022 — 2026', en: '2022 — 2026' },
+    desc: {
+      pt: 'Curso técnico integrado ao ensino médio. Base em programação, redes, banco de dados e desenvolvimento de sistemas.',
+      en: 'Technical program integrated with high school. Foundation in programming, networks, databases, and systems development.',
+    },
+    tags: ['Programação', 'Redes', 'Banco de Dados'],
+  },
+];
+
+const PROFESSIONAL = [
+  {
+    title: { pt: 'Estágio em Desenvolvimento ADVPL', en: 'ADVPL Development Internship' },
+    place: { pt: 'TOTVS Protheus', en: 'TOTVS Protheus' },
+    period: { pt: '2026 — 2027', en: '2026 — 2027' },
+    desc: {
+      pt: 'Desenvolvimento de rotinas customizadas em ADVPL, geração de relatórios HTML, integrações REST e automações no ecossistema Protheus.',
+      en: 'Development of custom ADVPL routines, HTML report generation, REST integrations, and automation in the Protheus ecosystem.',
+    },
+    tags: ['ADVPL', 'Protheus', 'SQL', 'REST'],
+  },
+];
+
+const CERTIFICATIONS = {
+  items: [
+    {
+      id: 'isc2-cc',
+      name: 'ISC2 Certified in Cybersecurity (CC)',
+      issuer: 'ISC2',
+      year: 2026,
+      status: 'studying',
+      progress: 40,
+    },
+    {
+      id: 'comptia-security',
+      name: 'CompTIA Security+',
+      issuer: 'CompTIA',
+      year: 2027,
+      status: 'planned',
+      progress: 0,
+    },
+    {
+      id: 'blue-team-l1',
+      name: 'Blue Team Level 1 (BTL1)',
+      issuer: 'Security Blue Team',
+      year: 2027,
+      status: 'planned',
+      progress: 0,
+    },
+    {
+      id: 'ejpt',
+      name: 'eJPT — Junior Penetration Tester',
+      issuer: 'INE Security',
+      year: 2028,
+      status: 'planned',
+      progress: 0,
+    },
+  ],
+  overallProgress: null,
+};
+
+/* =========================================================
+   COMPONENTES INTERNOS
+   ========================================================= */
+function Timeline({ items, lang }) {
   return (
     <ol className="relative border-l border-app pl-6 space-y-8">
-      {items.map((it) => (
-        <li key={it.title} className="relative group">
+      {items.map((it, i) => (
+        <li key={i} className="relative group">
           <span
             className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full border-2 group-hover:scale-125 transition-transform"
             style={{
@@ -19,13 +109,13 @@ function Timeline({ items }) {
             }}
           />
           <p className="text-[10px] font-mono text-app-dim tracking-wider uppercase">
-            {it.period}
+            {pickText(it.period, lang)}
           </p>
           <h3 className="text-app font-semibold mt-1 group-hover:text-app-accent transition-colors">
-            {it.title}
+            {pickText(it.title, lang)}
           </h3>
-          <p className="text-app-muted text-xs mt-0.5">{it.place}</p>
-          <p className="text-app/80 text-sm mt-2 leading-relaxed">{it.desc}</p>
+          <p className="text-app-muted text-xs mt-0.5">{pickText(it.place, lang)}</p>
+          <p className="text-app/80 text-sm mt-2 leading-relaxed">{pickText(it.desc, lang)}</p>
           {it.tags && it.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-3">
               {it.tags.map((tag) => (
@@ -44,9 +134,6 @@ function Timeline({ items }) {
   );
 }
 
-/* =========================================================
-   CERTIFICAÇÕES — consome JSON
-   ========================================================= */
 function Certifications({ t, certifications }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
@@ -91,7 +178,6 @@ function Certifications({ t, certifications }) {
         </div>
         <p className="text-app-muted text-sm max-w-2xl">{t.sobre.certsSubtitle}</p>
 
-        {/* ===================== BARRA DE PROGRESSO GERAL ===================== */}
         <div className="mt-6 max-w-2xl">
           <div className="flex items-center justify-between text-xs font-mono mb-2">
             <span className="text-app-muted uppercase tracking-widest">
@@ -110,32 +196,21 @@ function Certifications({ t, certifications }) {
                         #b0be5e,
                         #1ea356
                        )`,
-                boxShadow: overallPct > 0
-                  ? `0 0 12px color-mix(in srgb, var(--cert-studying) 50%, transparent)`
-                  : 'none',
               }}
             />
           </div>
 
           <div className="flex items-center gap-4 mt-2 text-[10px] font-mono text-app-dim">
-            <span>
-              {items.filter((c) => c.status === 'done').length} concluída(s)
-            </span>
+            <span>{items.filter((c) => c.status === 'done').length} concluída(s)</span>
             <span>·</span>
-            <span>
-              {items.filter((c) => c.status === 'studying').length} estudando
-            </span>
+            <span>{items.filter((c) => c.status === 'studying').length} estudando</span>
             <span>·</span>
-            <span>
-              {items.filter((c) => c.status === 'planned').length} planejada(s)
-            </span>
+            <span>{items.filter((c) => c.status === 'planned').length} planejada(s)</span>
           </div>
         </div>
-        {/* =================== FIM DA BARRA =================== */}
       </header>
 
       <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 max-w-4xl">
-        {/* Lista lateral */}
         <ul className="space-y-1">
           {items.map((c, i) => {
             const s = STATUS[c.status];
@@ -172,7 +247,6 @@ function Certifications({ t, certifications }) {
           })}
         </ul>
 
-        {/* Preview */}
         <div
           className="rounded-xl border p-6 relative overflow-hidden
                      bg-surface-soft backdrop-blur-sm"
@@ -251,43 +325,8 @@ function Certifications({ t, certifications }) {
    ========================================================= */
 export default function Sobre() {
   const { t, lang } = useLanguage();
-  const { profile, certifications, education, loading, error } = usePortfolioData();
 
-  if (loading) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-red-400 text-sm">erro: {error}</p>
-      </div>
-    );
-  }
-
-  // Bio do JSON — agora vem como objeto {pt: [...], en: [...]}
-  const bio = profile?.bio?.[lang] || profile?.bio?.pt || [];
-
-  // Converte education JSON pro formato do <Timeline>
-  const academicItems = (education?.academic || []).map((it) => ({
-    title: pickText(it.title, lang),
-    place: pickText(it.place, lang),
-    period: pickText(it.period, lang),
-    desc: pickText(it.desc, lang),
-    tags: it.tags || [],
-  }));
-
-  const professionalItems = (education?.professional || []).map((it) => ({
-    title: pickText(it.title, lang),
-    place: pickText(it.place, lang),
-    period: pickText(it.period, lang),
-    desc: pickText(it.desc, lang),
-    tags: it.tags || [],
-  }));
+  const bio = BIO[lang] || BIO.pt;
 
   return (
     <div>
@@ -299,7 +338,6 @@ export default function Sobre() {
         <p className="text-app-muted text-sm mt-2 max-w-2xl">{t.sobre.subtitle}</p>
       </header>
 
-      {/* Bio — do JSON */}
       <section className="max-w-3xl space-y-4 mb-16">
         {bio.map((paragraph, i) => (
           <p key={i} className="text-app/85 leading-relaxed">
@@ -308,7 +346,6 @@ export default function Sobre() {
         ))}
       </section>
 
-      {/* Formação — do JSON */}
       <section className="pt-12 border-t border-app">
         <header className="mb-8">
           <h2 className="text-2xl font-bold text-app">{t.sobre.eduTitle}</h2>
@@ -333,7 +370,7 @@ export default function Sobre() {
                 }}
               />
             </div>
-            <Timeline items={academicItems} />
+            <Timeline items={ACADEMIC} lang={lang} />
           </section>
 
           <section>
@@ -353,12 +390,11 @@ export default function Sobre() {
                 }}
               />
             </div>
-            <Timeline items={professionalItems} />
+            <Timeline items={PROFESSIONAL} lang={lang} />
           </section>
         </div>
 
-        {/* Certificações — do JSON */}
-        <Certifications t={t} certifications={certifications} />
+        <Certifications t={t} certifications={CERTIFICATIONS} />
       </section>
     </div>
   );

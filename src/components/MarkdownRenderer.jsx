@@ -1,23 +1,5 @@
 import { useMemo } from 'react';
 
-/**
- * Renderer de Markdown minimalista.
- * Suporta: h1-h4, bold, italic, code inline, code block, links, listas, blockquote.
- */
-export default function MarkdownRenderer({ content = '' }) {
-  const html = useMemo(() => markdownToHtml(content), [content]);
-
-  return (
-    <div
-      className="prose-readme"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
-}
-
-/* =========================================================
-   CONVERSOR MARKDOWN → HTML
-   ========================================================= */
 function escapeHtml(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -32,7 +14,7 @@ function markdownToHtml(md) {
 
   let html = md;
 
-  // Code blocks ```bash ... ```
+  // Code blocks
   const codeBlocks = [];
   html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
     const idx = codeBlocks.length;
@@ -42,10 +24,9 @@ function markdownToHtml(md) {
     return `\u0000CODEBLOCK${idx}\u0000`;
   });
 
-  // Escapa HTML restante
   html = escapeHtml(html);
 
-  // Code inline `foo`
+  // Code inline
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
   // Headers
@@ -54,16 +35,20 @@ function markdownToHtml(md) {
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
-  // Bold
+  // Bold / Italic
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-  // Italic
   html = html.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
 
-  // Links [text](url)
+  // Links
   html = html.replace(
     /\[([^\]]+)\]\(([^)]+)\)/g,
     '<a href="$2" target="_blank" rel="noreferrer">$1</a>'
+  );
+
+  // Imagens
+  html = html.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" loading="lazy" />'
   );
 
   // Blockquote
@@ -77,25 +62,38 @@ function markdownToHtml(md) {
   html = html.replace(/^\d+\. (.+)$/gm, '<li-ordered>$1</li-ordered>');
   html = html.replace(
     /(<li-ordered>.*<\/li-ordered>\n?)+/g,
-    (match) => `<ol>${match.replace(/<\/?li-ordered>/g, (m) => m.includes('/') ? '</li>' : '<li>')}</ol>`
+    (match) =>
+      `<ol>${match.replace(/<\/?li-ordered>/g, (m) =>
+        m.includes('/') ? '</li>' : '<li>'
+      )}</ol>`
   );
 
-  // Parágrafos (linhas que não são tags)
+  // Parágrafos
   html = html
     .split('\n\n')
     .map((block) => {
       const trimmed = block.trim();
       if (!trimmed) return '';
-      if (/^<(h[1-4]|ul|ol|pre|blockquote|li)/.test(trimmed)) return trimmed;
+      if (/^<(h[1-4]|ul|ol|pre|blockquote|li|img)/.test(trimmed)) return trimmed;
       if (trimmed.startsWith('\u0000CODEBLOCK')) return trimmed;
       return `<p>${trimmed.replace(/\n/g, '<br/>')}</p>`;
     })
     .join('\n');
 
-  // Restaura code blocks
   codeBlocks.forEach((block, idx) => {
     html = html.replace(`\u0000CODEBLOCK${idx}\u0000`, block);
   });
 
   return html;
+}
+
+export default function MarkdownRenderer({ content = '' }) {
+  const html = useMemo(() => markdownToHtml(content), [content]);
+
+  return (
+    <div
+      className="prose-readme"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }

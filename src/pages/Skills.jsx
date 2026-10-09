@@ -1,5 +1,60 @@
 import { useLanguage } from '../contexts/useLanguage';
-import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
+import { pickText } from '../utils/pickText';
+
+/* =========================================================
+   DADOS HARD-CODED
+   ========================================================= */
+const KNOWN = [
+  { name: 'Python',       icon: 'python/python-original' },
+  { name: 'JavaScript',   icon: 'javascript/javascript-original' },
+  { name: 'React',        icon: 'react/react-original' },
+  { name: 'C#',           icon: 'csharp/csharp-original' },
+  { name: 'SQL Server',   icon: 'microsoftsqlserver/microsoftsqlserver-plain' },
+  { name: 'Git',          icon: 'git/git-original' },
+  { name: 'VS Code',      icon: 'vscode/vscode-original' },
+  { name: 'HTML5',        icon: 'html5/html5-original' },
+  { name: 'CSS3',         icon: 'css3/css3-original' },
+];
+
+const LEARNING = [
+  { name: 'AWS',     icon: 'amazonwebservices/amazonwebservices-original-wordmark' },
+  { name: 'Docker',  icon: 'docker/docker-original' },
+  { name: 'Linux',   icon: 'linux/linux-original' },
+  { name: 'MySQL',   icon: 'mysql/mysql-original' },
+  { name: 'Node.js', icon: 'nodejs/nodejs-original' },
+  { name: 'FastAPI', icon: 'fastapi/fastapi-original' },
+];
+
+const SOFT_SKILLS = [
+  {
+    title: { pt: 'Pensamento Analítico', en: 'Analytical Thinking' },
+    desc: {
+      pt: 'Gosto de quebrar problemas em partes menores, entender a causa raiz e construir uma solução que faça sentido no contexto.',
+      en: 'I like breaking problems into smaller parts, understanding the root cause, and building solutions that make sense in context.',
+    },
+  },
+  {
+    title: { pt: 'Autonomia', en: 'Autonomy' },
+    desc: {
+      pt: 'Aprendo sozinha quando preciso. Pesquiso, testo, erro e ajusto até funcionar — sem depender de alguém me guiando a cada passo.',
+      en: 'I learn on my own when needed. I research, test, fail, and adjust until it works — without needing someone guiding every step.',
+    },
+  },
+  {
+    title: { pt: 'Comunicação Direta', en: 'Direct Communication' },
+    desc: {
+      pt: 'Prefiro clareza a rodeios. Explico o que fiz, o que não fiz e o que precisa ser feito — sem inflar resultado.',
+      en: 'I prefer clarity over fluff. I explain what I did, what I did not do, and what needs to be done — without inflating results.',
+    },
+  },
+  {
+    title: { pt: 'Curiosidade Técnica', en: 'Technical Curiosity' },
+    desc: {
+      pt: 'Não me contento com "funciona". Quero entender o porquê por trás de cada escolha — de arquitetura a detalhes de implementação.',
+      en: 'I am not satisfied with "it works". I want to understand the why behind every choice — from architecture to implementation details.',
+    },
+  },
+];
 
 function Card({ children, className = '', hover = true }) {
   return (
@@ -16,27 +71,6 @@ function Card({ children, className = '', hover = true }) {
 
 export default function Skills() {
   const { t, lang } = useLanguage();
-  const { skills, loading, error } = usePortfolioData();
-
-  if (loading) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-red-400 text-sm">erro: {error}</p>
-      </div>
-    );
-  }
-
-  const known = skills?.arsenal?.known || [];
-  const learning = skills?.arsenal?.learning || [];
-  const soft = skills?.soft || [];
 
   return (
     <div>
@@ -49,7 +83,6 @@ export default function Skills() {
       </header>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* COLUNA 1 — Arsenal */}
         <section>
           <div className="flex items-center gap-3 mb-5">
             <span className="w-2 h-2 rounded-full"
@@ -62,7 +95,6 @@ export default function Skills() {
           </div>
 
           <div className="space-y-4">
-            {/* Domino */}
             <Card className="p-5">
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full"
@@ -71,12 +103,12 @@ export default function Skills() {
                   {t.skills.groups.known}
                 </p>
                 <span className="text-[10px] font-mono text-app-dim ml-auto">
-                  {known.length}
+                  {KNOWN.length}
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2">
-                {known.map((s) => (
+                {KNOWN.map((s) => (
                   <div
                     key={s.name}
                     className="flex flex-col items-center gap-2 p-3 rounded-lg
@@ -97,7 +129,6 @@ export default function Skills() {
               </div>
             </Card>
 
-            {/* Em evolução */}
             <Card className="p-5">
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full border"
@@ -106,12 +137,12 @@ export default function Skills() {
                   {t.skills.groups.learning}
                 </p>
                 <span className="text-[10px] font-mono text-app-dim ml-auto">
-                  {learning.length}
+                  {LEARNING.length}
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2">
-                {learning.map((s) => (
+                {LEARNING.map((s) => (
                   <div
                     key={s.name}
                     className="flex flex-col items-center gap-2 p-3 rounded-lg
@@ -135,7 +166,6 @@ export default function Skills() {
           </div>
         </section>
 
-        {/* COLUNA 2 — Soft Skills */}
         <section>
           <div className="flex items-center gap-3 mb-5">
             <span className="w-2 h-2 rounded-full"
@@ -148,7 +178,7 @@ export default function Skills() {
           </div>
 
           <ul className="space-y-3">
-            {soft.map((s, i) => (
+            {SOFT_SKILLS.map((s, i) => (
               <li
                 key={i}
                 className="group p-4 rounded-2xl border border-app bg-surface-soft

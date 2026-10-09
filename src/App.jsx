@@ -7,10 +7,8 @@ import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
-import ProjectDetail from './pages/ProjectDetail';
-import CyberDetail from './pages/CyberDetail';
-import Admin from './pages/Admin';
 import { useLanguage } from './contexts/useLanguage';
+import LabDetail from './pages/LabDetail';
 
 function PageWrapper({ children }) {
   return (
@@ -67,13 +65,11 @@ export default function App() {
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path="/"               element={<PageWrapper><Home /></PageWrapper>} />
-              <Route path="/sobre"          element={<PageWrapper><Sobre /></PageWrapper>} />
-              <Route path="/skills"         element={<PageWrapper><Skills /></PageWrapper>} />
-              <Route path="/projetos"       element={<PageWrapper><Projects /></PageWrapper>} />
-              <Route path="/projetos/:name" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
-              <Route path="/cyber/:slug"    element={<PageWrapper><CyberDetail /></PageWrapper>} />
-              <Route path="/admin"          element={<PageWrapper><Admin /></PageWrapper>} />
+              <Route path="/"         element={<PageWrapper><Home /></PageWrapper>} />
+              <Route path="/sobre"    element={<PageWrapper><Sobre /></PageWrapper>} />
+              <Route path="/skills"   element={<PageWrapper><Skills /></PageWrapper>} />
+              <Route path="/projetos" element={<PageWrapper><Projects /></PageWrapper>} />
+              <Route path="/labs/:slug" element={<PageWrapper><LabDetail /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </main>

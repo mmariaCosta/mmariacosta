@@ -4,8 +4,45 @@ import { useEffect, useState } from 'react';
 import { FaArrowRight, FaEnvelope } from 'react-icons/fa';
 import CyberTerminal from '../components/CyberTerminal';
 import { useLanguage } from '../contexts/useLanguage';
-import { usePortfolioData, pickText } from '../hooks/usePortfolioData';
-import { useImage } from '../hooks/useImage';
+
+/* =========================================================
+   DADOS HARD-CODED
+   ========================================================= */
+const PERFIL = {
+  name: 'Maria Costa',
+  email: 'mmaria.costa@outlook.com',
+  whatsapp: '+55 19 99378-6188',
+  whatsappUrl: 'https://wa.me/5519993786188',
+  typing: {
+    pt: [
+      'Desenvolvedora em transição pra Cyber',
+      'Blue Team · Análise de logs · Detecção',
+      'Python · React · ADVPL',
+    ],
+    en: [
+      'Developer transitioning to Cyber',
+      'Blue Team · Log analysis · Detection',
+      'Python · React · ADVPL',
+    ],
+  },
+  intro: {
+    pt: 'Olá, eu sou',
+    en: 'Hi, I am',
+  },
+  role: {
+    pt: 'Desenvolvedora em transição pra Cyber',
+    en: 'Developer transitioning to Cyber',
+  },
+  bioShort: {
+    pt: 'Sou desenvolvedora ADVPL no dia a dia, estudando cibersegurança e construindo projetos que mostram o que eu sei fazer.',
+    en: 'I work with ADVPL development, study cybersecurity, and build projects that show what I know how to do.',
+  },
+  bugQuote: {
+    pt: '"Comer bugs é meu passatempo favorito!"',
+    en: '"Eating bugs is my favorite hobby!"',
+  },
+  catImage: 'images/perfil.jpg',
+};
 
 function useTyping(lines = []) {
   const [idx, setIdx] = useState(0);
@@ -50,49 +87,19 @@ function useTyping(lines = []) {
 }
 
 export default function Home() {
-  // =========================================================
-  // TODOS OS HOOKS AQUI EM CIMA (antes de qualquer return)
-  // =========================================================
   const { t, lang } = useLanguage();
-  const { profile, loading, error } = usePortfolioData();
 
-  const typingLines = profile?.typing?.[lang] || profile?.typing?.pt || [];
+  const typingLines = PERFIL.typing[lang] || PERFIL.typing.pt;
   const typed = useTyping(typingLines);
-  const catImage = useImage('cat', profile?.images?.cat);
 
-  // =========================================================
-  // DEPOIS DOS HOOKS, OS RETURNS CONDICIONAIS
-  // =========================================================
-  if (loading) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-app-muted text-sm animate-pulse">carregando...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-red-400 text-sm">erro: {error}</p>
-      </div>
-    );
-  }
-
-  // =========================================================
-  // VALORES DERIVADOS (não são hooks, podem vir depois)
-  // =========================================================
-  const intro = pickText(profile?.intro, lang);
-  const role = pickText(profile?.role, lang);
-  const bio = pickText(profile?.bioShort, lang);
-  const bugQuote = pickText(profile?.bugQuote, lang);
-  const email = profile?.email || 'mmaria.costa@outlook.com';
-  const whatsapp = profile?.whatsapp || '+55 19 99378-6188';
-  const whatsappUrl = profile?.whatsappUrl || 'https://wa.me/5519993786188';
+  const intro = PERFIL.intro[lang] || PERFIL.intro.pt;
+  const role = PERFIL.role[lang] || PERFIL.role.pt;
+  const bio = PERFIL.bioShort[lang] || PERFIL.bioShort.pt;
+  const bugQuote = PERFIL.bugQuote[lang] || PERFIL.bugQuote.pt;
+  const catImage = PERFIL.catImage;
 
   return (
     <div>
-      {/* HERO */}
       <section className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
         <div>
           <motion.p
@@ -109,7 +116,7 @@ export default function Home() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-app leading-tight"
           >
-            {profile?.name}
+            {PERFIL.name}
           </motion.h1>
 
           <motion.p
@@ -126,23 +133,23 @@ export default function Home() {
             />
           </motion.p>
 
-          {/* BIO COM NEGRITO */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
             className="mt-6 text-app/85 max-w-xl leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: bio }}
-          />
+          >
+            {bio}
+          </motion.p>
 
-          {/* BUG QUOTE COM NEGRITO */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
             className="mt-4 text-app-dim italic font-mono text-sm"
-            dangerouslySetInnerHTML={{ __html: bugQuote }}
-          />
+          >
+            {bugQuote}
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -177,34 +184,23 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="relative mx-auto group"
+          className="relative mx-auto"
         >
-          <div
-            className="absolute inset-0 rounded-full blur-3xl
-                       transition-opacity duration-500
-                       group-hover:opacity-100 opacity-70"
-            style={{ backgroundColor: 'var(--glow)' }}
+          <img
+            src={catImage}
+            alt="Foto de Perfil"
+            width="256"
+            height="256"
+            fetchPriority="high"
+            decoding="async"
+            className="w-48 md:w-64 aspect-square object-cover rounded-2xl
+                      border border-app-strong shadow-app"
           />
-          {catImage && (
-            <img
-              src={catImage}
-              alt="Foto de Perfil"
-              width="256"
-              height="256"
-              fetchPriority="high"
-              decoding="async"
-              className="relative w-48 md:w-64 aspect-square object-cover rounded-2xl
-                        border border-app-strong shadow-app
-                        transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          )}
         </motion.div>
       </section>
 
-      {/* TERMINAL */}
       <CyberTerminal />
 
-      {/* CONTATO */}
       <section id="contato" className="mt-20 pt-12 border-t border-app">
         <header className="text-center mb-8">
           <p className="text-app-accent font-mono text-xs tracking-widest uppercase mb-2">
@@ -218,7 +214,7 @@ export default function Home() {
 
         <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           <a
-            href={`mailto:${email}`}
+            href={`mailto:${PERFIL.email}`}
             className="group p-5 rounded-xl border border-app bg-surface-soft
                        hover:border-app-strong hover:shadow-app hover:-translate-y-0.5
                        transition-all"
@@ -227,12 +223,12 @@ export default function Home() {
               email
             </p>
             <p className="text-app font-medium group-hover:text-app-accent transition-colors break-all">
-              {email}
+              {PERFIL.email}
             </p>
           </a>
 
           <a
-            href={whatsappUrl}
+            href={PERFIL.whatsappUrl}
             target="_blank"
             rel="noreferrer"
             className="group p-5 rounded-xl border border-app bg-surface-soft
@@ -243,7 +239,7 @@ export default function Home() {
               whatsapp
             </p>
             <p className="text-app font-medium group-hover:text-app-accent transition-colors">
-              {whatsapp}
+              {PERFIL.whatsapp}
             </p>
           </a>
         </div>

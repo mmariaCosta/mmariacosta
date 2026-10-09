@@ -1,14 +1,12 @@
 export function parseFrontmatter(raw) {
   if (!raw) return { data: {}, content: '' };
 
-  // Normaliza quebras de linha Windows → Unix
   const text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
   if (!text.startsWith('---')) {
     return { data: {}, content: text };
   }
 
-  // Encontra o fechamento do frontmatter
   const endIdx = text.indexOf('\n---', 3);
   if (endIdx === -1) {
     return { data: {}, content: text };
@@ -31,7 +29,6 @@ export function parseFrontmatter(raw) {
 
     if (!key) continue;
 
-    // Remove aspas
     if (
       (value.startsWith('"') && value.endsWith('"')) ||
       (value.startsWith("'") && value.endsWith("'"))
@@ -39,7 +36,6 @@ export function parseFrontmatter(raw) {
       value = value.slice(1, -1);
     }
 
-    // Array inline: [a, b, c]
     if (value.startsWith('[') && value.endsWith(']')) {
       const inner = value.slice(1, -1);
       data[key] = inner
@@ -49,11 +45,8 @@ export function parseFrontmatter(raw) {
       continue;
     }
 
-    // Booleano
     if (value === 'true') { data[key] = true; continue; }
     if (value === 'false') { data[key] = false; continue; }
-
-    // Número
     if (/^\d+$/.test(value)) { data[key] = Number(value); continue; }
 
     data[key] = value;
@@ -63,10 +56,8 @@ export function parseFrontmatter(raw) {
 }
 
 export function slugFromFilename(filename) {
-  return filename.replace(/\.(pt|en)\.md$/i, '').replace(/\.md$/i, '');
-}
-
-export function langFromFilename(filename) {
-  const m = filename.match(/\.(pt|en)\.md$/i);
-  return m ? m[1].toLowerCase() : 'pt';
+  return filename
+    .replace(/^.*\//, '')
+    .replace(/\.(pt|en)\.md$/i, '')
+    .replace(/\.md$/i, '');
 }
