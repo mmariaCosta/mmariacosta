@@ -1,28 +1,32 @@
 import { useLanguage } from '../contexts/useLanguage';
 import { pickText } from '../utils/pickText';
 
+
 /* =========================================================
    DADOS HARD-CODED
    ========================================================= */
 const KNOWN = [
-  { name: 'Python',       icon: 'python/python-original' },
-  { name: 'JavaScript',   icon: 'javascript/javascript-original' },
-  { name: 'React',        icon: 'react/react-original' },
-  { name: 'C#',           icon: 'csharp/csharp-original' },
-  { name: 'SQL Server',   icon: 'microsoftsqlserver/microsoftsqlserver-plain' },
-  { name: 'Git',          icon: 'git/git-original' },
-  { name: 'VS Code',      icon: 'vscode/vscode-original' },
-  { name: 'HTML5',        icon: 'html5/html5-original' },
-  { name: 'CSS3',         icon: 'css3/css3-original' },
+  { name: 'Python',     icon: 'python/python-original' },
+  { name: 'JavaScript', icon: 'javascript/javascript-original' },
+  { name: 'React',      icon: 'react/react-original' },
+  { name: 'C#',         icon: 'csharp/csharp-original' },
+  { name: 'SQL Server', icon: 'microsoftsqlserver/microsoftsqlserver-plain' },
+  { name: 'Git',        icon: 'git/git-original' },
+  { name: 'VS Code',    icon: 'vscode/vscode-original' },
+  { name: 'HTML5',      icon: 'html5/html5-original' },
+  { name: 'CSS3',       icon: 'css3/css3-original' },
+  { name: 'ADVPL',      icon: null, emoji: '/images/advpl.svg' }, 
+  { name: 'Firebase',   simpleIcon: 'firebase', color: 'FFCA28' },
+  { name: 'Node.js',    icon: 'nodejs/nodejs-original' },
+  { name: 'PowerShell', icon: 'powershell/powershell-original' },
 ];
 
 const LEARNING = [
-  { name: 'AWS',     icon: 'amazonwebservices/amazonwebservices-original-wordmark' },
-  { name: 'Docker',  icon: 'docker/docker-original' },
-  { name: 'Linux',   icon: 'linux/linux-original' },
-  { name: 'MySQL',   icon: 'mysql/mysql-original' },
-  { name: 'Node.js', icon: 'nodejs/nodejs-original' },
-  { name: 'FastAPI', icon: 'fastapi/fastapi-original' },
+  { name: 'AWS',    icon: 'amazonwebservices/amazonwebservices-original-wordmark' },
+  { name: 'Docker', icon: 'docker/docker-original' },
+  { name: 'Linux',  icon: 'linux/linux-original' },
+  { name: 'Ruby',   icon: 'ruby/ruby-original' },
+  { name: 'Rust',   icon: 'rust/rust-original' },
 ];
 
 const SOFT_SKILLS = [
@@ -69,6 +73,69 @@ function Card({ children, className = '', hover = true }) {
   );
 }
 
+/* =========================================================
+   CARD DE TECNOLOGIA (aceita ícone ou emoji)
+   ========================================================= */
+function TechCard({ tech, muted = false }) {
+  // Função de fallback: quando um ícone falha, cai pro emoji
+  const fallback = (e) => {
+    const parent = e.target.parentElement;
+    e.target.style.display = 'none';
+    const span = document.createElement('span');
+    span.className = 'text-2xl leading-none';
+    span.textContent = tech.emoji || '📦';
+    parent.insertBefore(span, e.target);
+  };
+
+  return (
+    <div
+      className={`flex flex-col items-center justify-center gap-2 p-3 rounded-lg
+                  border border-app bg-surface min-h-[72px]
+                  ${muted ? 'opacity-70 hover:opacity-100 transition-opacity' : ''}`}
+    >
+      {/* Prioridade 1: Simple Icons (ícones atualizados) */}
+      {tech.simpleIcon ? (
+        <img
+          src={`https://cdn.simpleicons.org/${tech.simpleIcon}/${tech.color || 'white'}`}
+          alt={tech.name}
+          className="h-8 w-8"
+          loading="lazy"
+          onError={fallback}
+        />
+      ) : tech.icon ? (
+        // Prioridade 2: Devicon (ícones clássicos)
+        <img
+          src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}.svg`}
+          alt={tech.name}
+          className="h-8 w-8"
+          loading="lazy"
+          onError={fallback}
+        />
+      ) : (
+        // Prioridade 3: Emoji ou caminho de imagem customizada
+        tech.emoji?.startsWith('/') ? (
+          <img
+            src={tech.emoji}
+            alt={tech.name}
+            className="h-8 w-8"
+            loading="lazy"
+            onError={fallback}
+          />
+        ) : (
+          <span className="text-2xl leading-none">{tech.emoji || '📦'}</span>
+        )
+      )}
+
+      <span className={`text-[10px] text-center font-mono ${muted ? 'text-app-muted' : 'text-app'}`}>
+        {tech.name}
+      </span>
+    </div>
+  );
+}
+
+/* =========================================================
+   PÁGINA
+   ========================================================= */
 export default function Skills() {
   const { t, lang } = useLanguage();
 
@@ -85,20 +152,27 @@ export default function Skills() {
       <div className="grid md:grid-cols-2 gap-6">
         <section>
           <div className="flex items-center gap-3 mb-5">
-            <span className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }} />
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }}
+            />
             <h2 className="text-sm font-mono uppercase tracking-widest text-app-muted">
               {t.skills.arsenalTitle}
             </h2>
-            <span className="flex-1 h-px"
-                  style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }} />
+            <span
+              className="flex-1 h-px"
+              style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }}
+            />
           </div>
 
           <div className="space-y-4">
+            {/* Dominados */}
             <Card className="p-5">
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: 'var(--accent)' }} />
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ backgroundColor: 'var(--accent)' }}
+                />
                 <p className="text-[10px] font-mono uppercase tracking-widest text-app-muted">
                   {t.skills.groups.known}
                 </p>
@@ -109,30 +183,18 @@ export default function Skills() {
 
               <div className="grid grid-cols-3 gap-2">
                 {KNOWN.map((s) => (
-                  <div
-                    key={s.name}
-                    className="flex flex-col items-center gap-2 p-3 rounded-lg
-                               border border-app bg-surface"
-                  >
-                    <img
-                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${s.icon}.svg`}
-                      alt={s.name}
-                      className="h-8 w-8"
-                      loading="lazy"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                    <span className="text-[10px] text-app text-center font-mono">
-                      {s.name}
-                    </span>
-                  </div>
+                  <TechCard key={s.name} tech={s} />
                 ))}
               </div>
             </Card>
 
+            {/* Em evolução */}
             <Card className="p-5">
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-1.5 h-1.5 rounded-full border"
-                      style={{ borderColor: 'var(--accent)' }} />
+                <span
+                  className="w-1.5 h-1.5 rounded-full border"
+                  style={{ borderColor: 'var(--accent)' }}
+                />
                 <p className="text-[10px] font-mono uppercase tracking-widest text-app-muted">
                   {t.skills.groups.learning}
                 </p>
@@ -143,38 +205,27 @@ export default function Skills() {
 
               <div className="grid grid-cols-3 gap-2">
                 {LEARNING.map((s) => (
-                  <div
-                    key={s.name}
-                    className="flex flex-col items-center gap-2 p-3 rounded-lg
-                               border border-app bg-surface opacity-70 hover:opacity-100
-                               transition-opacity"
-                  >
-                    <img
-                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${s.icon}.svg`}
-                      alt={s.name}
-                      className="h-8 w-8"
-                      loading="lazy"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                    <span className="text-[10px] text-app-muted text-center font-mono">
-                      {s.name}
-                    </span>
-                  </div>
+                  <TechCard key={s.name} tech={s} muted />
                 ))}
               </div>
             </Card>
           </div>
         </section>
 
+        {/* Soft Skills */}
         <section>
           <div className="flex items-center gap-3 mb-5">
-            <span className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }} />
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: 'var(--accent)', boxShadow: '0 0 10px var(--glow)' }}
+            />
             <h2 className="text-sm font-mono uppercase tracking-widest text-app-muted">
               {t.skills.softTitle}
             </h2>
-            <span className="flex-1 h-px"
-                  style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }} />
+            <span
+              className="flex-1 h-px"
+              style={{ background: 'linear-gradient(to right, var(--border-strong), transparent)' }}
+            />
           </div>
 
           <ul className="space-y-3">

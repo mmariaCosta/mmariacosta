@@ -16,12 +16,12 @@ const PERFIL = {
   typing: {
     pt: [
       'Desenvolvedora em transição pra Cyber',
-      'Blue Team · Análise de logs · Detecção',
+      'Blue Team · Análise de logs',
       'Python · React · ADVPL',
     ],
     en: [
       'Developer transitioning to Cyber',
-      'Blue Team · Log analysis · Detection',
+      'Blue Team · Log analysis',
       'Python · React · ADVPL',
     ],
   },
@@ -30,12 +30,12 @@ const PERFIL = {
     en: 'Hi, I am',
   },
   role: {
-    pt: 'Desenvolvedora em transição pra Cyber',
-    en: 'Developer transitioning to Cyber',
+    pt: 'Desenvolvedora · Estudante de Cibersegurança (FIAP 2027)',
+    en: 'Developer · Cybersecurity Student (FIAP 2027)',
   },
   bioShort: {
-    pt: 'Sou desenvolvedora ADVPL no dia a dia, estudando cibersegurança e construindo projetos que mostram o que eu sei fazer.',
-    en: 'I work with ADVPL development, study cybersecurity, and build projects that show what I know how to do.',
+    pt: 'Construí sistemas corporativos por dentro. Agora quero proteger eles por fora. Estagio com ADVPL no Protheus, curso Cyber em 2027, e estou montando um portfólio de projetos que mostram essa transição de verdade.',
+    en: 'I built corporate systems from the inside. Now I want to protect them from the outside. I intern with ADVPL on Protheus, start Cyber at FIAP in 2027, and I am building a portfolio that shows this transition for real.',
   },
   bugQuote: {
     pt: '"Comer bugs é meu passatempo favorito!"',

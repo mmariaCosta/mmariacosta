@@ -57,12 +57,20 @@ const PROFESSIONAL = [
 const CERTIFICATIONS = {
   items: [
     {
+      id: 'ibsec-soc',
+      name: 'IBSEC Analista SOC — Fundamentos',
+      issuer: 'IBSEC',
+      year: 2026,
+      status: 'studying',
+      progress: 30,
+    },
+    {
       id: 'isc2-cc',
       name: 'ISC2 Certified in Cybersecurity (CC)',
       issuer: 'ISC2',
       year: 2026,
       status: 'studying',
-      progress: 40,
+      progress: 20,
     },
     {
       id: 'comptia-security',
@@ -73,7 +81,15 @@ const CERTIFICATIONS = {
       progress: 0,
     },
     {
-      id: 'blue-team-l1',
+      id: 'sc-200',
+      name: 'Microsoft SC-200 — Security Operations Analyst',
+      issuer: 'Microsoft',
+      year: 2027,
+      status: 'planned',
+      progress: 0,
+    },
+    {
+      id: 'btl1',
       name: 'Blue Team Level 1 (BTL1)',
       issuer: 'Security Blue Team',
       year: 2027,
@@ -81,9 +97,9 @@ const CERTIFICATIONS = {
       progress: 0,
     },
     {
-      id: 'ejpt',
-      name: 'eJPT — Junior Penetration Tester',
-      issuer: 'INE Security',
+      id: 'cysa',
+      name: 'CompTIA CySA+',
+      issuer: 'CompTIA',
       year: 2028,
       status: 'planned',
       progress: 0,

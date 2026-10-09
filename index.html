@@ -1,39 +1,64 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-    <title>Maria Costa — Analista de Segurança | Portfólio</title>
-    <meta
-      name="description"
-      content="Portfólio de Maria Costa, analista de segurança em formação. Foco em Cibersegurança, Cloud Security, análise de vulnerabilidades e automação. Estudante de Cibersegurança pela FIAP."
-    />
-    <meta name="author" content="Maria Costa" />
-    <meta name="theme-color" content="#1c152c" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Maria Costa — Analista de Segurança" />
-    <meta property="og:description" content="Portfólio com foco em Cibersegurança, Cloud Security e automação." />
-    <meta property="og:type" content="website" />
+  <!-- Título e descrição -->
+  <title>Maria Costa · Desenvolvedora ADVPL e Cibersegurança</title>
+  <meta
+    name="description"
+    content="Portfólio de Maria Costa — desenvolvedora ADVPL em transição para cibersegurança. Projetos de Blue Team, labs de SOC e análise de logs."
+  />
+  <meta name="author" content="Maria Costa" />
+  <meta name="theme-color" content="#0a0613" />
 
-    <!-- Preconnect (só o essencial) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mmariacosta.vercel.app/" />
+  <meta property="og:title" content="Maria Costa · Desenvolvedora ADVPL e Cibersegurança" />
+  <meta
+    property="og:description"
+    content="Portfólio com projetos de Blue Team, labs de SOC e análise de logs. Desenvolvedora ADVPL em transição para segurança defensiva."
+  />
+  <meta property="og:image" content="https://mmariacosta.vercel.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Maria Costa" />
 
-    <!-- Fontes com display=swap (não bloqueia render) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maria Costa · Desenvolvedora ADVPL e Cibersegurança" />
+  <meta
+    name="twitter:description"
+    content="Portfólio com projetos de Blue Team, labs de SOC e análise de logs."
+  />
+  <meta name="twitter:image" content="https://mmariacosta.vercel.app/og-image.png" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />  
-    <link rel="preload" href="/data/i18n/pt.json" as="fetch" crossorigin>
-    <link rel="preload" href="/data/profile.json" as="fetch" crossorigin>
-  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Script de tema inicial (evita flash) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   </head>
   <body>
     <div id="root"></div>
