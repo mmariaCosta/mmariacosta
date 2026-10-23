@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { FaArrowRight, FaEnvelope } from 'react-icons/fa';
 import CyberTerminal from '../components/CyberTerminal';
 import { useLanguage } from '../contexts/useLanguage';
+import { FaArrowRight, FaEnvelope, FaDownload } from 'react-icons/fa';
 
 /* =========================================================
    DADOS HARD-CODED
@@ -151,6 +151,7 @@ export default function Home() {
             {bugQuote}
           </motion.p>
 
+          {/* BOTÕES - AQUI ESTÁ A CORREÇÃO */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -176,6 +177,16 @@ export default function Home() {
                          hover:bg-surface-soft hover:-translate-y-0.5 transition-all"
             >
               <FaEnvelope size={14} /> {t.home?.ctaContact || 'Contato'}
+            </a>
+
+            <a
+              href="/curriculo-maria-costa.pdf"
+              download="Curriculo_Maria_Costa.pdf"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+                         border border-app-strong text-app
+                         hover:bg-surface-soft hover:-translate-y-0.5 transition-all"
+            >
+              <FaDownload size={14} /> {lang === 'pt' ? 'Currículo' : 'Resume'}
             </a>
           </motion.div>
         </div>
