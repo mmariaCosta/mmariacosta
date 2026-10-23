@@ -9,6 +9,7 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import { useLanguage } from './contexts/useLanguage';
 import LabDetail from './pages/LabDetail';
+import CyberDetail from './pages/CyberDetail';
 
 function PageWrapper({ children }) {
   return (
@@ -70,6 +71,7 @@ export default function App() {
               <Route path="/skills"   element={<PageWrapper><Skills /></PageWrapper>} />
               <Route path="/projetos" element={<PageWrapper><Projects /></PageWrapper>} />
               <Route path="/labs/:slug" element={<PageWrapper><LabDetail /></PageWrapper>} />
+              <Route path="/cyber/:slug" element={<PageWrapper><CyberDetail /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </main>

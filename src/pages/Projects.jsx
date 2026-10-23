@@ -2,15 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FaStar, FaCodeBranch, FaArrowRight, FaGithub, FaExternalLinkAlt,
+  FaArrowRight, FaGithub, FaExternalLinkAlt,
 } from 'react-icons/fa';
 import { useLanguage } from '../contexts/useLanguage';
-import LabCard from '../components/LabCard';
-import { carregarLabs } from '../utils/labs';
+import { useLocalContent } from '../hooks/useLocalContent';
 
 /* =========================================================
-   DADOS DOS PROJETOS
-   Edita esse array quando quiser adicionar/remover projetos.
+   DADOS ESTÁTICOS DOS PROJETOS (Repos)
    ========================================================= */
 const PROJETOS = [
   {
@@ -22,8 +20,6 @@ const PROJETOS = [
     demo: 'https://torre-de-controle-tawny.vercel.app',
     github: 'https://github.com/mmariacosta/torre-de-controle',
     cover: '/projects/torre.png',
-    stars: 0,
-    forks: 0,
   },
   {
     id: 'protheus-workspace',
@@ -34,8 +30,6 @@ const PROJETOS = [
     demo: 'https://protheus-workspace.vercel.app',
     github: 'https://github.com/mmariacosta/Protheus-Workspace',
     cover: '/projects/protheus.png',
-    stars: 0,
-    forks: 0,
   },
   {
     id: 'mmariacosta',
@@ -46,25 +40,50 @@ const PROJETOS = [
     demo: 'https://mmariacosta.vercel.app',
     github: 'https://github.com/mmariacosta/mmariacosta',
     cover: '/projects/portfolio.png',
-    stars: 0,
-    forks: 0,
   },
 ];
-
-/* =========================================================
-   DADOS DO CYBER (writeups / notas / lab)
-   Vazio por enquanto. Preenche quando tiver conteúdo.
-   ========================================================= */
-const CYBER_WRITEUPS = [];
-const CYBER_NOTES = [];
-const CYBER_LAB = [];
 
 const LANG_EMOJI = {
   JavaScript: '🟨', TypeScript: '🔷', Python: '🐍',
   Ruby: '💎', Java: '☕', 'C#': '🎯',
-  'C++': '🔵', HTML: '🌐', CSS: '🎨',
-  Shell: '🐚', Go: '🐹', Rust: '🦀',
 };
+
+/* =========================================================
+   LÓGICA DE TRADUÇÃO (Junta os arquivos PT e EN)
+   ========================================================= */
+function resolveItemsByLanguage(rawItems, currentLang) {
+  const grouped = new Map();
+
+  rawItems.forEach((item) => {
+    if (!item.slug) return;
+    
+    // Se o slug não existe no mapa, cria com valores nulos
+    if (!grouped.has(item.slug)) {
+      grouped.set(item.slug, { pt: null, en: null, other: null });
+    }
+
+    const group = grouped.get(item.slug);
+    if (item.lang === 'pt') group.pt = item;
+    else if (item.lang === 'en') group.en = item;
+    else group.other = item;
+  });
+
+  const resolved = [];
+  grouped.forEach((group) => {
+    // Prioriza o idioma atual, senão cai pro PT, senão EN, senão outro
+    let chosen = group[currentLang] || group.pt || group.en || group.other;
+    if (chosen) resolved.push(chosen);
+  });
+
+  // Ordena pela data mais recente
+  return resolved.sort((a, b) => {
+    const da = a.data?.date || '';
+    const db = b.data?.date || '';
+    if (!da) return 1;
+    if (!db) return -1;
+    return da < db ? 1 : -1;
+  });
+}
 
 /* =========================================================
    PÁGINA
@@ -73,11 +92,19 @@ export default function Projects() {
   const { t, lang } = useLanguage();
   const [tab, setTab] = useState('repos');
 
+  // Pega os dados locais (arquivos .md)
+  const { writeups, notes, labs } = useLocalContent();
+
+  // Aplica a lógica para não duplicar os cards
+  const cyberWriteups = resolveItemsByLanguage(writeups, lang);
+  const cyberNotes = resolveItemsByLanguage(notes, lang);
+  const cyberLabs = resolveItemsByLanguage(labs, lang);
+
   const TABS = [
     { id: 'repos',    label: t.projects?.tabs?.repos    || 'Repos',     count: PROJETOS.length },
-    { id: 'writeups', label: t.projects?.tabs?.writeups || 'Write-ups', count: CYBER_WRITEUPS.length },
-    { id: 'notes',    label: t.projects?.tabs?.notes    || 'Notas',     count: CYBER_NOTES.length },
-    { id: 'lab', label: t.projects?.tabs?.lab || 'Lab', count: carregarLabs().length },
+    { id: 'writeups', label: t.projects?.tabs?.writeups || 'Write-ups', count: cyberWriteups.length },
+    { id: 'notes',    label: t.projects?.tabs?.notes    || 'Notas',     count: cyberNotes.length },
+    { id: 'lab',      label: t.projects?.tabs?.lab      || 'Lab',       count: cyberLabs.length },
   ];
 
   return (
@@ -126,10 +153,17 @@ export default function Projects() {
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2 }}
         >
-          {tab === 'repos' && <ReposTab t={t} />}
-          {tab === 'writeups' && <CyberEmptyTab label="// sem write-ups ainda" />}
-          {tab === 'notes' && <CyberEmptyTab label="// sem notas ainda" />}
-          {tab === 'lab' && <LabsTab />}
+          {tab === 'repos' && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {PROJETOS.map((r) => (
+                <ProjetoCard key={r.id} projeto={r} />
+              ))}
+            </div>
+          )}
+          
+          {tab === 'writeups' && <CyberTab items={cyberWriteups} emptyLabel="// sem write-ups ainda" />}
+          {tab === 'notes' && <CyberTab items={cyberNotes} emptyLabel="// sem notas ainda" />}
+          {tab === 'lab' && <CyberTab items={cyberLabs} emptyLabel="// sem labs ainda" />}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -137,125 +171,42 @@ export default function Projects() {
 }
 
 /* =========================================================
-   TAB: REPOS (agora estática)
+   COMPONENTES DE CARD
    ========================================================= */
-function ReposTab({ t }) {
-  if (PROJETOS.length === 0) {
-    return (
-      <div className="text-center py-16 border border-dashed border-app rounded-2xl">
-        <p className="text-app-muted text-sm font-mono">// sem repositórios</p>
-      </div>
-    );
-  }
-
+function ProjetoCard({ projeto }) {
   return (
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {PROJETOS.map((r) => (
-        <ProjetoCard key={r.id} projeto={r} t={t} />
-      ))}
-    </div>
-  );
-}
-
-/* =========================================================
-   CARD DE PROJETO
-   ========================================================= */
-function ProjetoCard({ projeto, t }) {
-  return (
-    <article
-      className="group rounded-2xl border border-app bg-surface-soft
-                 overflow-hidden hover:border-app-strong hover:shadow-app
-                 hover:-translate-y-0.5 transition-all flex flex-col"
-    >
-      {/* Capa */}
+    <article className="group rounded-2xl border border-app bg-surface-soft overflow-hidden hover:border-app-strong hover:shadow-app hover:-translate-y-0.5 transition-all flex flex-col">
       <div className="aspect-video overflow-hidden bg-[#0a0613] relative">
-        {projeto.cover ? (
-          <img
-            src={projeto.cover}
-            alt={projeto.name}
-            width="600"
-            height="400"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover transition-transform duration-500
-                       group-hover:scale-105"
-            onError={(e) => { e.target.style.display = 'none'; }}
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center
-                          bg-gradient-to-br from-purple-900/50 to-purple-700/20">
-            <span className="text-4xl mb-2">
-              {LANG_EMOJI[projeto.language] || '📦'}
-            </span>
-            <span className="text-app-muted font-mono text-[10px] uppercase tracking-widest">
-              {projeto.language || 'project'}
-            </span>
-          </div>
-        )}
-
-        {projeto.language && (
-          <span className="absolute top-2 right-2 text-[10px] font-mono
-                           px-2 py-0.5 rounded bg-black/60 text-purple-200
-                           backdrop-blur-sm">
-            {projeto.language}
-          </span>
-        )}
+        <img
+          src={projeto.cover}
+          alt={projeto.name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => { e.target.style.display = 'none'; }}
+        />
+        <span className="absolute top-2 right-2 text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 text-purple-200 backdrop-blur-sm">
+          {projeto.language}
+        </span>
       </div>
-
-      {/* Corpo */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-app font-mono font-semibold text-sm mb-2
-                       flex items-center gap-2 truncate">
-          <span className="text-app-dim">&lt;</span>
-          <span className="truncate">{projeto.name}</span>
-          <span className="text-app-dim">/&gt;</span>
+        <h3 className="text-app font-mono font-semibold text-sm mb-2 truncate">
+          &lt;{projeto.name}/&gt;
         </h3>
-
         <p className="text-app-muted text-xs leading-relaxed mb-4 flex-1 line-clamp-4">
           {projeto.summary}
         </p>
-
-        {/* Stack */}
-        {projeto.stack && projeto.stack.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {projeto.stack.map((tech) => (
-              <span
-                key={tech}
-                className="text-[10px] font-mono px-2 py-0.5 rounded
-                           border border-app text-app-muted"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Ações */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {projeto.stack.map((tech) => (
+            <span key={tech} className="text-[10px] font-mono px-2 py-0.5 rounded border border-app text-app-muted">
+              {tech}
+            </span>
+          ))}
+        </div>
         <div className="flex items-center gap-2 mt-auto pt-4 border-t border-app">
-          <a
-            href={projeto.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 flex items-center justify-center gap-2
-                       px-3 py-2 rounded-lg text-xs font-medium
-                       bg-[var(--accent)] text-white
-                       hover:opacity-90 transition-opacity"
-          >
-            <FaExternalLinkAlt size={10} />
-            Ver demo
+          <a href={projeto.demo} target="_blank" rel="noreferrer" className="flex-1 flex justify-center items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium bg-[var(--accent)] text-white hover:opacity-90">
+            <FaExternalLinkAlt size={10} /> Demo
           </a>
-
-          <a
-            href={projeto.github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 flex items-center justify-center gap-2
-                       px-3 py-2 rounded-lg text-xs font-medium
-                       border border-app text-app-muted
-                       hover:border-app-strong hover:text-app transition-colors"
-          >
-            <FaGithub size={11} />
-            GitHub
+          <a href={projeto.github} target="_blank" rel="noreferrer" className="flex-1 flex justify-center items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border border-app text-app-muted hover:border-app-strong hover:text-app">
+            <FaGithub size={11} /> GitHub
           </a>
         </div>
       </div>
@@ -263,32 +214,35 @@ function ProjetoCard({ projeto, t }) {
   );
 }
 
-/* =========================================================
-   TAB VAZIA (cyber)
-   ========================================================= */
-function CyberEmptyTab({ label }) {
-  return (
-    <div className="text-center py-16 border border-dashed border-app rounded-2xl">
-      <p className="text-app-muted text-sm font-mono">{label}</p>
-    </div>
-  );
-}
-
-function LabsTab() {
-  const labs = carregarLabs();
-
-  if (labs.length === 0) {
+function CyberTab({ items, emptyLabel }) {
+  if (!items || items.length === 0) {
     return (
       <div className="text-center py-16 border border-dashed border-app rounded-2xl">
-        <p className="text-app-muted text-sm font-mono">// sem labs publicados ainda</p>
+        <p className="text-app-muted text-sm font-mono">{emptyLabel}</p>
       </div>
     );
   }
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {labs.map((lab) => (
-        <LabCard key={lab.slug} lab={lab} />
+      {items.map((item) => (
+        <Link
+          key={item.slug}
+          to={`/cyber/${item.slug}`}
+          className="group relative overflow-hidden rounded-xl border border-app bg-surface-soft p-5 hover:border-app-strong hover:-translate-y-0.5 transition-all flex flex-col min-h-[180px]"
+        >
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest mb-4">
+            <span className="font-bold text-[var(--accent)]">{item.type}</span>
+            <span className="text-app-muted">{item.data.date || ''}</span>
+          </div>
+          <h3 className="text-app font-bold text-base leading-tight mb-2 group-hover:text-app-accent transition-colors line-clamp-2">
+            {item.data.title || item.slug}
+          </h3>
+          <p className="text-app-muted text-xs leading-relaxed line-clamp-3 flex-1">
+            {item.data.summary || ''}
+          </p>
+          <FaArrowRight size={9} className="mt-4 ml-auto text-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
+        </Link>
       ))}
     </div>
   );

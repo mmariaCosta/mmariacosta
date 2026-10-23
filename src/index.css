@@ -2,9 +2,9 @@
 
 /* ===== TEMA (variáveis) ===== */
 :root {
-  --bg: rgba(203, 176, 247, 0.911);
+  --bg: rgba(214, 193, 252, 0.986);
   --bg-radial: rgba(250, 245, 255, 0.75);
-  --surface: rgba(100, 36, 196, 0.411);
+  --surface: rgba(114, 50, 209, 0.411);
   --surface-solid: #ffffff;
   --surface-2: rgba(234, 222, 250, 0.322);
   --border: rgba(46, 6, 66, 0.74);
@@ -31,7 +31,7 @@
   --stat-bg: rgba(255, 255, 255, 0.55);
   --stat-border: rgba(46, 6, 66, 0.25);
 
-  --cert-done:     #16a34a;
+  --cert-done:     #0f8038;
   --cert-studying: #ca8a04;
   --cert-planned:  #42158f;
 
@@ -39,7 +39,7 @@
   --diff-medium:   #b45309;   /* laranja escuro */
   --diff-hard:     #b91c1c;   /* vermelho escuro */
 
-  --status-ready:    #15803d;
+  --status-ready:    #153a23;
   --status-building: #b45309;
   --status-planned:  #6d28d9;
 
@@ -144,11 +144,11 @@ code, pre, .mono, h1, h2, h3 {
 .prose-readme h1 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
 .prose-readme h2 { font-size: 1.25rem; }
 .prose-readme h3 { font-size: 1.05rem; }
-.prose-readme p  { margin: 0.8em 0; }
+.prose-readme p  { color: var(--text); margin: 0.8em 0; }
 .prose-readme a  { color: var(--accent); text-decoration: underline; }
 .prose-readme ul,
 .prose-readme ol { padding-left: 1.5em; margin: 0.8em 0; }
-.prose-readme li { margin: 0.3em 0; }
+.prose-readme li { color: var(--text); margin: 0.3em 0; }
 .prose-readme code {
   background: var(--surface-2);
   padding: 0.15em 0.4em;
