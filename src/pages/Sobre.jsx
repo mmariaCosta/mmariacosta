@@ -7,7 +7,7 @@ import { pickText } from '../utils/pickText';
    ========================================================= */
 const BIO = {
   pt: [
-    'Sou estudante de TI no COTUCA (Unicamp), formada no técnico e atualmente estagiando como desenvolvedora ADVPL no ecossistema TOTVS Protheus. Fui aprovada em Cibersegurança na FIAP e vou começar em 2027.',
+    'Sou estudante de TI no COTUCA (Unicamp), formada no técnico e atualmente estagiando como desenvolvedora ADVPL no ecossistema TOTVS Protheus. Fui aprovada em Segurança Cibernética na FIAP e vou começar em 2027.',
     'Meu foco é segurança defensiva. Gosto de entender como sistemas funcionam por dentro — de infraestrutura a código — porque acredito que não dá pra proteger o que não se entende.',
     'Estou construindo projetos que mostram isso na prática: simuladores de SOC, laboratórios, análise de logs. Tudo no GitHub, tudo documentado.',
   ],
@@ -20,11 +20,11 @@ const BIO = {
 
 const ACADEMIC = [
   {
-    title: { pt: 'Cibersegurança', en: 'Cybersecurity' },
+    title: { pt: 'Segurança Cibernética', en: 'Cybersecurity' },
     place: { pt: 'FIAP', en: 'FIAP' },
     period: { pt: '2027 — 2029', en: '2027 — 2029' },
     desc: {
-      pt: 'Graduação em Cibersegurança. Foco em segurança defensiva, análise de ameaças, resposta a incidentes e infraestrutura.',
+      pt: 'Graduação em Segurança Cibernética. Foco em segurança defensiva, análise de ameaças, resposta a incidentes e infraestrutura.',
       en: 'Cybersecurity degree. Focus on defensive security, threat analysis, incident response, and infrastructure.',
     },
     tags: ['Blue Team', 'SOC', 'Threat Intel'],

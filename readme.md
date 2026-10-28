@@ -32,7 +32,7 @@ Portfólio pessoal construído em React + Vite. Bilíngue (PT/EN), com tema clar
 
 ## Sobre o projeto
 
-Sou desenvolvedora ADVPL em transição para cibersegurança. Este portfólio reúne os projetos, labs e estudos que mostram essa transição de forma prática — não só como currículo, mas como vitrine técnica.
+Sou desenvolvedora ADVPL em transição para Segurança Cibernética. Este portfólio reúne os projetos, labs e estudos que mostram essa transição de forma prática — não só como currículo, mas como vitrine técnica.
 
 A ideia foi construir algo que fosse mais do que uma página estática de "olá, sou X". Tem terminal interativo, sistema de publicação de labs, suporte a dois idiomas, dois temas e uma arquitetura pensada para crescer.
 
@@ -443,7 +443,7 @@ Deploy automático via Vercel. Cada push na branch `main` gera um novo deploy em
 ## Autor
 
 **Maria Costa**
-Desenvolvedora ADVPL · Estudante de Cibersegurança (FIAP 2027)
+Desenvolvedora ADVPL · Estudante de Segurança Cibernética (FIAP 2027)
 
 - E-mail: mmaria.costa@outlook.com
 - LinkedIn: [mmariacosta](https://www.linkedin.com/in/mmariacosta)

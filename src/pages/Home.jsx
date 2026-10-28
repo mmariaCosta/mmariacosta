@@ -30,7 +30,7 @@ const PERFIL = {
     en: 'Hi, I am',
   },
   role: {
-    pt: 'Desenvolvedora · Estudante de Cibersegurança (FIAP 2027)',
+    pt: 'Desenvolvedora · Estudante de Segurança Cibernética (FIAP 2027)',
     en: 'Developer · Cybersecurity Student (FIAP 2027)',
   },
   bioShort: {
