@@ -22,7 +22,7 @@ const ACADEMIC = [
   {
     title: { pt: 'Segurança Cibernética', en: 'Cybersecurity' },
     place: { pt: 'FIAP', en: 'FIAP' },
-    period: { pt: '2027 — 2029', en: '2027 — 2029' },
+    period: { pt: 'Jan/2027 — Dez/2028', en: 'Jan/2027 — Dez/2028' },
     desc: {
       pt: 'Graduação em Segurança Cibernética. Foco em segurança defensiva, análise de ameaças, resposta a incidentes e infraestrutura.',
       en: 'Cybersecurity degree. Focus on defensive security, threat analysis, incident response, and infrastructure.',
@@ -32,7 +32,7 @@ const ACADEMIC = [
   {
     title: { pt: 'Técnico em Informática', en: 'Technical Degree in IT' },
     place: { pt: 'COTUCA — Unicamp', en: 'COTUCA — Unicamp' },
-    period: { pt: '2022 — 2026', en: '2022 — 2026' },
+    period: { pt: 'Jan/2023 — Dez/2026', en: 'Jan/2022 — Dez/2026' },
     desc: {
       pt: 'Curso técnico integrado ao ensino médio. Base em programação, redes, banco de dados e desenvolvimento de sistemas.',
       en: 'Technical program integrated with high school. Foundation in programming, networks, databases, and systems development.',
@@ -45,7 +45,7 @@ const PROFESSIONAL = [
   {
     title: { pt: 'Estágio em Desenvolvimento ADVPL', en: 'ADVPL Development Internship' },
     place: { pt: 'TOTVS Protheus', en: 'TOTVS Protheus' },
-    period: { pt: '2026 — 2027', en: '2026 — 2027' },
+    period: { pt: 'Fev/2026 — Fev/2027', en: 'Feb/2026 — Feb/2027' },
     desc: {
       pt: 'Desenvolvimento de rotinas customizadas em ADVPL, geração de relatórios HTML, integrações REST e automações no ecossistema Protheus.',
       en: 'Development of custom ADVPL routines, HTML report generation, REST integrations, and automation in the Protheus ecosystem.',
