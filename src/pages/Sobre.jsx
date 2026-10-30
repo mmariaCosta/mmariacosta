@@ -22,7 +22,7 @@ const ACADEMIC = [
   {
     title: { pt: 'Segurança Cibernética', en: 'Cybersecurity' },
     place: { pt: 'FIAP', en: 'FIAP' },
-    period: { pt: 'Jan/2027 — Dez/2028', en: 'Jan/2027 — Dez/2028' },
+    period: { pt: 'Jan/2027 — Dez/2028', en: 'Jan/2027 — Dec/2028' },
     desc: {
       pt: 'Graduação em Segurança Cibernética. Foco em segurança defensiva, análise de ameaças, resposta a incidentes e infraestrutura.',
       en: 'Cybersecurity degree. Focus on defensive security, threat analysis, incident response, and infrastructure.',
@@ -32,7 +32,7 @@ const ACADEMIC = [
   {
     title: { pt: 'Técnico em Informática', en: 'Technical Degree in IT' },
     place: { pt: 'COTUCA — Unicamp', en: 'COTUCA — Unicamp' },
-    period: { pt: 'Jan/2023 — Dez/2026', en: 'Jan/2022 — Dez/2026' },
+    period: { pt: 'Jan/2023 — Dez/2026', en: 'Jan/2022 — Dec/2026' },
     desc: {
       pt: 'Curso técnico integrado ao ensino médio. Base em programação, redes, banco de dados e desenvolvimento de sistemas.',
       en: 'Technical program integrated with high school. Foundation in programming, networks, databases, and systems development.',
